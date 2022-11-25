@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+import Reservation.Company;
+
 public class MainGUI extends JFrame {
 
 	public MainGUI() {
@@ -63,7 +65,7 @@ public class MainGUI extends JFrame {
 	}
 
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
 		new MainGUI("피어펫 서비스");
 	}
 

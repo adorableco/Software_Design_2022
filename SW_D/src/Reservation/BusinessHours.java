@@ -1,6 +1,8 @@
 package Reservation;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class BusinessHours {
 	LocalTime opening;
@@ -15,8 +17,10 @@ public class BusinessHours {
 		this.closing = closing;
 	}
 	
-	public void print() {
-		System.out.println(opening);
-		System.out.println(opening);
+	public String[] getStringTime() {
+		String[] time_str = new String[2];
+		time_str[0] = this.opening.format(DateTimeFormatter.ofPattern("HH:mm"));
+		time_str[1] = this.closing.format(DateTimeFormatter.ofPattern("HH:mm"));
+		return time_str;
 	}
 }
