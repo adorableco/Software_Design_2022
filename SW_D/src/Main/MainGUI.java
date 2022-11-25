@@ -3,6 +3,8 @@ package Main;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import Database.AnimalHospitalDBConnector;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -67,6 +69,7 @@ public class MainGUI extends JFrame {
 	
 	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
 		new MainGUI("피어펫 서비스");
+//		AnimalHospitalDBConnector conn = new AnimalHospitalDBConnector(); 
 	}
 
 }

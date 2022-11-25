@@ -1,9 +1,9 @@
 package Main;
 
-public class PetGroomingSalonReservationGUI extends CompanyReservationGUI{
+public class PetGroomingSalonReservationGUI {
 
 	public PetGroomingSalonReservationGUI(String title) {
-		super(title);
+//		super(title);
 	}
 
 }
