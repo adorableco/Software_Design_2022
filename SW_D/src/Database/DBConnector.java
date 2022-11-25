@@ -1,9 +1,7 @@
 package Database;
 
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import Reservation.Company;
 
@@ -18,10 +16,44 @@ public interface DBConnector {
 		
 	};
 	//DB 읽어옴
-	public List<Company> readDB(String fname);
-	//DB 값 추가, return 값은 True(성공), False(실패)
-	public Boolean addDB(String fname);
-	//DB 값 삭제, return 값은 True(성공), False(실패)
-	public Boolean deleteDB(String fname);
+	public default List<Company> readDB(String fname) throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(fname));
+		reader.readLine(); //header 제거
+		String str;
+		List<Company> companyDB = new LinkedList<Company>();
+        while ((str = reader.readLine()) != null) {
+            companyDB.add(new Company(Arrays.asList(str.split(","))));
+        }
+		reader.close();
+		
+		return companyDB;
+	};
+	//DB 값 추가
+	public default void addDB(String fname, String str) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fname));
+        writer.write(str);
+        writer.close();
+		return;
+	};
+	
+	/* need to implement
+	//DB 값 삭제
+	public default Boolean deleteDB(String fname, String name) {
+		if (!isinDB(fname, name)) {
+			return false;
+		}
+		
+		
+		return true;
+			
+	};
+	//DB에 존재하는지 검색
+	public default Boolean isinDB(String fname, String searchName) {
+		Boolean flag;
+		
+		return flag;
+		
+	};
+	*/
 	
 }
