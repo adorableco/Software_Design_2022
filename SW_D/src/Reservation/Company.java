@@ -92,9 +92,9 @@ public class Company {
 				companyAttrList[i++] = f.get(this).toString();
 			}
 		}
-		for (String str : companyAttrList) {
-			System.out.println(str);
-		}
+//		for (String str : companyAttrList) {
+//			System.out.println(str);
+//		}
 		return companyAttrList;
 		
 //		for(Field f : attrs) {
