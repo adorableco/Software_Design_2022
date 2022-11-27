@@ -1,6 +1,7 @@
 package Reservation;
 
-import java.util.List;
+import java.time.*;
+import java.util.*;
 
 public class AnimalHospital extends Company {
 	private String name;
@@ -28,6 +29,18 @@ public class AnimalHospital extends Company {
 		this.rating = Float.valueOf(attr.get(16));
 		this.address = attr.get(17);
 		this.specialty = attr.get(18);
+	}
+	public Boolean checkWithinBH(LocalDate date, LocalTime time) {
+		DayOfWeek dayOfWeek = date.getDayOfWeek();
+        int dayOfWeekNumber = dayOfWeek.getValue();
+        LocalTime[] times = this.hours[dayOfWeekNumber].getTime();
+        if (time.isBefore(times[1]) && time.isAfter(times[0])){
+        	return true;
+        }
+        else {
+        	return false;
+        }
+ 
 	}
 
 }

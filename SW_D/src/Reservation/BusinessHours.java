@@ -23,4 +23,11 @@ public class BusinessHours {
 		time_str[1] = this.closing.format(DateTimeFormatter.ofPattern("HH:mm"));
 		return time_str;
 	}
+	
+	public LocalTime[] getTime() {
+		LocalTime[] times = new LocalTime[2];
+		times[0] = this.opening;
+		times[1] = this.closing;
+		return times;
+	}
 }

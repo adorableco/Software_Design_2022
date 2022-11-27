@@ -1,6 +1,7 @@
 package Database;
 
 import java.io.*;
+import java.time.*;
 import java.util.*;
 
 import Reservation.AnimalHospital;
@@ -22,7 +23,8 @@ public class AnimalHospitalDBConnector {
 		BufferedReader reader = new BufferedReader(new FileReader(this.fname));
 		String header = reader.readLine();
 		reader.close();
-		
+//		System.out.println(header.substring(0, 17)+header.substring(248));
+		header = header.substring(0, 17)+header.substring(248);
 		return header.split(",");
 		
 	};
@@ -59,6 +61,21 @@ public class AnimalHospitalDBConnector {
 		return;
 	};
 	
+	public LinkedList<AnimalHospital> searchDBwithTime(LocalDate date, LocalTime time) throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(this.fname));
+		reader.readLine(); //header 제거
+		String str;
+		LinkedList<AnimalHospital> hospitalDB = new LinkedList<AnimalHospital>();
+        while ((str = reader.readLine()) != null) {
+        	AnimalHospital hospital = new AnimalHospital(Arrays.asList(str.split(",")));
+        	if (hospital.checkWithinBH(date, time)) { //참이면 추가
+        		hospitalDB.add(hospital);
+        	}	
+        }
+		reader.close();
+		
+		return hospitalDB;
+	}
 	/* need to implement
 	//DB 값 삭제
 	public Boolean deleteDB(String fname, String name) {

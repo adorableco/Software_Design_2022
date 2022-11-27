@@ -68,7 +68,8 @@ public class Company {
 		// need to implement. DB Connector에서 write하는데 쓰임.
 		
 		Field[] attrs = this.getClass().getDeclaredFields();
-		String[] companyAttrList = new String[19];
+//		String[] companyAttrList = new String[19];
+		String[] companyAttrList = new String[5];
 		int i = 0;
 		for(Field f : attrs) {
 			f.setAccessible(true);
@@ -78,9 +79,9 @@ public class Company {
 					if(h == null) {
 						continue;
 					}
-					String[] times = h.getStringTime();
-					companyAttrList[i++] = times[0];
-					companyAttrList[i++] = times[1];
+//					String[] times = h.getStringTime();
+//					companyAttrList[i++] = times[0];
+//					companyAttrList[i++] = times[1];
 				}
 					
 			}
@@ -90,6 +91,9 @@ public class Company {
 			else {
 				companyAttrList[i++] = f.get(this).toString();
 			}
+		}
+		for (String str : companyAttrList) {
+			System.out.println(str);
 		}
 		return companyAttrList;
 		
