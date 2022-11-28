@@ -2,6 +2,9 @@ package Reservation;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 public class Company {
@@ -117,6 +120,19 @@ public class Company {
 //		}
 //		return (ArrayList<String>) companyAttrList;
 		
+	}
+	
+	public Boolean checkWithinBH(LocalDate date, LocalTime time) {
+		DayOfWeek dayOfWeek = date.getDayOfWeek();
+        int dayOfWeekNumber = dayOfWeek.getValue();
+        LocalTime[] times = this.hours[dayOfWeekNumber].getTime();
+        if (time.isBefore(times[1]) && time.isAfter(times[0])){
+        	return true;
+        }
+        else {
+        	return false;
+        }
+ 
 	}
 
 }
