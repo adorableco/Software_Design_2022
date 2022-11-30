@@ -23,8 +23,10 @@ public class MainGUI extends JFrame {
 		button_panel.setLayout(new GridLayout(10,1));
 		JButton hospitalResvButton = new JButton("병원 예약");
 		JButton salonResvButton = new JButton("반려동물 미용실 예약");
+		JButton petsitterSrchButton = new JButton("도우미 검색 서비스");
 		button_panel.add(hospitalResvButton);
 		button_panel.add(salonResvButton);
+		button_panel.add(petsitterSrchButton);
 		ActionListener hospitalResvListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -32,15 +34,23 @@ public class MainGUI extends JFrame {
 			}
 			
 		};
-		ActionListener salonResvListner = new ActionListener() {
+		ActionListener salonResvListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스");
 			}
 			
 		};
+		ActionListener petsitterSrchListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PetSitterSearchGUI("도우미 검색 서비스");
+			}
+			
+		};
 		hospitalResvButton.addActionListener(hospitalResvListener);
-		salonResvButton.addActionListener(salonResvListner);
+		salonResvButton.addActionListener(salonResvListener);
+		petsitterSrchButton.addActionListener(petsitterSrchListener);
 		
 		this.add(button_panel, BorderLayout.WEST);
 		
