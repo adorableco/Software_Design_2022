@@ -2,17 +2,20 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
+
 import javax.swing.*;
 
 public class Reservation_helper_GUI extends JFrame {
-
+	Reservation_helper rh;
+	
 	private Dimension dim1,dim2,dim3,dim4;
-	private String[] year= {"2022","2023","2024","2025","2026","2027","2028","2029","2030"};
-	private String[] month= {"01","02","03","04","05","06","07","08","09","10","11","12"};
-	private String[] day= {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-	private String[] hour= {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
-	private String[] min= {"00","10","20","30","40","50"};
-	private String[] service= {"산책","집 방문","병원 동행","반려동물 미용샵 동행"};
+	private String[] year= {"yyyy","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
+	private String[] month= {"MM","01","02","03","04","05","06","07","08","09","10","11","12"};
+	private String[] day= {"dd","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+	private String[] hour= {"HH","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
+	private String[] min= {"mm","00","10","20","30","40","50"};
+	private String[] service= {"서비스 선택","산책","집 방문","병원 동행","반려동물 미용샵 동행"};
 	private JButton helper_search_button;
 	private JComboBox<String> yearCombo;
 	private JComboBox<String> monthCombo;
@@ -28,21 +31,20 @@ public class Reservation_helper_GUI extends JFrame {
 	String da;
 	String ho;
 	String mi;
-	String[] data=new String[6];
+	String[] data;
 	
-	String[] setdata() {
+	void setdata() {
+		data=new String[6];
 		data[0]=ye;
 		data[1]=mo;
 		data[2]=da;
 		data[3]=ho;
 		data[4]=mi;
 		data[5]=service_choose;
-		
-		return data;
 	}
 	
 	public Reservation_helper_GUI() {
-		
+		rh=new Reservation_helper();
 		setTitle("도우미 예약하기");
 		
 		JPanel title = new JPanel();
@@ -183,7 +185,8 @@ public class Reservation_helper_GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				JComboBox y=(JComboBox)e.getSource();
-				ye=y.getSelectedItem().toString();
+				if(!y.getSelectedItem().equals("yyyy"))
+					ye=y.getSelectedItem().toString();
 				y.setEnabled(false);
 			}
 			
@@ -194,7 +197,8 @@ public class Reservation_helper_GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				JComboBox m=(JComboBox)e.getSource();
-				mo=m.getSelectedItem().toString();
+				if(!m.getSelectedItem().equals("MM"))
+					mo=m.getSelectedItem().toString();
 				m.setEnabled(false);
 			}
 			
@@ -205,7 +209,8 @@ public class Reservation_helper_GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				JComboBox d=(JComboBox)e.getSource();
-				da=d.getSelectedItem().toString();
+				if(!d.getSelectedItem().equals("dd"))
+					da=d.getSelectedItem().toString();
 				d.setEnabled(false);
 			}
 			
@@ -218,7 +223,8 @@ public class Reservation_helper_GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				JComboBox h=(JComboBox)e.getSource();
-				ho=h.getSelectedItem().toString();
+				if(!h.getSelectedItem().equals("HH"))
+					ho=h.getSelectedItem().toString();
 				h.setEnabled(false);
 			}
 			
@@ -229,7 +235,8 @@ public class Reservation_helper_GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				JComboBox m=(JComboBox)e.getSource();
-				mi=m.getSelectedItem().toString();
+				if(!m.getSelectedItem().equals("mm"))
+					mi=m.getSelectedItem().toString();
 				m.setEnabled(false);
 			}
 			
@@ -242,7 +249,8 @@ public class Reservation_helper_GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				JComboBox meau = (JComboBox)e.getSource();
-				service_choose = meau.getSelectedItem().toString();
+				if(!meau.getSelectedItem().equals("서비스 선택"))
+					service_choose = meau.getSelectedItem().toString();
 				meau.setEnabled(false);
 			}
 			
@@ -264,18 +272,34 @@ public class Reservation_helper_GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				JButton n=(JButton)e.getSource();
+				
+				
 				//서비스콤보가 "산책","집방문"이면 결제창으로 넘어감
 				//넘어가기전에"결제하시겠습니까" 메세지창 띄우기 
 				//서비스콤보가 "병원 동행","미용샵 동행"이면 각각의 예약 창으로 넘어감
 				if(service_choose.equals("산책") || service_choose.equals("집 방문")) {
 					JOptionPane.showMessageDialog(null,"결제하시겠습니까?");
 					//결제창 넘어감??
+					//지금 짠 코드는 결제 안하고 바로 예약 DB에 저장함
+					//
+					if(n.getText().equals("다음")) {
+						setdata();
+						rh.store(data);
+					}
+					//예약 성공하면 메인창으로 넘어감
+					dispose();
 				}
 				else if(service_choose.equals("병원 동행")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
+					//병원 예약창으로 넘어감
+					dispose();
 				}
 				else if(service_choose.equals("반려동물 미용샵 동행")) {
 					JOptionPane.showMessageDialog(null,"미용샵을 예약하시겠습니까?");
+					//미용샵 예약창으로 넘어감
+					dispose();
 				}
 				
 			}
@@ -295,9 +319,6 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		requestFocus();
 		
-	}
-	public static void main(String[] args) {
-		new Reservation_helper_GUI();
 	}
 }
 
