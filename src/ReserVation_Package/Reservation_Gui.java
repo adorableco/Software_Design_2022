@@ -69,8 +69,8 @@ class CheckReservationMode extends JFrame implements ActionListener{
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frame = getSize();
 		
-		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2);
-		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2);
+		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2 - 200);
+		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2 - 200);
 		
 		this.setLocation(xPos, yPos);
 		this.setResizable(true);
@@ -313,7 +313,7 @@ public class Reservation_Gui {
 
 		new CheckReservationMode();
 	}
-	public static void main(String[] args) {
-		new CheckReservationMode();
-	}
+//	public static void main(String[] args) {
+//		new CheckReservationMode();
+//	}
 }
