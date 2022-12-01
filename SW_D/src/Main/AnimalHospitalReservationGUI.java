@@ -17,6 +17,7 @@ public class AnimalHospitalReservationGUI extends MainGUI{
 	
 	public AnimalHospitalReservationGUI(String title) {
 		createFrame(title);
+
 		this.conn = new AnimalHospitalDBConnector();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
