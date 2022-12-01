@@ -1,0 +1,134 @@
+package pit_a_pet;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+public class User_GUI extends JFrame implements ActionListener {
+	
+	protected JButton rgstrButton = new JButton("반려동물 정보 등록");
+	protected JButton dltButton = new JButton("반려동물 정보 삭제");
+	protected JPanel mainPanel = new JPanel();
+	protected JButton nextButton = new JButton("다음");
+	protected JButton completeButton = new JButton("완료");
+	protected JPanel subPanel = new JPanel(new GridLayout(5,3));
+	protected int panelCheck = 0;
+	protected JPanel cards = new JPanel(new CardLayout());
+	protected CardLayout cl = new CardLayout();
+	protected JPanel borderPanel = new JPanel();
+	//protected String [] type = {"개","고양이","햄스터","양서류","파충류"};
+	
+	public User_GUI() {
+		setTitle("반려동물 정보 관리");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(new BorderLayout(5,10));
+		JPanel westPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout(50,50));
+		westPanel.setLayout(new GridLayout(10,1));
+		rgstrButton.addActionListener(this);
+		dltButton.addActionListener(this);
+		westPanel.add(rgstrButton);
+		westPanel.add(dltButton);
+		
+		mainPanel.add(borderPanel,BorderLayout.SOUTH);
+		completeButton.setPreferredSize(new Dimension(150, 50));
+		
+		c.add(westPanel,BorderLayout.WEST);
+		c.add(mainPanel,BorderLayout.CENTER);
+		c.add(new JPanel(),BorderLayout.SOUTH);
+		setSize(800,600);
+		setVisible(true);
+		cl = (CardLayout) cards.getLayout();
+		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==rgstrButton && panelCheck==0) {
+			borderPanel.add(nextButton);
+			RegisterInfo_GUI();
+		}
+		
+		else if(e.getSource()==nextButton) {
+			if(nextButton.getText()=="다음") {
+				borderPanel.add(completeButton);
+				completeButton.setVisible(true);
+				nextButton.setText("이전");
+			}
+			else {
+				nextButton.setText("다음");
+				completeButton.setVisible(false);
+			}
+			cl.next(cards);
+		}
+		
+		else if(e.getSource()==completeButton) {
+			
+		}
+		
+	}
+	
+	public void RegisterInfo_GUI() {
+		panelCheck = 1;
+		mainPanel.add(cards);
+		nextButton.setText("다음");
+		JPanel subPanel1 = new JPanel(new GridLayout(5,3));
+		mainPanel.add(new JPanel(),BorderLayout.NORTH);
+		mainPanel.add(new JPanel(),BorderLayout.EAST);
+		mainPanel.add(new JPanel(),BorderLayout.WEST);
+		mainPanel.add(subPanel,BorderLayout.CENTER);
+		subPanel1.add(new JLabel(" 반려동물 종류"));
+		JTextField type = new JTextField("",10);
+		subPanel1.add(type);
+		subPanel1.add(new JLabel(""));
+		subPanel1.add(new JLabel(" 이름"));
+		JTextField name = new JTextField("",10);
+		subPanel1.add(name);
+		subPanel1.add(new JLabel(""));
+		subPanel1.add(new JLabel(" 나이"));
+		JTextField age = new JTextField("",10);
+		subPanel1.add(age);
+		subPanel1.add(new JLabel(""));
+		subPanel1.add(new JLabel(" 품종"));
+		JTextField breed = new JTextField("",10);
+		subPanel1.add(breed);
+		subPanel1.add(new JLabel(""));
+		subPanel1.add(new JLabel(" 무게"));
+		JTextField weight = new JTextField("",10);
+		subPanel1.add(weight);
+		subPanel1.add(new JLabel(" kg"));
+		nextButton.setBackground(Color.BLACK);
+		nextButton.setPreferredSize(new Dimension(150, 50));
+		nextButton.addActionListener(this);
+		
+		
+		//next Panel
+		JPanel subPanel2 = new JPanel(new GridLayout(4,3));
+		subPanel2.add(new JLabel(" 질병의 유무"));
+		subPanel2.add(new JTextField("",10));
+		subPanel2.add(new JLabel(""));
+		subPanel2.add(new JLabel(" 복용중인 약 명칭"));
+		subPanel2.add(new JTextField("",10));
+		subPanel2.add(new JLabel(""));
+		subPanel2.add(new JLabel(" 이용중인 동물 병원"));
+		subPanel2.add(new JTextField("",10));
+		subPanel2.add(new JLabel(""));
+		subPanel2.add(new JLabel(" 이용중인 반려동물 미용실"));
+		subPanel2.add(new JTextField("",10));
+		subPanel2.add(new JLabel(""));
+		
+		
+		cards.add(subPanel1,"subPanel1");
+		cards.add(subPanel2,"subPanel2");
+		
+		mainPanel.add(cards);
+		mainPanel.setVisible(true);
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		new User_GUI();
+	}
+}
