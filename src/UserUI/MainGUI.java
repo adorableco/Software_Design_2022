@@ -60,7 +60,7 @@ public class MainGUI {
 		button1.setBounds(25, 29, 103, 29);
 		mainSubPanel.add(button1);
 		
-		JButton button2 = new JButton("예약 정보 관리");
+		JButton button2 = new JButton("예약 정보ㅇ 관리");
 		button2.setBounds(25, 93, 103, 29);
 		button2.addActionListener(new ActionListener() {
 			
