@@ -4,3 +4,5 @@
 *.prefs
 *.ini
 *.prefs
+*.metadata
+*.DS_Store
