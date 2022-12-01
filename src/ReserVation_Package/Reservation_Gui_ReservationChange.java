@@ -41,6 +41,7 @@ class ReservationChange extends JFrame implements ActionListener{
 	
 	private String Menu[] = {"(2) 예약 변경", "(2-1) 날짜변경", "(2-2) 저장하기"};
 	private int Selected_Menu_Index;
+	
 	private Reservation_Info SelectedReservation;
 	private File Selected_File;
 	
@@ -148,25 +149,26 @@ class ReservationChange extends JFrame implements ActionListener{
 		
 	}
 	public void actionPerformed(ActionEvent e) {
-		switch(Selected_Menu_Index) {
-		case(1):
-			int input = Integer.valueOf(informationTA.getText());
-			informationTA.setText("");
-			SelectedReservation.changeState(input);
-			dispose();
-			new ReservationChange(SelectedReservation, Selected_File);
-			break;
-		case(2):
-			System.out.println(Selected_File.getName());
-			try {
-				FileWriter fw = new FileWriter(Selected_File.getPath(), false);
-				fw.write(SelectedReservation.Get_name() + " " + SelectedReservation.Get_State());
-				fw.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			break;
-		}
+		dispose();
+//		switch(Selected_Menu_Index) {
+//		case(1):
+//			int input = Integer.valueOf(informationTA.getText());
+//			informationTA.setText("");
+//			SelectedReservation.changeState(input);
+//			dispose();
+//			new ReservationChange(SelectedReservation, Selected_File);
+//			break;
+//		case(2):
+//			System.out.println(Selected_File.getName());
+//			try {
+//				FileWriter fw = new FileWriter(Selected_File.getPath(), false);
+//				fw.write(SelectedReservation.Get_name() + " " + SelectedReservation.Get_State());
+//				fw.close();
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}
+//			break;
+//		}
 	}	
 	
 }
