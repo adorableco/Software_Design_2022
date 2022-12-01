@@ -125,6 +125,7 @@ public class UserGUI {
 					pet.registerWeight(Integer.parseInt(weightText.getText()));
 					} catch (NumberFormatException ex) {
 						JOptionPane.showMessageDialog(null,"무게는 숫자로 입력해주세요.");
+						(info.n)--;
 						return;
 						}
 
