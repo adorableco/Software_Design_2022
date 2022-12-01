@@ -24,8 +24,6 @@ hs_err_pid*
 
 *.prefs
 *.resources
-*.prefs
 *.ini
-*.prefs
 *.metadata
 *.DS_Store
