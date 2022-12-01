@@ -121,8 +121,9 @@ public class UserGUI {
 					return;
 				}
 				
+				String mass = weightText.getText();
 				try {
-					pet.registerWeight(Integer.parseInt(weightText.getText()));
+					pet.registerWeight(Integer.parseInt(mass));
 					} catch (NumberFormatException ex) {
 						JOptionPane.showMessageDialog(null,"무게는 숫자로 입력해주세요.");
 						(info.n)--;
@@ -141,7 +142,6 @@ public class UserGUI {
 				
 				nameText.setText(" ");;
 				breedText.setText(" ");
-				weightText.setText(" ");
 				drugText.setText(" ");
 				hospitalText.setText(" ");
 				shopText.setText(" ");
