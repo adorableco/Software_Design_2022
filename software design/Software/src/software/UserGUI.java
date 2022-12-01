@@ -122,13 +122,15 @@ public class UserGUI {
 				}
 				
 				String mass = weightText.getText();
-				try {
-					pet.registerWeight(Integer.parseInt(mass));
-					} catch (NumberFormatException ex) {
-						JOptionPane.showMessageDialog(null,"무게는 숫자로 입력해주세요.");
-						(info.n)--;
-						return;
-						}
+				if(checkEmpty(mass)) {
+					try {
+						pet.registerWeight(Integer.parseInt(mass));
+						} catch (NumberFormatException ex) {
+							JOptionPane.showMessageDialog(null,"무게는 숫자로 입력해주세요.");
+							(info.n)--;
+							return;
+							}
+				}
 
 				
 				pet.registerType(typeCombobox.getSelectedItem().toString());
@@ -140,12 +142,13 @@ public class UserGUI {
 				
 				model.insertRow(info.n, new Object[] {info.pet[(info.n)-1].name,info.pet[(info.n)-1].breed,info.pet[(info.n)-1].age});
 				
-				nameText.setText(" ");;
-				breedText.setText(" ");
-				drugText.setText(" ");
-				hospitalText.setText(" ");
-				shopText.setText(" ");
-				illnessText.setText(" ");
+				nameText.setText("");;
+				breedText.setText("");
+				drugText.setText("");
+				hospitalText.setText("");
+				shopText.setText("");
+				illnessText.setText("");
+				weightText.setText("");
 				
 				System.out.println("name : "+pet.name);
 				System.out.println("type : " + pet.type);
