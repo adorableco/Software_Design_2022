@@ -24,7 +24,6 @@ public class ManagePetInfo {
 		for(int i=deleteNum-1; i<n-1; i++)
 			pet[i] = pet[i+1];
 		n--; //총 반려동물 마릿수 -1
-		
 	}
 	
 }
