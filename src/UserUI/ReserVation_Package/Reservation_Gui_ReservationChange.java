@@ -41,7 +41,7 @@ class ReservationChange extends JFrame implements ActionListener{
 	private JPanel informationWpanel = new JPanel(new GridLayout(1,2));
 	private JButton informationWRokBtn = new JButton("Confirm");
 	
-	private String Menu[] = {"(2) 예약 변경", "(2-1) 날짜변경", "(2-2) 저장하기"};
+	private String Menu[] = {"(2) 예약 변경", "(2-1) 날짜변경", "(2-2) 할일목록 변경","(2-3) 저장하기"};
 	private int Selected_Menu_Index;
 	
 	private Reservation_Info SelectedReservation;
@@ -131,8 +131,16 @@ class ReservationChange extends JFrame implements ActionListener{
 		add(informationRpanel, BorderLayout.CENTER);
 		add(informationPanel, BorderLayout.SOUTH);
 		
-		informationGuideWindow.setText(this.SelectedReservation.Get_name() + "\n");
-		informationGuideWindow.append("예약상태 : " + Integer.toString(this.SelectedReservation.Get_State()) + "\n");
+		
+
+		if(SelectedReservation.Get_State() == 0) informationGuideWindow.setText("상태 : 이용예정\n");
+		else if(SelectedReservation.Get_State() == 1) informationGuideWindow.setText("상태 : 이용완료\n");
+		else informationGuideWindow.setText("상태 : 예약 취소\n");
+		
+		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 날짜 : " + SelectedReservation.Get_Use_Day() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Time() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "할일 목록 : " + SelectedReservation.Get_Use_Service() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "결제 금액 : " + Integer.toString(SelectedReservation.Get_Cost())+ "\n");
 		
 		
 		this.setVisible(true);

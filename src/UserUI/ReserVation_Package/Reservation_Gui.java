@@ -73,8 +73,8 @@ class CheckReservationMode extends JFrame implements ActionListener{
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frame = getSize();
 		
-		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2 - 200);
-		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2 - 200);
+		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2);
+		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2);
 		
 		this.setLocation(xPos, yPos);
 		this.setResizable(true);
@@ -137,10 +137,19 @@ class CheckReservationMode extends JFrame implements ActionListener{
 //		this.Reserv_Info.add(new Reservation_Info("예약 4",4));
 		
 		//
-		for(int i = 0;i < Reserv_Info.size(); i++) {
-			Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
+		for(int i = 0; i < Reserv_Info.size(); i++) {
+		switch(Reserv_Info.get(i).Get_State()) {
+		case(0):
+			Accesable_Info.addElement( "이용예정:            " + Reserv_Info.get(i).Get_Use_Day());
+			break;
+		case(1):
+			Accesable_Info.addElement( "이용완료:            " + Reserv_Info.get(i).Get_Use_Day());
+			break;
+		case(2):
+			Accesable_Info.addElement( "예약취소:            " + Reserv_Info.get(i).Get_Use_Day());
+			break;
 		}
-		
+	}
 		
 		this.informationGuideWindow = new JList(Accesable_Info);
 	
@@ -224,10 +233,19 @@ class CheckReservationMode extends JFrame implements ActionListener{
 
 		case(0):
 			informationWindow.setText("상세 보기");
-
 			Accesable_Info.clear();
 			for(int i = 0; i < Reserv_Info.size(); i++) {
-				Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
+				switch(Reserv_Info.get(i).Get_State()) {
+				case(0):
+					Accesable_Info.addElement( "이용예정:            " + Reserv_Info.get(i).Get_Use_Day());
+					break;
+				case(1):
+					Accesable_Info.addElement( "이용완료:            " + Reserv_Info.get(i).Get_Use_Day());
+					break;
+				case(2):
+					Accesable_Info.addElement( "예약취소:            " + Reserv_Info.get(i).Get_Use_Day());
+					break;
+				}
 			}
 			break;
 		case(1):
@@ -237,7 +255,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 			// State == 0 -> 
 			for(int i = 0;i < Reserv_Info.size(); i++) {
 				if( Reserv_Info.get(i).Get_State() == 1 )
-					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
+					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day());
 
 				else 
 					Accesable_Info.addElement( "" );
@@ -292,16 +310,14 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					int temp = InformationIndex;
 					Accesable_Info.clear();
 					System.out.println(temp);
-					if(Reserv_Info.get(temp).Get_State() == 0) Accesable_Info.addElement("상태 : 이용예정");
-					else if(Reserv_Info.get(temp).Get_State() == 1) Accesable_Info.addElement("상태 : 이용완료");
-					else Accesable_Info.addElement("상태 : 예약 취소");
 					
-					Accesable_Info.addElement( "이용 날짜 : " + Reserv_Info.get(temp).Get_Use_Day() );
-					Accesable_Info.addElement( "이용 시간 : " + Reserv_Info.get(temp).Get_Use_Time() );
-					Accesable_Info.addElement( "할일 목록 : " + Reserv_Info.get(temp).Get_Use_Service() );
+					// 정보 Print하
 					if(Reserv_Info.get(temp).Get_State() == 0) Accesable_Info.addElement("이용예정");
 					else if(Reserv_Info.get(temp).Get_State() == 1) Accesable_Info.addElement("이용완료");
 					else Accesable_Info.addElement("예약 취소");
+					Accesable_Info.addElement( "이용 날짜 : " + Reserv_Info.get(temp).Get_Use_Day() );
+					Accesable_Info.addElement( "이용 시간 : " + Reserv_Info.get(temp).Get_Use_Time() );
+					Accesable_Info.addElement( "할일 목록 : " + Reserv_Info.get(temp).Get_Use_Service() );
 					Accesable_Info.addElement( "결제 금액 : " + Integer.toString(Reserv_Info.get(temp).Get_Cost()));
 					if(!(Reserv_Info.get(temp).Get_Review().equals("0"))) {
 						Accesable_Info.addElement( "리뷰내용 : " + Reserv_Info.get(temp).Get_Review());
@@ -310,6 +326,8 @@ class CheckReservationMode extends JFrame implements ActionListener{
 						Accesable_Info.addElement( "리뷰내용 : 없음");
 					}
 					break;
+					
+					
 				case (1):
 					new Reservation_Gui_ReservatioonReview(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
 					break;
@@ -338,7 +356,7 @@ public class Reservation_Gui {
 
 		new CheckReservationMode();
 	}
-//	public static void main(String[] args) {
-//		new CheckReservationMode();
-//	}
+	public static void main(String[] args) {
+		new CheckReservationMode();
+	}
 }

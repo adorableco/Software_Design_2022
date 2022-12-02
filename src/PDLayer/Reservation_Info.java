@@ -11,8 +11,11 @@ public class Reservation_Info {
 	private int State;  // 이용 상태 0: 이용 예정  1:이용완료  2:예약 취소
 	private int Cost;  // 결제 비용
 	private String Review; // 리뷰 내
+	// 도우미 코드, 업체 예약 정보 ( 업체코드 ) 추가 해야함.
 	
-	public Reservation_Info(Date Use_Day, Time Use_Time, String Use_Service,int State, int Cost, String Review){
+	
+	public Reservation_Info(Date Use_Day, Time Use_Time, String Use_Service
+			,int State, int Cost, String Review){
 		this.Use_Day = Use_Day;
 		this.Use_Time = Use_Time;
 		this.Use_Service = Use_Service;
@@ -37,7 +40,7 @@ public class Reservation_Info {
 		return this.State;
 	}
 	public int Get_Cost() {
-		return this.State;
+		return this.Cost;
 	}
 	public String Get_Review() {
 		return this.Review;
