@@ -8,6 +8,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainGUI {
 
@@ -52,10 +54,20 @@ public class MainGUI {
 		mainSubPanel.setLayout(null);
 		
 		JButton button1 = new JButton("도우미 예약");
+		button1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Reservation_helper_GUI reservationGUI = new Reservation_helper_GUI();
+			}
+		});
 		button1.setBounds(25, 29, 103, 29);
 		mainSubPanel.add(button1);
 		
 		JButton button2 = new JButton("예약 정보 관리");
+		button2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PetInfoGUI.main(null);
+			}
+		});
 		button2.setBounds(25, 93, 103, 29);
 		mainSubPanel.add(button2);
 		

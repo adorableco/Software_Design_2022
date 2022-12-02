@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
-public class UserGUI {
+public class PetInfoGUI {
 
 	private JFrame frame;
 	private JTextField nameText;
@@ -50,7 +50,7 @@ public class UserGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UserGUI window = new UserGUI();
+					PetInfoGUI window = new PetInfoGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class UserGUI {
 	/**
 	 * Create the application.
 	 */
-	public UserGUI() {
+	public PetInfoGUI() {
 		initialize();
 	}
 	
