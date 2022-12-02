@@ -1,5 +1,6 @@
-package software;
+package participant_package;
 
+import database_package.Pet;
 
 public class ManagePetInfo {
 	//public User_GUI gui = new User_GUI();

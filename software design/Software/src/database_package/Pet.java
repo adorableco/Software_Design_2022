@@ -1,4 +1,4 @@
-package software;
+package database_package;
 
 public class Pet  { //반려동물 정보를 가지고 있는 클래스 
 	

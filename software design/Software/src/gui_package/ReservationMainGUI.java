@@ -1,22 +1,22 @@
-package Main;
+package gui_package;
 
 import javax.swing.*;
 import javax.swing.event.*;
 
-import Database.AnimalHospitalDBConnector;
+import database_package.AnimalHospitalDBConnector;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-import Reservation.Company;
+import reservation_package.Company;
 
-public class MainGUI extends JFrame {
+public class ReservationMainGUI extends JFrame {
 
-	public MainGUI() {
+	public ReservationMainGUI() {
 		this.setTitle("피어펫 서비스");
 	}
-	public MainGUI(String title) {
+	public ReservationMainGUI(String title) {
 		createFrame(title);
 
 		JPanel button_panel = new JPanel();
@@ -78,7 +78,7 @@ public class MainGUI extends JFrame {
 
 	
 	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
-		new MainGUI("피어펫 서비스");
+		new ReservationMainGUI("피어펫 서비스");
 //		AnimalHospitalDBConnector conn = new AnimalHospitalDBConnector(); 
 	}
 

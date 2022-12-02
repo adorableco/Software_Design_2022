@@ -1,9 +1,10 @@
-package software;
+package gui_package;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -65,13 +66,19 @@ public class MainGUI {
 		JButton button2 = new JButton("예약 정보 관리");
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PetInfoGUI.main(null);
+				Reservation_Gui reservation__gui = new Reservation_Gui();
+				Reservation_Gui.main(null);
 			}
 		});
 		button2.setBounds(25, 93, 103, 29);
 		mainSubPanel.add(button2);
 		
 		JButton button3 = new JButton("반려동물 관리");
+		button3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PetInfoGUI.main(null);
+			}
+		});
 		button3.setBounds(25, 163, 103, 29);
 		mainSubPanel.add(button3);
 		

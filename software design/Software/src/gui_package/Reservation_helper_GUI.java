@@ -1,12 +1,11 @@
-package software;
-
-
-
+package gui_package;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
 
 import javax.swing.*;
+
+import database_package.Reservation_helper;
 
 public class Reservation_helper_GUI extends JFrame {
 	Reservation_helper rh;

@@ -1,6 +1,9 @@
-package software;
+package database_package;
 
 import java.util.*;
+
+import gui_package.Reservation_helper_GUI;
+
 import java.io.*;
 
 //여기서 gui랑 DB 생성해야함
@@ -46,7 +49,7 @@ public class Reservation_helper {
 			e.printStackTrace();
 		}
 	}
-	void store(String[] data){
+	public void store(String[] data){
 		dataset= new String[6];
 		dataset=data;
 		date_store();

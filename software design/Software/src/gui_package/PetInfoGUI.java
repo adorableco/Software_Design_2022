@@ -1,4 +1,5 @@
-package software;
+package gui_package;
+import participant_package.ManagePetInfo;
 
 import java.awt.EventQueue;
 
@@ -23,6 +24,9 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import database_package.Pet;
+
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
