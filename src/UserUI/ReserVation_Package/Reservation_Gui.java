@@ -14,11 +14,15 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import PDLayer.Reservation_Info;
 
 import java.util.*;
 import java.util.List;
@@ -85,6 +89,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 	
 	
 	
+	@SuppressWarnings("deprecation")
 	public CheckReservationMode() {
 		createFrame("Checking Reservation");
 		
@@ -99,6 +104,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					return !name.equals(".DS_Store");
 				}
 			});
+			
 			Arrays.sort(flist);
 			
 			for(int i = 0; i < flist.length; i++) {
@@ -110,7 +116,10 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					int state;
 					while((content = br.readLine()) != null) {
 						String[] contentlist = content.split(" ");
-						this.Reserv_Info.add(new Reservation_Info(contentlist[0], Integer.valueOf(contentlist[1]).intValue()));
+						this.Reserv_Info.add(
+								new Reservation_Info( new Date(Integer.parseInt(contentlist[0])-1900, Integer.parseInt(contentlist[1])- 1, Integer.parseInt(contentlist[2])),
+								new Time( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
+								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8]));
 					}
 				}
 			}
@@ -129,7 +138,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 		
 		//
 		for(int i = 0;i < Reserv_Info.size(); i++) {
-			Accesable_Info.addElement( Reserv_Info.get(i).Get_name() );
+			Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
 		}
 		
 		
@@ -214,11 +223,11 @@ class CheckReservationMode extends JFrame implements ActionListener{
 		switch(selection) {
 
 		case(0):
-			informationWindow.setText("전체 정보");
+			informationWindow.setText("상세 보기");
 
 			Accesable_Info.clear();
 			for(int i = 0; i < Reserv_Info.size(); i++) {
-				Accesable_Info.addElement( Reserv_Info.get(i).Get_name() );
+				Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
 			}
 			break;
 		case(1):
@@ -227,8 +236,8 @@ class CheckReservationMode extends JFrame implements ActionListener{
 			
 			// State == 0 -> 
 			for(int i = 0;i < Reserv_Info.size(); i++) {
-				if( Reserv_Info.get(i).Get_State() == 0 )
-					Accesable_Info.addElement( Reserv_Info.get(i).Get_name() );
+				if( Reserv_Info.get(i).Get_State() == 1 )
+					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
 
 				else 
 					Accesable_Info.addElement( "" );
@@ -239,8 +248,8 @@ class CheckReservationMode extends JFrame implements ActionListener{
 			informationWindow.setText("예약 변경을 선택 하시겠습니까?");
 			Accesable_Info.clear();
 			for(int i = 0;i < Reserv_Info.size(); i++) {
-				if( Reserv_Info.get(i).Get_State() == 1 )
-					Accesable_Info.addElement( Reserv_Info.get(i).Get_name() );
+				if( Reserv_Info.get(i).Get_State() == 0 )
+					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
 				else 
 					Accesable_Info.addElement( "" );
 			}
@@ -253,8 +262,8 @@ class CheckReservationMode extends JFrame implements ActionListener{
 			
 
 			for(int i = 0;i < Reserv_Info.size(); i++) {
-				if( Reserv_Info.get(i).Get_State() == 2 )
-					Accesable_Info.addElement( Reserv_Info.get(i).Get_name() );
+				if( Reserv_Info.get(i).Get_State() == 0 )
+					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
 
 				else 
 					Accesable_Info.addElement( "" );
@@ -283,10 +292,26 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					int temp = InformationIndex;
 					Accesable_Info.clear();
 					System.out.println(temp);
-					Accesable_Info.addElement( Reserv_Info.get(temp).Get_name() );
-					Accesable_Info.addElement( Integer.toString( Reserv_Info.get(temp).Get_State()) );
+					if(Reserv_Info.get(temp).Get_State() == 0) Accesable_Info.addElement("상태 : 이용예정");
+					else if(Reserv_Info.get(temp).Get_State() == 1) Accesable_Info.addElement("상태 : 이용완료");
+					else Accesable_Info.addElement("상태 : 예약 취소");
+					
+					Accesable_Info.addElement( "이용 날짜 : " + Reserv_Info.get(temp).Get_Use_Day() );
+					Accesable_Info.addElement( "이용 시간 : " + Reserv_Info.get(temp).Get_Use_Time() );
+					Accesable_Info.addElement( "할일 목록 : " + Reserv_Info.get(temp).Get_Use_Service() );
+					if(Reserv_Info.get(temp).Get_State() == 0) Accesable_Info.addElement("이용예정");
+					else if(Reserv_Info.get(temp).Get_State() == 1) Accesable_Info.addElement("이용완료");
+					else Accesable_Info.addElement("예약 취소");
+					Accesable_Info.addElement( "결제 금액 : " + Integer.toString(Reserv_Info.get(temp).Get_Cost()));
+					if(!(Reserv_Info.get(temp).Get_Review().equals("0"))) {
+						Accesable_Info.addElement( "리뷰내용 : " + Reserv_Info.get(temp).Get_Review());
+					}
+					else {
+						Accesable_Info.addElement( "리뷰내용 : 없음");
+					}
 					break;
 				case (1):
+					new Reservation_Gui_ReservatioonReview(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
 					break;
 				case (2): // 예약변경
 					new Reservation_Gui_ReservationChange(Reserv_Info.get(InformationIndex), flist[InformationIndex] );

@@ -6,11 +6,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import PDLayer.Reservation_Info;
 
 import java.util.*;
 
@@ -105,9 +109,15 @@ private static final long serialVersionUID = 1L;
 		add(informationRpanel, BorderLayout.CENTER);
 		add(informationPanel, BorderLayout.SOUTH);
 		
-		informationGuideWindow.setText(this.SelectedReservation.Get_name() + "\n");
-		informationGuideWindow.append("예약상태 : " + Integer.toString(this.SelectedReservation.Get_State()) + "\n");
+
+		if(SelectedReservation.Get_State() == 0) informationGuideWindow.setText("상태 : 이용예정\n");
+		else if(SelectedReservation.Get_State() == 1) informationGuideWindow.setText("상태 : 이용완료\n");
+		else informationGuideWindow.setText("상태 : 예약 취소\n");
 		
+		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 날짜 : " + SelectedReservation.Get_Use_Day() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Time() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "할일 목록 : " + SelectedReservation.Get_Use_Service() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "결제 금액 : " + Integer.toString(SelectedReservation.Get_Cost())+ "\n");
 		
 		this.setVisible(true);
 		this.setFocusable(true);
@@ -118,7 +128,22 @@ private static final long serialVersionUID = 1L;
 		
 	}
 	public void actionPerformed(ActionEvent e) {
-		Selected_File.delete();
+
+		System.out.println(Selected_File.getName());
+
+		String Day = SelectedReservation.Get_Use_Day();
+		String[] date = Day.split("-");
+		String Time = SelectedReservation.Get_Use_Time();
+		String[] time = Time.split(":");
+		try {
+			FileWriter fw = new FileWriter(Selected_File.getPath(), false);
+			fw.write( date[0] + " " + date[1] + " " + date[2] + " " + time[0] + " " + time[1]
+					+ " " + SelectedReservation.Get_Use_Service() + " 2 "
+					+ SelectedReservation.Get_Cost() + " " + SelectedReservation.Get_Review());
+			fw.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		dispose();
 	}
 	

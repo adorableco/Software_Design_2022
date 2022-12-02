@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainGUI {
 
@@ -60,7 +62,7 @@ public class MainGUI {
 		button1.setBounds(25, 29, 103, 29);
 		mainSubPanel.add(button1);
 		
-		JButton button2 = new JButton("예약 정보ㅇ 관리");
+		JButton button2 = new JButton("예약 정보 관리");
 		button2.setBounds(25, 93, 103, 29);
 		button2.addActionListener(new ActionListener() {
 			
@@ -83,8 +85,7 @@ public class MainGUI {
 			}
 		});
 		mainSubPanel.add(button3);
-		
-		JLabel lblPitAPat = new JLabel("Pit A Pat");
+		JLabel lblPitAPat = new JLabel();
 		lblPitAPat.setFont(new Font("Lucida Grande", Font.PLAIN, 43));
 		lblPitAPat.setBounds(384, 200, 371, 111);
 		frame.getContentPane().add(lblPitAPat);
