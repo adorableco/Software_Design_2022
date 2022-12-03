@@ -93,6 +93,11 @@ public class Reservation_helper_GUI extends JFrame {
 		LocalTime resvTime = reservation_Info.Get_Use_Time();
 		String resvService = reservation_Info.Get_Use_Service();
 		
+		ye = Integer.toString(resvDate.getYear());
+		mo = Integer.toString(resvDate.getMonthValue());
+		da = Integer.toString(resvDate.getDayOfMonth());
+		ho = Integer.toString(resvTime.getHour());
+		mi = Integer.toString(resvTime.getMinute());
 		
 		createFrame("도우미 예약");
 	
