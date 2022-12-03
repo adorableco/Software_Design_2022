@@ -460,16 +460,16 @@ public class Reservation_helper_GUI extends JFrame {
 				
 				service_choose = meau.getSelectedItem().toString();
 				
-				if(service_choose.equals("산책")||service_choose.equals("집 방문")) {
+				if(service_choose.equals("산책")||service_choose.equals("집방문")) {
 					next_btn.setText("저장");
 				}
 					
-				else if (service_choose.equals("병원 동행")) {
-					next_btn.setText("병원 예약");
+				else if (service_choose.equals("병원동행")) {
+					next_btn.setText("병원예약");
 				}
 					
-				else if(service_choose.equals("반려동물 미용샵 동행")) {
-					next_btn.setText("반려동물 미용샵 예약");
+				else if(service_choose.equals("반려동물미용샵동행")) {
+					next_btn.setText("반려동물미용샵예약");
 				}
 			}
 		};
@@ -511,13 +511,13 @@ public class Reservation_helper_GUI extends JFrame {
 					
 					dispose();
 				}					
-				else if(n.getText().equals("병원 예약")) {
+				else if(n.getText().equals("병원예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
 					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
 					dispose();
 				}
-				else if(n.getText().equals("미용샵 예약")) {
+				else if(n.getText().equals("미용샵예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
 					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res);
@@ -830,16 +830,16 @@ public class Reservation_helper_GUI extends JFrame {
 				
 				service_choose = meau.getSelectedItem().toString();
 				
-				if(service_choose.equals("산책")||service_choose.equals("집 방문")) {
+				if(service_choose.equals("산책")||service_choose.equals("집방문")) {
 					next_btn.setText("결제");
 				}
 					
-				else if (service_choose.equals("병원 동행")) {
-					next_btn.setText("병원 예약");
+				else if (service_choose.equals("병원동행")) {
+					next_btn.setText("병원예약");
 				}
 					
-				else if(service_choose.equals("반려동물 미용샵 동행")) {
-					next_btn.setText("반려동물 미용샵 예약");
+				else if(service_choose.equals("반려동물미용샵동행")) {
+					next_btn.setText("반려동물미용샵예약");
 				}
 			}
 		});
@@ -927,7 +927,7 @@ public class Reservation_helper_GUI extends JFrame {
 					
 					dispose();
 				}					
-				else if(n.getText().equals("병원 예약")) {
+				else if(n.getText().equals("병원예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
 					int i_ye=Integer.parseInt(ye);
@@ -951,7 +951,7 @@ public class Reservation_helper_GUI extends JFrame {
 					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
 					dispose();
 				}
-				else if(n.getText().equals("미용샵 예약")) {
+				else if(n.getText().equals("미용샵예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
 					int i_ye=Integer.parseInt(ye);
