@@ -13,9 +13,11 @@ import javax.swing.table.*;
 import database_package.AnimalHospitalDBConnector;
 import reservation_package.AnimalHospital;
 
-public class AnimalHospitalReservationGUI extends ReservationMainGUI{
+public class AnimalHospitalReservationGUI extends JFrame{
 	private AnimalHospitalDBConnector conn;
-	
+	public AnimalHospitalReservationGUI() {
+		this.setTitle("피어펫 서비스");
+	}
 	public AnimalHospitalReservationGUI(String title) {
 		createFrame(title);
 
@@ -23,7 +25,7 @@ public class AnimalHospitalReservationGUI extends ReservationMainGUI{
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
 		LocalDate resvDate = LocalDate.now();
-		LocalTime resvTime = LocalTime.parse("10:00");
+		LocalTime resvTime = LocalTime.parse("12:00");
 		this.add(infoPanel(resvDate, resvTime), BorderLayout.NORTH);
 		try {
 			this.add(showList(this.conn.searchDBwithTime(resvDate, resvTime)), BorderLayout.CENTER);
@@ -131,4 +133,21 @@ public class AnimalHospitalReservationGUI extends ReservationMainGUI{
 	    }
 	}
 
+	void createFrame(String title) {
+		this.setTitle(title);
+		this.setSize(800,600);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension frame = getSize();
+		
+		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2);
+		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2);
+		
+		this.setLocation(xPos, yPos);
+		this.setResizable(true);
+		
+		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		this.setLayout(new BorderLayout());	
+	}
 }

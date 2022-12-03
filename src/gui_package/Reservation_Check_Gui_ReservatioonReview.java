@@ -25,7 +25,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import database_package.Reservation;
+import reservation_package.Reservation;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -184,9 +184,9 @@ class ReviewMode extends JFrame implements ActionListener{
 				
 				
 				String[] Review = addList.get(0).split("_");
-				String Day = SelectedReservation.Get_Use_Day();
+				String Day = SelectedReservation.Get_Use_Day().toString();
 				String[] date = Day.split("-");
-				String Time = SelectedReservation.Get_Use_Time();
+				String Time = SelectedReservation.Get_Use_Time().toString();
 				String[] time = Time.split(":");
 				try {
 					FileWriter fw = new FileWriter(Selected_File.getPath(),false);
@@ -265,8 +265,8 @@ class ReviewMode extends JFrame implements ActionListener{
 
 
 
-public class Reservation_Gui_ReservatioonReview {
-	public Reservation_Gui_ReservatioonReview(Reservation reservation_Info, File Selected_File) {
+public class Reservation_Check_Gui_ReservatioonReview {
+	public Reservation_Check_Gui_ReservatioonReview(Reservation reservation_Info, File Selected_File) {
 		new ReviewMode(reservation_Info, Selected_File);
 	}
 }

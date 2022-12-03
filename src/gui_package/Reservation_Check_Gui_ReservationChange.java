@@ -1,5 +1,6 @@
 package gui_package;
 
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,15 +15,15 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import database_package.Reservation;
+import reservation_package.Reservation;
 
 import java.util.*;
 
 
 
-class ReservationCancel extends JFrame{
+class ReservationChange extends JFrame implements ActionListener{
 	
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	
 	private JPanel listPanel = new JPanel();
@@ -36,13 +37,15 @@ private static final long serialVersionUID = 1L;
 	private JPanel informationPanel = new JPanel(new GridLayout(2,1));
 	private JLabel informationWindow = new JLabel("Select the Menu");
 	private JPanel informationWpanel = new JPanel(new GridLayout(1,2));
-	private JButton CancelBtn = new JButton("취소하기");
-	private JButton BackBtn = new JButton("뒤로가기");
+	private JButton informationWRokBtn = new JButton("예약 변경 하러 가기");
+	private JButton BackBtn = new JButton("뒤돌아 가기");
+	
+	private String Menu[] = {"(2) 예약 변경","(2-1) 저장하기"};
+	private int Selected_Menu_Index;
 	
 	private Reservation SelectedReservation;
 	private File Selected_File;
-
-	String Menu[] = {"(3) 취소"};
+	
 	private JList<String> GuiMenu = new JList<String>(Menu);
 	private ArrayList<String> MenuList = new ArrayList<String>();
 	
@@ -70,7 +73,7 @@ private static final long serialVersionUID = 1L;
 		
 	}
 	
-	public ReservationCancel(Reservation reservation_Info, File Selected_File) {
+	public ReservationChange(Reservation reservation_Info, File Selected_File) {
 		createFrame("Reservation Change");
 		this.SelectedReservation = reservation_Info;
 		this.Selected_File = Selected_File;
@@ -95,10 +98,27 @@ private static final long serialVersionUID = 1L;
 		
 		listPanel.add(GuiMenu);
 		GuiMenu.setSelectedIndex(0);
+		GuiMenu.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				Selected_Menu_Index = e.getLastIndex();
+				
+				switch(Selected_Menu_Index) {
+				case 1:
+					informationWindow.setText("변경할 날짜를 입력하세요");
+					break;
+				case 2:
+					informationWindow.setText("저장하시겠습니까??");
+				}
+			}
+		});
 //		areaPanel.add(scrollPane);
 		
-		informationWpanel.add(CancelBtn);
+		informationWpanel.add(informationWRokBtn);
 		informationWpanel.add(BackBtn);
+		
 		
 		informationPanel.add(informationWindow);
 		informationPanel.add(informationWpanel);
@@ -111,46 +131,23 @@ private static final long serialVersionUID = 1L;
 		add(informationRpanel, BorderLayout.CENTER);
 		add(informationPanel, BorderLayout.SOUTH);
 		
+		
 
 		if(SelectedReservation.Get_State() == 0) informationGuideWindow.setText("상태 : 이용예정\n");
 		else if(SelectedReservation.Get_State() == 1) informationGuideWindow.setText("상태 : 이용완료\n");
 		else informationGuideWindow.setText("상태 : 예약 취소\n");
 		
-		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 날짜 : " + SelectedReservation.Get_Use_Day() + "\n");
-		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Time() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 날짜 : " + SelectedReservation.Get_Use_Day().toString() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Time().toString() + "\n");
 		informationGuideWindow.setText( informationGuideWindow.getText() + "할일 목록 : " + SelectedReservation.Get_Use_Service() + "\n");
 		informationGuideWindow.setText( informationGuideWindow.getText() + "결제 금액 : " + Integer.toString(SelectedReservation.Get_Cost())+ "\n");
+		
 		
 		this.setVisible(true);
 		this.setFocusable(true);
 		
 		
-		CancelBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane confirm = new JOptionPane();
-				int result;
-				result = confirm.showConfirmDialog(null, "정말 취소하시겠습니까?", "예약 취소", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				String Day = SelectedReservation.Get_Use_Day();
-				String[] date = Day.split("-");
-				String Time = SelectedReservation.Get_Use_Time();
-				String[] time = Time.split(":");
-				if(result == 0) {
-					try {
-						FileWriter fw = new FileWriter(Selected_File.getPath(), false);
-						fw.write( date[0] + " " + date[1] + " " + date[2] + " " + time[0] + " " + time[1] + " "
-								+ SelectedReservation.Get_Use_Service() +  " 2 "
-								+ Integer.toString(SelectedReservation.Get_Cost()) + " " + SelectedReservation.Get_Review());
-						fw.close();
-						dispose();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
-		
+		informationWRokBtn.addActionListener(this);
 		BackBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -165,16 +162,30 @@ private static final long serialVersionUID = 1L;
 		});
 		
 	}
-	
+	public void actionPerformed(ActionEvent e) {
+		switch(Selected_Menu_Index) {
+		case(0):
+			new Reservation_helper_GUI(SelectedReservation, Selected_File);
+			break;
+//		case(2):
+//			System.out.println(Selected_File.getName());
+//			try {
+//				FileWriter fw = new FileWriter(Selected_File.getPath(), false);
+//				fw.write(SelectedReservation.Get_name() + " " + SelectedReservation.Get_State());
+//				fw.close();
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}
+//			break;
+		}
+	}	
 	
 }
 
 
 
-
-public class Reservation_Gui_ReservationCancel {
-	public Reservation_Gui_ReservationCancel(Reservation reservation_Info, File Selected_File) {
-
-		new ReservationCancel(reservation_Info, Selected_File);
+public class Reservation_Check_Gui_ReservationChange {
+	public Reservation_Check_Gui_ReservationChange(Reservation reservation_Info, File Selected_File) {
+		new ReservationChange(reservation_Info, Selected_File);
 	}
 }

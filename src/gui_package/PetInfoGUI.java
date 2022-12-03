@@ -1,5 +1,6 @@
 package gui_package;
 import participant_package.ManagePetInfo;
+import participant_package.Pet;
 
 import java.awt.EventQueue;
 
@@ -19,13 +20,18 @@ import java.awt.Font;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import database_package.Pet;
+import database_package.PetDB;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
@@ -40,6 +46,8 @@ public class PetInfoGUI {
 	private JTextField hospitalText;
 	private JTextField shopText;
 	private JTextField illnessText;
+	
+	PetDB petDB;
 	
 	private JComboBox typeCombobox = new JComboBox();
 	private JComboBox ageCombobox = new JComboBox();
@@ -67,6 +75,7 @@ public class PetInfoGUI {
 	 * Create the application.
 	 */
 	public PetInfoGUI() {
+		petDB = new PetDB();
 		initialize();
 	}
 	
@@ -143,6 +152,8 @@ public class PetInfoGUI {
 				pet.registerDrug(drugText.getText());
 				pet.registerHospital(hospitalText.getText());
 				pet.registerShop(shopText.getText());
+				
+				petDB.dataUpload_pet(pet);
 				
 				model.insertRow(info.n, new Object[] {info.pet[(info.n)-1].name,info.pet[(info.n)-1].breed,info.pet[(info.n)-1].age});
 				
@@ -307,6 +318,39 @@ public class PetInfoGUI {
 				if(choiceIndex!=0) {
 					info.DeletePet(choiceIndex);
 					model.removeRow(choiceIndex);
+					
+					//파일 열어서 삭제하는 로직 
+					File file = new File("./DataBase/Pet DB.txt");		
+					String dummy = "";
+					try {
+						BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+						
+						//1. 삭제하고자 하는 position 이전까지는 이동하며 dummy에 저장
+						String line;
+						for(int i=0; i<choiceIndex; i++) {
+						    line = br.readLine(); //읽으며 이동
+						    dummy += (line + "\r\n" ); 
+						}
+						
+						//2. 삭제하고자 하는 데이터는 건너뛰기
+						String delData = br.readLine();
+						
+						//3. 삭제하고자 하는 position 이후부터 dummy에 저장
+						while((line = br.readLine())!=null) {
+							dummy += (line + "\r\n" ); 
+						}
+						
+						//4. FileWriter를 이용해서 덮어쓰기
+						FileWriter fw = new FileWriter("./DataBase/Pet DB.txt");
+						fw.write(dummy);			
+						
+						//bw.close();
+						fw.close();
+						br.close();
+					} catch (Exception ex) {
+						// TODO Auto-generated catch block
+						ex.printStackTrace();
+					}
 				}
 			}
 		});

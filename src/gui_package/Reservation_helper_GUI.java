@@ -12,6 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
 import java.sql.*;
 import javax.swing.*;
 //reservation 객체 선언
@@ -38,10 +42,9 @@ public class Reservation_helper_GUI extends JFrame {
 	private JButton BackBtn = new JButton("뒤로가기");
 	
 	private JList<String> menu_btn = new JList<String>(Menu); //옆에 메뉴버튼
-	//private JPanel informationGuideWindow; //jlist
 	
-	private Dimension dim1,dim2,dim3;
 	JPanel info_panel;
+	private Dimension dim1,dim2,dim3,dim4, dim5;
 	private String[] year= {"yyyy","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
 	private String[] month= {"MM","01","02","03","04","05","06","07","08","09","10","11","12"};
 	private String[] day= {"dd","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
@@ -55,7 +58,7 @@ public class Reservation_helper_GUI extends JFrame {
 	private JComboBox<String> hourCombo;
 	private JComboBox<String> minCombo;
 	private JComboBox<String> serviceCombo;
-	private JButton next_button;
+	private JComboBox<String> PetnameCombo;
 	private String service_choose;
 	private int serviceNum;
 	private String ye;
@@ -64,39 +67,39 @@ public class Reservation_helper_GUI extends JFrame {
 	private String ho;
 	private String mi;
 	private int cost;
-	private Date date;
-	private Time time;
 	
 	//frame 생성
 	void createFrame(String title) {
-		this.setTitle(title);
-		this.setSize(800,600);
-		
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		Dimension frame = getSize();
-		
-		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2);
-		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2);
-		
-		this.setLocation(xPos, yPos);
-		this.setResizable(true);
-		
-		
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		this.setLayout(new BorderLayout());
-		
+			this.setTitle(title);
+			this.setSize(800,600);
+			
+			Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+			Dimension frame = getSize();
+			
+			int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2);
+			int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2);
+			
+			this.setLocation(xPos, yPos);
+			this.setResizable(true);
+			
+			
+			
+			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+			this.setLayout(new BorderLayout());
+			
 	}
-	
-	public Reservation_helper_GUI() {
 		
+	public Reservation_helper_GUI() {
 		res=new Reservation();
 		resDB=new ReservationDB();
+		//LocalDate resvDate = reservation_Info.Get_Use_Day();
+		//LocalTime resvTime = reservation_Info.Get_Use_Time();
+		//String resvService = reservation_Info.Get_Use_Service();
+		
 		
 		createFrame("도우미 예약");
 	
-		
 		LineBorder line = new LineBorder(Color.black,1);
 		back_next_panel.setBorder(line);
 		
@@ -113,6 +116,10 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		
 		listPanel.add(menu_btn);
+		
+		JLabel reservation_font = new JLabel("도우미 예약");
+		reservation_font.setFont(new Font("맑은 고딕", Font.BOLD, 40));
+		reservation_font.setForeground(new Color(5, 0, 153));
 		
 		// 컴포넌트를 title 컨테이너에 올림.
 		info_panel = new JPanel();
@@ -231,8 +238,6 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(service_panel_1); 
 		info_panel.add(service_panel_2);		
 		
-		
-		
 		// 이벤트 처리
 		//메뉴에서 도우미예약 선택
 		menu_btn.addListSelectionListener(new ListSelectionListener() {
@@ -346,15 +351,15 @@ public class Reservation_helper_GUI extends JFrame {
 				service_choose = meau.getSelectedItem().toString();
 				
 				if(service_choose.equals("산책")||service_choose.equals("집 방문")) {
-					next_button.setText("결제");
+					next_btn.setText("결제");
 				}
 					
 				else if (service_choose.equals("병원 동행")) {
-					next_button.setText("병원 예약");
+					next_btn.setText("병원 예약");
 				}
 					
 				else if(service_choose.equals("반려동물 미용샵 동행")) {
-					next_button.setText("미용샵 예약");
+					next_btn.setText("미용샵 예약");
 				}
 			}
 		});
@@ -396,7 +401,7 @@ public class Reservation_helper_GUI extends JFrame {
 					new AnimalHospitalReservationGUI("병원 예약 서비스");
 					dispose();
 				}
-				else if(n.getText().equals("반려동물 미용샵 예약")) {
+				else if(n.getText().equals("미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
 					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스");

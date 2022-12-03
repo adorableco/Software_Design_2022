@@ -17,7 +17,7 @@ public class PetGroomingSalonDBConnector {
 	private int col;
 	
 	public PetGroomingSalonDBConnector() {
-		this.fname = "Database\\PetGroomingSalonDB.txt";
+		this.fname = "./Database/PetGroomingSalonDB.txt";
 		setColSize();
 	}
 	public PetGroomingSalonDBConnector(String fname) {
