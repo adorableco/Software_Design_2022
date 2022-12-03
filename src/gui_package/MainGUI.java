@@ -60,7 +60,7 @@ public class MainGUI {
 				Reservation_helper_GUI reservationGUI = new Reservation_helper_GUI();
 			}
 		});
-		button1.setBounds(25, 29, 103, 29);
+		button1.setBounds(21, 29, 120, 29);
 		mainSubPanel.add(button1);
 		
 		JButton button2 = new JButton("예약 정보 관리");
@@ -69,7 +69,7 @@ public class MainGUI {
 				new Reservation_Check_Gui();
 			}
 		});
-		button2.setBounds(25, 93, 103, 29);
+		button2.setBounds(21, 93, 120, 29);
 		mainSubPanel.add(button2);
 		
 		JButton button3 = new JButton("반려동물 관리");
@@ -78,7 +78,7 @@ public class MainGUI {
 				PetInfoGUI.main(null);
 			}
 		});
-		button3.setBounds(25, 163, 103, 29);
+		button3.setBounds(21, 163, 120, 29);
 		mainSubPanel.add(button3);
 		
 		JLabel lblPitAPat = new JLabel("Pit A Pat");
