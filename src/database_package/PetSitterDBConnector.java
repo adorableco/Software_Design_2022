@@ -17,7 +17,7 @@ public class PetSitterDBConnector {
 	private int col;
 	
 	public PetSitterDBConnector() {
-		this.fname = "Database\\PetSitterDB.txt";
+		this.fname = "./Database/PetSitterDB.txt";
 		setColSize();
 	}
 	public PetSitterDBConnector(String fname) {

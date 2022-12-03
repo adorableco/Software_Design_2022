@@ -11,7 +11,7 @@ public class AnimalHospitalDBConnector {
 	private int col;
 	
 	public AnimalHospitalDBConnector() {
-		this.fname = "Database\\AnimalHospitalDB.txt";
+		this.fname = "./Database/AnimalHospitalDB.txt";
 		setColSize();
 	}
 	public AnimalHospitalDBConnector(String fname) {
