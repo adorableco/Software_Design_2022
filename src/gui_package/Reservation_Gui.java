@@ -57,6 +57,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 	private JLabel informationWindow = new JLabel("Select the Menu");
 	private JPanel informationWpanel = new JPanel(new GridLayout(1,2));
 	private JButton informationWRokBtn = new JButton("이동하기");
+	private JButton BackBtn = new JButton("뒤로가기");
 	
 	private JList<String> GuiMenu = new JList<String>(Menu);
 	private ArrayList<String> MenuList = new ArrayList<String>();
@@ -174,6 +175,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 		
 		
 		informationWpanel.setPreferredSize(new Dimension(600,47));
+		informationWpanel.add(BackBtn);
 		
 		informationGuideWindow.setOpaque(true);
 		informationGuideWindow.setBackground(Color.GRAY);
@@ -183,6 +185,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 		informationWindow.setOpaque(true);
 		informationWindow.setBackground(Color.LIGHT_GRAY);
 		informationWindow.setFont(new Font("Serief", Font.BOLD, 15));
+		
 		
 		listPanel.add(GuiMenu);
 		GuiMenu.addListSelectionListener(new ListSelectionListener() {
@@ -229,6 +232,18 @@ class CheckReservationMode extends JFrame implements ActionListener{
 		
 		
 		informationWRokBtn.addActionListener(this);
+		BackBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane confirm = new JOptionPane();
+				int result;
+				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if(result == 0) {
+						dispose();
+				} 
+			}
+		});
 		
 	}
 
