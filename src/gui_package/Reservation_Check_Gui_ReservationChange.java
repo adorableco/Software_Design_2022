@@ -31,18 +31,16 @@ class ReservationChange extends JFrame implements ActionListener{
 //	
 	private JTextArea informationGuideWindow = new JTextArea("");
 
-	private JTextArea informationTA = new JTextArea(10,3);
-	
-	private JScrollPane scrollPane = new JScrollPane(informationTA);
 	
 	private JPanel informationRpanel = new JPanel(new GridLayout(1,1));
 	
 	private JPanel informationPanel = new JPanel(new GridLayout(2,1));
 	private JLabel informationWindow = new JLabel("Select the Menu");
 	private JPanel informationWpanel = new JPanel(new GridLayout(1,2));
-	private JButton informationWRokBtn = new JButton("Confirm");
+	private JButton informationWRokBtn = new JButton("예약 변경 하러 가기");
+	private JButton BackBtn = new JButton("뒤돌아 가기");
 	
-	private String Menu[] = {"(2) 예약 변경", "(2-1) 날짜변경", "(2-2) 할일목록 변경","(2-3) 저장하기"};
+	private String Menu[] = {"(2) 예약 변경","(2-1) 저장하기"};
 	private int Selected_Menu_Index;
 	
 	private Reservation SelectedReservation;
@@ -118,8 +116,9 @@ class ReservationChange extends JFrame implements ActionListener{
 		});
 //		areaPanel.add(scrollPane);
 		
-		informationWpanel.add(scrollPane);
 		informationWpanel.add(informationWRokBtn);
+		informationWpanel.add(BackBtn);
+		
 		
 		informationPanel.add(informationWindow);
 		informationPanel.add(informationWpanel);
@@ -149,26 +148,25 @@ class ReservationChange extends JFrame implements ActionListener{
 		
 		
 		informationWRokBtn.addActionListener(this);
-		informationTA.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					System.out.println("enter " + informationTA.getText().length());
-				}
-			} 
+		BackBtn.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane confirm = new JOptionPane();
+				int result;
+				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if(result == 0) {
+						dispose();
+				} 
+			}
 		});
 		
 	}
 	public void actionPerformed(ActionEvent e) {
-		dispose();
-//		switch(Selected_Menu_Index) {
-//		case(1):
-//			int input = Integer.valueOf(informationTA.getText());
-//			informationTA.setText("");
-//			SelectedReservation.changeState(input);
-//			dispose();
-//			new ReservationChange(SelectedReservation, Selected_File);
-//			break;
+		switch(Selected_Menu_Index) {
+		case(0):
+			new Reservation_helper_GUI(SelectedReservation, Selected_File);
+			break;
 //		case(2):
 //			System.out.println(Selected_File.getName());
 //			try {
@@ -179,7 +177,7 @@ class ReservationChange extends JFrame implements ActionListener{
 //				e1.printStackTrace();
 //			}
 //			break;
-//		}
+		}
 	}	
 	
 }
