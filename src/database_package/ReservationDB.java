@@ -29,14 +29,15 @@ public class ReservationDB {
 	
 	public void saveFile(Reservation resvInfo) {
 		int userId = 1;
-		String fname = this.path + Integer.toString(userId) + "_Reser_" + Integer.toString(resvInt);
-		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+
-				resvInfo.Get_Use_Time().format(DateTimeFormatter.ofPattern("HH mm")) +
-				resvInfo.Get_Use_Service() +
-				Integer.toString(resvInfo.Get_State()) +
-				Integer.toString(resvInfo.Get_Cost()) +
+		String fname = this.path + Integer.toString(userId) + "_Reser_" + Integer.toString(resvInt) + ".txt";
+		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+ " " +
+				resvInfo.Get_Use_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
+				resvInfo.Get_Use_Service() + " " +
+				Integer.toString(resvInfo.Get_State()) + " " +
+				Integer.toString(resvInfo.Get_Cost()) + " " +
 				resvInfo.Get_Review();
-		
+		System.out.println(resv)
+;		
 	    try {
 	    	BufferedWriter writer = new BufferedWriter(new FileWriter(fname));
 			writer.write(resv);
