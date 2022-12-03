@@ -12,6 +12,7 @@ public class Reservation {
 	private String service;
 	private int State;
 	private int cost;
+	private String helper;
 	private String Review;
 	private int Petcode;
 	private int Companycode;
@@ -29,6 +30,7 @@ public class Reservation {
 		this.cost = Cost;
 		this.Review = Review;
 	}
+
 	
 	public void setDate(LocalDate date){
 		this.date=date;
@@ -43,6 +45,11 @@ public class Reservation {
 		this.cost=cost;
 	}
 	
+	public void setHelper(String helper) {
+		this.helper=helper;
+	}
+
+
 	public String madeDate() {
 		//date를 String으로 바꾸고 예약 정보를 String으로 합치기
 		String s_date=this.date.format(DateTimeFormatter.ofPattern("yyyy MM dd"));

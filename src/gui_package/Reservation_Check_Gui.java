@@ -127,11 +127,9 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					while((content = br.readLine()) != null) {
 						String[] contentlist = content.split(" ");
 						this.Reserv_Info.add(
-								new Reservation(
-								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
-								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
-								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8])
-								);
+								new Reservation( new Date(Integer.parseInt(contentlist[0])-1900, Integer.parseInt(contentlist[1])- 1, Integer.parseInt(contentlist[2])),
+								new Time( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
+								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8],contentlist[9]));
 					}
 				}
 			}

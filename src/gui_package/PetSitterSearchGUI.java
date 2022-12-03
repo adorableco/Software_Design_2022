@@ -13,7 +13,10 @@ import javax.swing.table.*;
 import database_package.PetSitterDBConnector;
 import reservation_package.PetSitter;
 
-public class PetSitterSearchGUI extends JFrame{
+public class PetSitterSearchGUI extends Reservation_helper_GUI{
+	public JTable table;
+	public JFrame fr;
+	protected int row;
 	private PetSitterDBConnector conn;
 	public PetSitterSearchGUI() {
 		this.setTitle("피어펫 서비스");
@@ -25,7 +28,7 @@ public class PetSitterSearchGUI extends JFrame{
 		//임시 resvDate, resvTime
 		LocalDate resvDate = LocalDate.now();
 		LocalTime resvTime = LocalTime.parse("12:00");
-		this.add(infoPanel(resvDate, resvTime), BorderLayout.NORTH);
+		fr.add(infoPanel(resvDate, resvTime), BorderLayout.NORTH);
 		LinkedList<PetSitter> petsitterDB = new LinkedList<PetSitter>();
 		
 		try {
@@ -73,11 +76,17 @@ public class PetSitterSearchGUI extends JFrame{
 //		});
 
 		
-		this.add(tablePanel, BorderLayout.CENTER);
+		fr.add(tablePanel, BorderLayout.CENTER);
 		JButton resvButton = new JButton("선택하기");
-		this.add(resvButton, BorderLayout.PAGE_END);
-		this.setVisible(true);
-		this.setFocusable(true);
+		resvButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {;
+				res.setHelper(table.getModel().getValueAt(row,0).toString());
+				fr.dispose();
+			}
+		});
+		fr.add(resvButton, BorderLayout.PAGE_END);
+		fr.setVisible(true);
+		fr.setFocusable(true);
 	}
 	
 	public JPanel infoPanel(LocalDate resvDate, LocalTime resvTime) {
@@ -118,8 +127,8 @@ public class PetSitterSearchGUI extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				JTable table = (JTable) e.getSource();
-				int row = table.getSelectedRow();
+				table = (JTable) e.getSource();
+				row = table.getSelectedRow();
 //				System.out.print(table.getModel().getValueAt(row,0 )+"\t");
 				select.setText(table.getModel().getValueAt(row,0)+"에 예약을 진행합니다.");
 			}
@@ -181,21 +190,22 @@ public class PetSitterSearchGUI extends JFrame{
 		return addrCombo;
 	}
 	void createFrame(String title) {
-		this.setTitle(title);
-		this.setSize(800,600);
+		fr = new JFrame();
+		fr.setTitle(title);
+		fr.setSize(800,600);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frame = getSize();
 		
 		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2);
 		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2);
 		
-		this.setLocation(xPos, yPos);
-		this.setResizable(true);
+		fr.setLocation(xPos, yPos);
+		fr.setResizable(true);
 		
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.setLayout(new BorderLayout());	
+		fr.setLayout(new BorderLayout());	
 	}
-
+	
 }
