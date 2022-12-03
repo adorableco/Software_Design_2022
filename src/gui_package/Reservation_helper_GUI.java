@@ -242,11 +242,12 @@ public class Reservation_helper_GUI extends JFrame {
 		service_panel_2.add(serviceCombo);
 		
 		info_panel.add(service_panel_1); 
-		info_panel.add(service_panel_2);		
+		info_panel.add(service_panel_2);	
+		explan_label.setText("도우미 예약");
 		
 		// 이벤트 처리
 		//메뉴에서 도우미예약 선택
-		menu_btn.addListSelectionListener(new ListSelectionListener() {
+		/*menu_btn.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
@@ -254,11 +255,11 @@ public class Reservation_helper_GUI extends JFrame {
 				switch(selection) {
 				case(0):
 					explan_label.setText("도우미 예약");
-					out_info_panel.add(info_panel);
+					//out_info_panel.add(info_panel);
 					break;
 				}
 			}
-		});
+		});*/
 		//도우미 검색 Action
 		helper_search_button.addActionListener(new ActionListener() {
 			
@@ -600,11 +601,12 @@ public class Reservation_helper_GUI extends JFrame {
 		service_panel_2.add(serviceCombo);
 		
 		info_panel.add(service_panel_1); 
-		info_panel.add(service_panel_2);		
+		info_panel.add(service_panel_2);	
+		explan_label.setText("도우미 예약");
 		
 		// 이벤트 처리
 		//메뉴에서 도우미예약 선택
-		menu_btn.addListSelectionListener(new ListSelectionListener() {
+		/*menu_btn.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
@@ -616,7 +618,7 @@ public class Reservation_helper_GUI extends JFrame {
 					break;
 				}
 			}
-		});
+		});*/
 		//도우미 검색 Action
 		helper_search_button.addActionListener(new ActionListener() {
 			
@@ -723,7 +725,7 @@ public class Reservation_helper_GUI extends JFrame {
 				}
 					
 				else if(service_choose.equals("반려동물 미용샵 동행")) {
-					next_btn.setText("미용샵 예약");
+					next_btn.setText("반려동물 미용샵 예약");
 				}
 			}
 		});
