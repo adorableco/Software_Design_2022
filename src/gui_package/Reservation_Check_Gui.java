@@ -71,6 +71,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 
 	private int selectedMenu = 0;
 	private int InformationIndex;
+	ReservationDB RDB = new ReservationDB();
 	private File[] flist;
 	
 	
@@ -105,44 +106,8 @@ class CheckReservationMode extends JFrame implements ActionListener{
 		createFrame("Checking Reservation");
 		
 		//Get Reservation Information
-		try {
-			
-			File Path = new File("./DataBase/Reservation/");
-			flist = Path.listFiles(new FilenameFilter() {
-				
-				@Override
-				public boolean accept(File dir, String name) {
-					return !name.equals(".DS_Store");
-				}
-			});
-			
-			Arrays.sort(flist);
-			
-			for(int i = 0; i < flist.length; i++) {
-				// Contain User name
-				if(flist[i].getName().contains("1_Res")) {
-					BufferedReader br = new BufferedReader(new FileReader(flist[i]));
-					String content;
-					String name;
-					int state;
-					while((content = br.readLine()) != null) {
-						String[] contentlist = content.split(" ");
-						this.Reserv_Info.add(
-								new Reservation(
-								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
-								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
-								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8], contentlist[9])
-								);
-					}
-				}
-			}
-			
-		}catch (FileNotFoundException e) {
-			// TODO: handle exception
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		flist = RDB.Get_Filelist();
+		Reserv_Info = RDB.Get_Reserve_Info(flist);
 		
 //		this.Reserv_Info.add(new Reservation("예약 1",1));
 //		this.Reserv_Info.add(new Reservation("예약 2",2));

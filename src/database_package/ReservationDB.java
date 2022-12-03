@@ -3,6 +3,8 @@ package database_package;
 import java.util.*;
 import reservation_package.Reservation;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReservationDB {
@@ -27,6 +29,54 @@ public class ReservationDB {
 	private int resvInt = 7;
 	private String path = "./DataBase/Reservation/";
 	
+	
+	public File[] Get_Filelist() {
+		File f = new File(path);
+		File[] flist = f.listFiles(new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String name) {
+				return !name.equals(".DS_Store");
+			}
+		});
+		Arrays.sort(flist);
+		return flist;
+	}
+	
+	public ArrayList<Reservation> Get_Reserve_Info(File[] flist){
+
+		ArrayList<Reservation> Reserv_Info = new ArrayList<Reservation>();
+		
+		try {
+			for(int i = 0; i < flist.length; i++) {
+				// Contain User name
+				if(flist[i].getName().contains("1_Res")) {
+					BufferedReader br = new BufferedReader(new FileReader(flist[i]));
+					String content;
+					String name;
+					int state;
+					while((content = br.readLine()) != null) {
+						String[] contentlist = content.split(" ");
+						Reserv_Info.add(
+								new Reservation(
+								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
+								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
+								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8], contentlist[9])
+								);
+					}
+				}
+			}
+		}catch (FileNotFoundException e) {
+			// TODO: handle exception
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return Reserv_Info;
+	}
+	
+	
 	public void saveFile(Reservation resvInfo) {
 		int userId = 1;
 		String fname = this.path + Integer.toString(userId) + "_Reser_" + Integer.toString(resvInt) + ".txt";
@@ -50,6 +100,7 @@ public class ReservationDB {
 		}
 		return;
 	}
+	
 	public void saveFile(Reservation resvInfo, File originalFile) {
 		String fname = this.path + originalFile.getName().substring(0, originalFile.getName().lastIndexOf("."))+"_temp.txt";
 		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+ " " + 
