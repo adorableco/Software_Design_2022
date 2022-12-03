@@ -241,6 +241,7 @@ public class Reservation_helper_GUI extends JFrame {
 		JPanel service_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
 		serviceCombo = new JComboBox<String>(service);
 		serviceCombo.setSelectedIndex(Arrays.asList(service).indexOf(service_choose));
+
 		serviceCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		service_panel_2.setOpaque(true);
 		service_panel_2.setBackground(Color.gray);

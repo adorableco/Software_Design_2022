@@ -48,7 +48,6 @@ public class Reservation {
 	
 	public void setHelper(String helper) {
 		this.helper=helper;
-		System.out.println("reservation : "+this.helper);
 	}
 
 
