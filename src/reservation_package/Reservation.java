@@ -22,13 +22,14 @@ public class Reservation {
 	
 	
 	public Reservation(LocalDate Use_Day, LocalTime Use_Time, String Use_Service
-			,int State, int Cost, String Review){
+			,int State, int Cost, String Review, String helper){
 		this.date = Use_Day;
 		this.time = Use_Time;
 		this.service = Use_Service;
 		this.State = State;
 		this.cost = Cost;
 		this.Review = Review;
+		this.helper = helper;
 	}
 
 	
@@ -75,6 +76,9 @@ public class Reservation {
 	}
 	public String Get_Review() {
 		return this.Review;
+	}
+	public String Get_Helper() {
+		return this.helper;
 	}
 	
 	
