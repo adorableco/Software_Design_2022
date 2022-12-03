@@ -24,7 +24,7 @@ public class ReservationDB {
 //			e.printStackTrace();
 //		}
 //	}
-	private int resvInt;
+	private int resvInt = 7;
 	private String path = "./DataBase/Reservation/";
 	
 	public void saveFile(Reservation resvInfo) {
