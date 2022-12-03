@@ -63,6 +63,7 @@ public class Reservation_helper_GUI extends JFrame {
 	private String da;
 	private String ho;
 	private String mi;
+	public String helper;
 	private int cost;
 	
 	//frame 생성
@@ -92,13 +93,13 @@ public class Reservation_helper_GUI extends JFrame {
 		resDB=new ReservationDB();
 		LocalDate resvDate = reservation_Info.Get_Use_Day();
 		LocalTime resvTime = reservation_Info.Get_Use_Time();
-		String resvService = reservation_Info.Get_Use_Service();
 		
 		ye = Integer.toString(resvDate.getYear());
 		mo = Integer.toString(resvDate.getMonthValue());
 		da = Integer.toString(resvDate.getDayOfMonth());
 		ho = Integer.toString(resvTime.getHour());
 		mi = Integer.toString(resvTime.getMinute());
+		service_choose = reservation_Info.Get_Use_Service();
 		
 		createFrame("도우미 예약");
 	
@@ -218,6 +219,8 @@ public class Reservation_helper_GUI extends JFrame {
 					
 		JPanel service_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
 		serviceCombo = new JComboBox<String>(service);
+		serviceCombo.setSelectedIndex(Arrays.asList(service).indexOf(service_choose));
+
 		serviceCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		service_panel_2.setOpaque(true);
 		service_panel_2.setBackground(Color.gray);
@@ -264,9 +267,8 @@ public class Reservation_helper_GUI extends JFrame {
 				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
 					@Override
 			        public void windowClosing(WindowEvent e) {
+						helper_search_button.setText("도우미 선택 완료");
 						helper_search_button.setEnabled(false);
-						JLabel helper_search_complete = new JLabel("도우미 선택 완료");
-						helper_search_panel_2.add(helper_search_complete);
 			        }
 			    });
 			}
@@ -343,12 +345,28 @@ public class Reservation_helper_GUI extends JFrame {
 				else {
 					mi=m.getSelectedItem().toString();
 				}
+				int servIndex = serviceCombo.getSelectedIndex();
+				switch(servIndex) {
+				case(1):{
+					next_btn.setText("저장");
+				}
+				case(2):{
+					break;
+				}
+				case(3): {
+					next_btn.setText("병원 예약");
+					break;
+				}
+				case(4):{
+					next_btn.setText("반려동물 미용샵 예약");
+				}
+				}
 			}
 			
 		});
 		
 		//이용 서비스 Action
-		serviceCombo.addActionListener(new ActionListener() {
+		ActionListener nextActionListener = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -360,7 +378,7 @@ public class Reservation_helper_GUI extends JFrame {
 				service_choose = meau.getSelectedItem().toString();
 				
 				if(service_choose.equals("산책")||service_choose.equals("집 방문")) {
-					next_btn.setText("결제");
+					next_btn.setText("저장");
 				}
 					
 				else if (service_choose.equals("병원 동행")) {
@@ -371,8 +389,9 @@ public class Reservation_helper_GUI extends JFrame {
 					next_btn.setText("반려동물 미용샵 예약");
 				}
 			}
-		});
-		
+		};
+
+		serviceCombo.addActionListener(nextActionListener);
 		next_btn.addActionListener(new ActionListener() {
 
 			@Override
@@ -385,9 +404,9 @@ public class Reservation_helper_GUI extends JFrame {
 				
 				//지금 짠 코드는 결제 안하고 바로 예약 DB에 저장함
 				//예약 성공하면 메인창으로 넘어감
-				if(n.getText().equals("결제")) {
+				if(n.getText().equals("저장")) {
 					cost=10000;
-					JOptionPane.showMessageDialog(null,cost+"원 결제되었습니다.");  //결제창 넘어감??
+					JOptionPane.showMessageDialog(null,"저장되었습니다.");  
 					//reservation 클래스에 정보줌
 					int i_ye=Integer.parseInt(ye);
 					int i_mo=Integer.parseInt(mo);
@@ -407,13 +426,13 @@ public class Reservation_helper_GUI extends JFrame {
 				else if(n.getText().equals("병원 예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
-					new AnimalHospitalReservationGUI("병원 예약 서비스");
+					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
 					dispose();
 				}
 				else if(n.getText().equals("미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
-					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스");
+					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res);
 					dispose();
 				}
 			}
@@ -744,6 +763,7 @@ public class Reservation_helper_GUI extends JFrame {
 					LocalTime time=LocalTime.of(i_ho, i_mi);
 					res.setDate(date);
 					res.setTime(time);
+					res.setHelper(helper);
 					res.setService(service_choose);
 					res.setCost(cost);
 					resDB.saveFile(res);
@@ -753,13 +773,39 @@ public class Reservation_helper_GUI extends JFrame {
 				else if(n.getText().equals("병원 예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
-					new AnimalHospitalReservationGUI("병원 예약 서비스");
+					int i_ye=Integer.parseInt(ye);
+					int i_mo=Integer.parseInt(mo);
+					int i_da=Integer.parseInt(da);
+					int i_ho=Integer.parseInt(ho);
+					int i_mi=Integer.parseInt(mi);
+					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
+					LocalTime time=LocalTime.of(i_ho, i_mi);
+					res.setDate(date);
+					res.setTime(time);
+					res.setHelper(helper);
+					res.setService(service_choose);
+					res.setCost(cost);
+					resDB.saveFile(res);
+					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
 					dispose();
 				}
 				else if(n.getText().equals("미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
-					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스");
+					int i_ye=Integer.parseInt(ye);
+					int i_mo=Integer.parseInt(mo);
+					int i_da=Integer.parseInt(da);
+					int i_ho=Integer.parseInt(ho);
+					int i_mi=Integer.parseInt(mi);
+					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
+					LocalTime time=LocalTime.of(i_ho, i_mi);
+					res.setDate(date);
+					res.setTime(time);
+					res.setHelper(helper);
+					res.setService(service_choose);
+					res.setCost(cost);
+					resDB.saveFile(res);
+					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res);
 					dispose();
 				}
 			}

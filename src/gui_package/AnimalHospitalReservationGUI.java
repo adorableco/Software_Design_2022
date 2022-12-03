@@ -12,20 +12,23 @@ import javax.swing.table.*;
 
 import database_package.AnimalHospitalDBConnector;
 import reservation_package.AnimalHospital;
+import reservation_package.Reservation;
 
 public class AnimalHospitalReservationGUI extends JFrame{
 	private AnimalHospitalDBConnector conn;
+	private Reservation res;
 	public AnimalHospitalReservationGUI() {
 		this.setTitle("피어펫 서비스");
 	}
-	public AnimalHospitalReservationGUI(String title) {
+	public AnimalHospitalReservationGUI(String title, Reservation res) {
+		this.res = res;
 		createFrame(title);
 
 		this.conn = new AnimalHospitalDBConnector();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
-		LocalDate resvDate = LocalDate.now();
-		LocalTime resvTime = LocalTime.parse("12:00");
+		LocalDate resvDate = res.Get_Use_Day();
+		LocalTime resvTime = res.Get_Use_Time();
 		this.add(infoPanel(resvDate, resvTime), BorderLayout.NORTH);
 		try {
 			this.add(showList(this.conn.searchDBwithTime(resvDate, resvTime)), BorderLayout.CENTER);

@@ -60,7 +60,7 @@ public class Pet  { //반려동물 정보를 가지고 있는 클래스
 	}
 	
 	public String madepetDB() {
-		String petData =this.type+" "+this.name+" "+this.age+" "+this.breed+" "+this.weight+" "+this.illness+" "+this.drug+" "+this.hospital+" "+this.shop;
+		String petData =this.type+","+this.name+","+this.age+","+this.breed+","+this.weight+","+this.illness+","+this.drug+","+this.hospital+","+this.shop;
 		return petData;
 	}
 	
