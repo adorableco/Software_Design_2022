@@ -14,7 +14,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import database_package.Reservation;
+import reservation_package.Reservation;
 
 import java.util.*;
 
@@ -132,9 +132,9 @@ private static final long serialVersionUID = 1L;
 				JOptionPane confirm = new JOptionPane();
 				int result;
 				result = confirm.showConfirmDialog(null, "정말 취소하시겠습니까?", "예약 취소", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				String Day = SelectedReservation.Get_Use_Day();
+				String Day = SelectedReservation.Get_Use_Day().toString();
 				String[] date = Day.split("-");
-				String Time = SelectedReservation.Get_Use_Time();
+				String Time = SelectedReservation.Get_Use_Time().toString();
 				String[] time = Time.split(":"); 
 				if(result == 0) {
 					try {
