@@ -85,7 +85,8 @@ public class ReservationDB {
 				resvInfo.Get_Use_Service() + " " +
 				Integer.toString(resvInfo.Get_State()) + " " +
 				Integer.toString(resvInfo.Get_Cost()) + " " +
-				resvInfo.Get_Review();
+				resvInfo.Get_Review() + " "+
+				resvInfo.Get_Helper();
 		System.out.println(resv)
 ;		
 	    try {
@@ -102,12 +103,13 @@ public class ReservationDB {
 	
 	public void saveFile(Reservation resvInfo, File originalFile) {
 		String fname = this.path + originalFile.getName().substring(0, originalFile.getName().lastIndexOf("."))+"_temp.txt";
-		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+
-				resvInfo.Get_Use_Time().format(DateTimeFormatter.ofPattern("HH mm")) +
-				resvInfo.Get_Use_Service() +
-				Integer.toString(resvInfo.Get_State()) +
-				Integer.toString(resvInfo.Get_Cost()) +
-				resvInfo.Get_Review();
+		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+ " " + 
+				resvInfo.Get_Use_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
+				resvInfo.Get_Use_Service() + " " +
+				Integer.toString(resvInfo.Get_State()) + " " +
+				Integer.toString(resvInfo.Get_Cost()) + " " + 
+				resvInfo.Get_Review() + " "+
+				resvInfo.Get_Helper();
 		
 	    try {
 	    	BufferedWriter writer = new BufferedWriter(new FileWriter(fname));
