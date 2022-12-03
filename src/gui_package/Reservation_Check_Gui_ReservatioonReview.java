@@ -1,4 +1,4 @@
-package gui_package.User_GUI.Reservation_Check_UI;
+package gui_package;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

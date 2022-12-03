@@ -1,33 +1,34 @@
-package gui_package.User_GUI.Reservation;
+package gui_package;
+
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.time.*;
-import java.time.format.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 import javax.swing.*;
 import javax.swing.table.*;
 
-import database_package.PetGroomingSalonDBConnector;
-import reservation_package.PetGroomingSalon;
+import database_package.AnimalHospitalDBConnector;
+import reservation_package.AnimalHospital;
 import reservation_package.Reservation;
 
-public class PetGroomingSalonReservationGUI extends JFrame{
-	private PetGroomingSalonDBConnector conn;
+public class AnimalHospitalReservationGUI extends JFrame{
+	private AnimalHospitalDBConnector conn;
 	private Reservation res;
-	public PetGroomingSalonReservationGUI() {
+	public AnimalHospitalReservationGUI() {
 		this.setTitle("피어펫 서비스");
 	}
-	public PetGroomingSalonReservationGUI(String title, Reservation res) {
-		createFrame(title);
+	public AnimalHospitalReservationGUI(String title, Reservation res) {
 		this.res = res;
-		this.conn = new PetGroomingSalonDBConnector();
+		createFrame(title);
+
+		this.conn = new AnimalHospitalDBConnector();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
-		LocalDate resvDate = LocalDate.now();
-		LocalTime resvTime = LocalTime.parse("12:00");
+		LocalDate resvDate = res.Get_Use_Day();
+		LocalTime resvTime = res.Get_Use_Time();
 		this.add(infoPanel(resvDate, resvTime), BorderLayout.NORTH);
 		try {
 			this.add(showList(this.conn.searchDBwithTime(resvDate, resvTime)), BorderLayout.CENTER);
@@ -51,15 +52,16 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 		return info;
 	}
 	
-	public JPanel showList(LinkedList<PetGroomingSalon> salonDB) throws IOException {
+	public JPanel showList(LinkedList<AnimalHospital> hospitalDB) throws IOException {
 		JPanel cList = new JPanel();
 		JLabel select = new JLabel();
 		cList.setLayout(new BorderLayout());
+//		LinkedList<AnimalHospital> hospitalDB = this.conn.readDB();
 		String[] header = this.conn.getDBHeader();
-		String[][] contents = new String[salonDB.size()][19];
-		for (int i = 0; i < salonDB.size();i++) {
+		String[][] contents = new String[hospitalDB.size()][19];
+		for (int i = 0; i < hospitalDB.size();i++) {
 			try {
-				contents[i] = salonDB.get(i).getAttributeInList();
+				contents[i] = hospitalDB.get(i).getAttributeInList();
 //				System.out.println(String.join(",", contents[i]));
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
@@ -69,10 +71,11 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 		JTable companyListTable = new JTable(contents, header);
 		companyListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		resizeColumnWidth(companyListTable);
-		companyListTable.getColumnModel().getColumn(0).setMinWidth(225);
-		companyListTable.getColumnModel().getColumn(1).setMinWidth(175);
-		companyListTable.getColumnModel().getColumn(2).setMinWidth(85);
-		companyListTable.getColumnModel().getColumn(3).setMinWidth(275);
+		companyListTable.getColumnModel().getColumn(0).setMinWidth(200);
+		companyListTable.getColumnModel().getColumn(1).setMinWidth(150);
+		companyListTable.getColumnModel().getColumn(2).setMinWidth(60);
+		companyListTable.getColumnModel().getColumn(3).setMinWidth(250);
+		companyListTable.getColumnModel().getColumn(4).setMinWidth(100);
 		
 		MouseListener tableListener = new MouseListener() {
 			@Override
@@ -132,7 +135,7 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 	        columnModel.getColumn(column).setPreferredWidth(width);
 	    }
 	}
-	
+
 	void createFrame(String title) {
 		this.setTitle(title);
 		this.setSize(800,600);

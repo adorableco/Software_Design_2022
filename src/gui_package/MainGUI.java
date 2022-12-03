@@ -12,9 +12,6 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import gui_package.User_GUI.Reservation.*;
-import gui_package.User_GUI.Reservation_Check_UI.*;;
-
 public class MainGUI {
 
 	private JFrame frame;

@@ -1,4 +1,4 @@
-package gui_package.User_GUI.Reservation;
+package gui_package;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,13 +12,6 @@ import javax.swing.table.*;
 
 import database_package.PetSitterDBConnector;
 import reservation_package.PetSitter;
-import database_package.AnimalHospitalDBConnector;
-import reservation_package.AnimalHospital;
-import reservation_package.Reservation;
-
-import gui_package.User_GUI.Reservation.*;
-import gui_package.User_GUI.Reservation_Check_UI.*;
-import gui_package.User_GUI.*;;
 
 public class PetSitterSearchGUI extends Reservation_helper_GUI{
 	public JTable table;

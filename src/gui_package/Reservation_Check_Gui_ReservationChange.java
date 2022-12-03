@@ -1,4 +1,4 @@
-package gui_package.User_GUI.Reservation_Check_UI;
+package gui_package;
 
 
 import java.awt.*;
@@ -15,7 +15,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import gui_package.User_GUI.Reservation.Reservation_helper_GUI;
 import reservation_package.Reservation;
 
 import java.util.*;
