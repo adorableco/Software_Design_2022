@@ -1,5 +1,4 @@
 package participant_package;
-import database_package.PetDB;
 
 public class ManagePetInfo {
 	//public User_GUI gui = new User_GUI();
@@ -7,15 +6,13 @@ public class ManagePetInfo {
 	public Pet [] pet;
 	
 	public ManagePetInfo() {
+		
 		pet = new Pet[5];
+		
 		
 		for(int i=0; i<5; i++)
 			pet[i] = new Pet();
-		
-		PetDB petDB = new PetDB();
-		n = petDB.dataDownload_pet(pet);
 	}
-	
 	
 	public Pet registerPet() {
 		n++;
