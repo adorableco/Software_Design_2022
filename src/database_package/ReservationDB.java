@@ -57,6 +57,7 @@ public class ReservationDB {
 					int state;
 					while((content = br.readLine()) != null) {
 						String[] contentlist = content.split(" ");
+						System.out.println(content);
 						Reserv_Info.add(
 								new Reservation(
 								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),

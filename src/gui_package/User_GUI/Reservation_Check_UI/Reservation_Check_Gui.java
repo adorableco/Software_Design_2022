@@ -1,4 +1,4 @@
-package gui_package;
+package gui_package.User_GUI.Reservation_Check_UI;
 
 import javax.swing.*;
 import javax.swing.event.*;

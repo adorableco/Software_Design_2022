@@ -1,4 +1,4 @@
-package gui_package;
+package gui_package.User_GUI.Reservation;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
