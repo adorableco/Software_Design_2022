@@ -2,17 +2,12 @@ package gui_package;
 
 import javax.swing.*;
 import javax.swing.event.*;
-
 import database_package.AnimalHospitalDBConnector;
 import database_package.Reservation;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-
 import reservation_package.Company;
-
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -28,13 +23,10 @@ import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.sql.Date;
 import java.sql.Time;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import java.util.*;
 import java.util.List;
 
 
