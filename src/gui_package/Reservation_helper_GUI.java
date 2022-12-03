@@ -264,6 +264,7 @@ public class Reservation_helper_GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//도우미 검색 창으로 넘어감
 				petsitterSearchGUI = new PetSitterSearchGUI("도우미 검색 서비스");
+				dispose();
 				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
 					@Override
 			        public void windowClosing(WindowEvent e) {

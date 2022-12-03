@@ -23,7 +23,6 @@ public class PetSitterSearchGUI extends Reservation_helper_GUI{
 	}
 	
 	public PetSitterSearchGUI(String title) {
-		super();
 		createFrame1(title);
 		this.conn = new PetSitterDBConnector();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
