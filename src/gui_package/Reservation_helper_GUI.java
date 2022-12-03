@@ -333,7 +333,7 @@ public class Reservation_helper_GUI extends JFrame {
 					new AnimalHospitalReservationGUI("병원 예약 서비스");
 					dispose();
 				}
-				else if(n.getText().equals("반려동물 미용샵 예약")) {
+				else if(n.getText().equals("미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
 					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스");

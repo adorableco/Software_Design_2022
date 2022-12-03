@@ -22,7 +22,7 @@ public class PetGroomingSalonReservationGUI extends ReservationMainGUI{
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
 		LocalDate resvDate = LocalDate.now();
-		LocalTime resvTime = LocalTime.parse("10:00");
+		LocalTime resvTime = LocalTime.parse("12:00");
 		this.add(infoPanel(resvDate, resvTime), BorderLayout.NORTH);
 		try {
 			this.add(showList(this.conn.searchDBwithTime(resvDate, resvTime)), BorderLayout.CENTER);
