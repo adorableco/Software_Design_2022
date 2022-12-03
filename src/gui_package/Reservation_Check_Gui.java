@@ -4,13 +4,14 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import database_package.AnimalHospitalDBConnector;
-import database_package.Reservation;
+
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
 import reservation_package.Company;
+import reservation_package.Reservation;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,8 +27,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -128,9 +129,11 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					while((content = br.readLine()) != null) {
 						String[] contentlist = content.split(" ");
 						this.Reserv_Info.add(
-								new Reservation( new Date(Integer.parseInt(contentlist[0])-1900, Integer.parseInt(contentlist[1])- 1, Integer.parseInt(contentlist[2])),
-								new Time( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
-								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8]));
+								new Reservation(
+								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
+								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
+								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8])
+								);
 					}
 				}
 			}
@@ -280,7 +283,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 			// State == 0 -> 
 			for(int i = 0;i < Reserv_Info.size(); i++) {
 				if( Reserv_Info.get(i).Get_State() == 1 )
-					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day());
+					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day().toString());
 
 				else 
 					Accesable_Info.addElement( "" );
@@ -292,7 +295,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 			Accesable_Info.clear();
 			for(int i = 0;i < Reserv_Info.size(); i++) {
 				if( Reserv_Info.get(i).Get_State() == 0 )
-					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
+					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day().toString() );
 				else 
 					Accesable_Info.addElement( "" );
 			}
@@ -306,7 +309,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 
 			for(int i = 0;i < Reserv_Info.size(); i++) {
 				if( Reserv_Info.get(i).Get_State() == 0 )
-					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day() );
+					Accesable_Info.addElement( Reserv_Info.get(i).Get_Use_Day().toString() );
 
 				else 
 					Accesable_Info.addElement( "" );
@@ -354,13 +357,13 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					
 					
 				case (1):
-					new Reservation_Check_Gui_ReservatioonReview(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
+//					new Reservation_Check_Gui_ReservatioonReview(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
 					break;
 				case (2): // 예약변경
-					new Reservation_Check_Gui_ReservationChange(Reserv_Info.get(InformationIndex), flist[InformationIndex] );
+//					new Reservation_Check_Gui_ReservationChange(Reserv_Info.get(InformationIndex), flist[InformationIndex] );
 					break;
 				case (3): // 예약 취소
-					new Reservation_Check_Gui_ReservationCancel(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
+//					new Reservation_Check_Gui_ReservationCancel(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
 					break;
 			}
 			
@@ -379,9 +382,9 @@ public class Reservation_Check_Gui {
 	
 	public Reservation_Check_Gui(){
 
+//		new CheckReservationMode();
+	}
+	public static void main(String[] args) {
 		new CheckReservationMode();
 	}
-//	public static void main(String[] args) {
-//		new CheckReservationMode();
-//	}
 }
