@@ -13,9 +13,11 @@ import javax.swing.table.*;
 import database_package.PetSitterDBConnector;
 import reservation_package.PetSitter;
 
-public class PetSitterSearchGUI extends ReservationMainGUI{
+public class PetSitterSearchGUI extends JFrame{
 	private PetSitterDBConnector conn;
-
+	public PetSitterSearchGUI() {
+		this.setTitle("피어펫 서비스");
+	}
 	public PetSitterSearchGUI(String title) {
 		createFrame(title);
 		this.conn = new PetSitterDBConnector();
@@ -177,6 +179,23 @@ public class PetSitterSearchGUI extends ReservationMainGUI{
 		String address[] = {"선택", "대구광역시 북구", "대구광역시 중구", "대구광역시 동구"};
 		JComboBox addrCombo = new JComboBox(address); 
 		return addrCombo;
+	}
+	void createFrame(String title) {
+		this.setTitle(title);
+		this.setSize(800,600);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension frame = getSize();
+		
+		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2);
+		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2);
+		
+		this.setLocation(xPos, yPos);
+		this.setResizable(true);
+		
+		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		this.setLayout(new BorderLayout());	
 	}
 
 }
