@@ -18,12 +18,12 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import database_package.ReservationDB;
+import database_package.ReservationDBConector;
 import reservation_package.Reservation;
 
 public class Reservation_helper_GUI extends JFrame {
 	Reservation res;
-	ReservationDB resDB;
+	ReservationDBConector resDB;
 	PetSitterSearchGUI petsitterSearchGUI;
 	
 	String Menu[]= {"(1) 도우미 예약"};
@@ -88,7 +88,7 @@ public class Reservation_helper_GUI extends JFrame {
 		
 	public Reservation_helper_GUI(Reservation reservation_Info,File Selected_File) {
 		res=new Reservation();
-		resDB=new ReservationDB();
+		resDB=new ReservationDBConector();
 		LocalDate resvDate = reservation_Info.Get_Use_Day();
 		LocalTime resvTime = reservation_Info.Get_Use_Time();
 		String resvService = reservation_Info.Get_Use_Service();
@@ -459,7 +459,8 @@ public class Reservation_helper_GUI extends JFrame {
 	
 	public Reservation_helper_GUI() {
 		res=new Reservation();
-		resDB=new ReservationDB();
+		resDB=new ReservationDBConector();
+		setTitle("도우미 예약하기");
 		
 		createFrame("도우미 예약");
 	
