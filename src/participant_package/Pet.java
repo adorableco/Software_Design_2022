@@ -1,4 +1,6 @@
-package database_package;
+package participant_package;
+
+import java.time.format.DateTimeFormatter;
 
 public class Pet  { //반려동물 정보를 가지고 있는 클래스 
 	
@@ -55,6 +57,11 @@ public class Pet  { //반려동물 정보를 가지고 있는 클래스
 	public void registerShop(String shop) 
 	{
 		this.shop = shop;
+	}
+	
+	public String madepetDB() {
+		String petData =this.type+" "+this.name+" "+this.age+" "+this.breed+" "+this.weight+" "+this.illness+" "+this.drug+" "+this.hospital+" "+this.shop;
+		return petData;
 	}
 	
 }

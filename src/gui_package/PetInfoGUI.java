@@ -1,5 +1,6 @@
 package gui_package;
 import participant_package.ManagePetInfo;
+import participant_package.Pet;
 
 import java.awt.EventQueue;
 
@@ -25,7 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import database_package.Pet;
+import database_package.PetDB;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
@@ -40,6 +41,8 @@ public class PetInfoGUI {
 	private JTextField hospitalText;
 	private JTextField shopText;
 	private JTextField illnessText;
+	
+	PetDB petDB;
 	
 	private JComboBox typeCombobox = new JComboBox();
 	private JComboBox ageCombobox = new JComboBox();
@@ -67,6 +70,7 @@ public class PetInfoGUI {
 	 * Create the application.
 	 */
 	public PetInfoGUI() {
+		petDB = new PetDB();
 		initialize();
 	}
 	
@@ -143,6 +147,8 @@ public class PetInfoGUI {
 				pet.registerDrug(drugText.getText());
 				pet.registerHospital(hospitalText.getText());
 				pet.registerShop(shopText.getText());
+				
+				petDB.dataUpload_pet(pet);
 				
 				model.insertRow(info.n, new Object[] {info.pet[(info.n)-1].name,info.pet[(info.n)-1].breed,info.pet[(info.n)-1].age});
 				
