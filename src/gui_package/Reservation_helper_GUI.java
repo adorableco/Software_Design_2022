@@ -24,6 +24,7 @@ import reservation_package.Reservation;
 public class Reservation_helper_GUI extends JFrame {
 	Reservation res;
 	ReservationDB resDB;
+	PetSitterSearchGUI petsitterSearchGUI;
 	
 	String Menu[]= {"(1) 도우미 예약"};
 	private JPanel listPanel = new JPanel();
@@ -264,7 +265,15 @@ public class Reservation_helper_GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//도우미 검색 창으로 넘어감
-				new PetSitterSearchGUI("도우미 검색 서비스");
+				petsitterSearchGUI = new PetSitterSearchGUI("도우미 검색 서비스");
+				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
+					@Override
+			        public void windowClosing(WindowEvent e) {
+						helper_search_button.setEnabled(false);
+						JLabel helper_search_complete = new JLabel("도우미 선택 완료");
+						helper_search_panel_2.add(helper_search_complete);
+			        }
+			    });
 			}
 		});
 		
