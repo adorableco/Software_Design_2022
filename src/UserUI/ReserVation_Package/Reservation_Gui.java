@@ -356,7 +356,7 @@ public class Reservation_Gui {
 
 		new CheckReservationMode();
 	}
-	public static void main(String[] args) {
-		new CheckReservationMode();
-	}
+//	public static void main(String[] args) {
+//		new CheckReservationMode();
+//	}
 }

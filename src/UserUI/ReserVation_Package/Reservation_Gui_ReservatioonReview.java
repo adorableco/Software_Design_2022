@@ -5,10 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -18,6 +28,9 @@ import javax.swing.event.ListSelectionListener;
 import PDLayer.Reservation_Info;
 
 import java.util.*;
+import java.util.stream.Stream;
+
+
 
 
 
@@ -46,12 +59,14 @@ class ReviewMode extends JFrame implements ActionListener{
 	
 	private JOptionPane ConfirmBtn = new JOptionPane();
 	
-
+	private ArrayList<Reservation_Info> Reserv_Info = new ArrayList<Reservation_Info>();
 	private int selectedMenu; // selectedmenu index
+	private File[] flist;
+	private File Selected_File;
 	
 	String Menu[] = {"(1) 리뷰 작성하기"};
 	private Reservation_Info SelectedReservation;
-	private File Selected_File;
+	
 	
 	private JList<String> GuiMenu = new JList<String>(Menu);
 	private ArrayList<String> MenuList = new ArrayList<String>();
@@ -82,7 +97,7 @@ class ReviewMode extends JFrame implements ActionListener{
 	public ReviewMode(Reservation_Info reservation_Info, File selected_File2/*Reservation_Info reservation_Info, File Selected_File*/) {
 		createFrame("Checking Reservation");
 		this.SelectedReservation = reservation_Info;
-		this.Selected_File = Selected_File;
+		this.Selected_File = selected_File2;
 		
 		LineBorder line = new LineBorder(Color.black,1);
 		informationWpanel.setBorder(line);
@@ -141,7 +156,7 @@ class ReviewMode extends JFrame implements ActionListener{
 			System.out.println("Result 값 : " + result);
 			if( result == 0) {
 				SaveInput();
-				 try {
+				 /*try {
 			        	int n = 0;
 			            // 1. 파일 객체 생성
 			            File file = new File("C:\\Users\\SEC\\OneDrive\\바탕 화면\\소설\\Reservation" + "\\예약1.txt");
@@ -166,7 +181,79 @@ class ReviewMode extends JFrame implements ActionListener{
 			 
 			        } catch (IOException e1) {
 			            e1.printStackTrace();
-			        }
+			        }*/
+				
+				
+				String[] Review = addList.get(0).split("_");
+				String Day = SelectedReservation.Get_Use_Day();
+				String[] date = Day.split("-");
+				String Time = SelectedReservation.Get_Use_Time();
+				String[] time = Time.split(":");
+				try {
+					FileWriter fw = new FileWriter(Selected_File.getPath(),false);
+					fw.write(date[0] + " " + date[1] + " " + date[2] + " " + time[0] + " " + time[1] + " "
+							+ SelectedReservation.Get_Use_Service() +  " 1 "
+							+ Integer.toString(SelectedReservation.Get_Cost()) + " " );
+					fw.close();
+					FileWriter fw1 = new FileWriter(Selected_File.getPath(),true);
+				
+					for(int k =0; k<Review.length; k++) {
+						fw1.write(Review[k] + " ");
+					}
+					fw1.close();
+					
+				} catch(IOException e2) {
+					e2.printStackTrace();
+				}
+			
+				
+				/*try {
+					
+					File Path = new File("C:\\Users\\SEC\\OneDrive\\바탕 화면\\소설\\Software_Design-Branch_Sang\\DataBase\\Reservation");
+					flist = Path.listFiles(new FilenameFilter() {
+						
+						@Override
+						public boolean accept(File dir, String name) {
+							return !name.equals(".DS_Store");
+						}
+					});
+					
+					Arrays.sort(flist);
+					
+					
+					
+					
+					for(int i = 0; i < flist.length; i++) {
+						System.out.println(flist[i].getName());
+						// Contain User name
+						if(flist[i].getName().contains("1_Res")) {
+//							
+//							FileWriter fw = new FileWriter(flist[i],true);
+//				            BufferedWriter writer = new BufferedWriter(fw);
+//				            writer.write("..." + addList.get(0));
+//				            
+//				            informationTA.setText("");
+//				            writer.close();
+							
+							
+							
+							BufferedReader br = new BufferedReader(new FileReader(flist[i]));
+							String content;
+							String name;
+							int state;
+							while((content = br.readLine()) != null) {
+								String[] contentlist = content.split(" ");
+								if(Integer.parseInt(contentlist[8]) == 0) {
+									contentlist[8] = addList.get(0);
+								}
+							}
+						}
+					}
+					
+				}catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}*/
 				JOptionPane.showMessageDialog(null, "저장이 완료되었습니다.");
 				dispose();
 			}
