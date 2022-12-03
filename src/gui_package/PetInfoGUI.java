@@ -387,7 +387,25 @@ public class PetInfoGUI {
 				deletePanel.setVisible(true);
 			}
 		});
+		
 		deleteButton.setBounds(8, 81, 140, 29);
 		subPanel.add(deleteButton);
+		
+		JButton BackBtn = new JButton("뒤로가기");
+		BackBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane confirm = new JOptionPane();
+				int result;
+				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if(result == 0) {
+						frame.dispose();
+				} 
+			}
+		});
+		BackBtn.setBounds(8, 141, 140, 29);
+		subPanel.add(BackBtn);
+		
 	}
 }
