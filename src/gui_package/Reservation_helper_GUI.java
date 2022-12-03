@@ -98,6 +98,7 @@ public class Reservation_helper_GUI extends JFrame {
 		da = Integer.toString(resvDate.getDayOfMonth());
 		ho = Integer.toString(resvTime.getHour());
 		mi = Integer.toString(resvTime.getMinute());
+		service_choose = reservation_Info.Get_Use_Service();
 		
 		createFrame("도우미 예약");
 	
@@ -239,6 +240,7 @@ public class Reservation_helper_GUI extends JFrame {
 					
 		JPanel service_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
 		serviceCombo = new JComboBox<String>(service);
+		serviceCombo.setSelectedIndex(service_choose);
 		serviceCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		service_panel_2.setOpaque(true);
 		service_panel_2.setBackground(Color.gray);
