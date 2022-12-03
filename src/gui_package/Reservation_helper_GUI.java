@@ -56,7 +56,6 @@ public class Reservation_helper_GUI extends JFrame {
 	private JComboBox<String> finish_hourCombo;
 	private JComboBox<String> finish_minCombo;
 	private JComboBox<String> serviceCombo;
-	
 	private JComboBox<String> PetnameCombo;
 	private String service_choose;
 	private int serviceNum;
@@ -142,7 +141,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.setFont(new Font("Serief", Font.BOLD, 15));
 		info_panel.setLayout(new GridLayout(4, 2));
 		//info_panel.setVisible(true);
-		
+
 		//이용날짜
 		dim2=new Dimension(77,30);
 		JPanel date_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
@@ -219,32 +218,6 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(time_panel_1); 
 		info_panel.add(time_panel_2);
 		
-		//이용서비스
-		dim1=new Dimension(245,30);
-		JPanel service_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
-		JLabel service_label = new JLabel("이용 서비스 : ", JLabel.CENTER);
-		service_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		service_label.setForeground(Color.white);
-		service_panel_1.setOpaque(true);
-		service_panel_1.setBackground(Color.gray);
-		service_panel_1.setOpaque(true);
-		service_panel_1.add(service_label);
-					
-		JPanel service_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
-		serviceCombo = new JComboBox<String>(service);
-		serviceCombo.setSelectedIndex(Arrays.asList(service).indexOf(service_choose));
-
-		serviceCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		service_panel_2.setOpaque(true);
-		service_panel_2.setBackground(Color.gray);
-		service_panel_2.setOpaque(true);
-		serviceCombo.setPreferredSize(dim1);
-		service_panel_2.add(serviceCombo);
-		
-		info_panel.add(service_panel_1); 
-		info_panel.add(service_panel_2);	
-		explan_label.setText("도우미 예약");
-		
 		//도우미 검색
 		dim1=new Dimension(245,30);
 		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
@@ -268,6 +241,31 @@ public class Reservation_helper_GUI extends JFrame {
 				
 		info_panel.add(helper_search_panel_1); 
 		info_panel.add(helper_search_panel_2);
+				
+		//이용서비스
+		dim1=new Dimension(245,30);
+		JPanel service_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
+		JLabel service_label = new JLabel("이용 서비스 : ", JLabel.CENTER);
+		service_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		service_label.setForeground(Color.white);
+		service_panel_1.setOpaque(true);
+		service_panel_1.setBackground(Color.gray);
+		service_panel_1.setOpaque(true);
+		service_panel_1.add(service_label);
+					
+		JPanel service_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
+		serviceCombo = new JComboBox<String>(service);
+		serviceCombo.setSelectedIndex(Arrays.asList(service).indexOf(service_choose));
+		serviceCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		service_panel_2.setOpaque(true);
+		service_panel_2.setBackground(Color.gray);
+		service_panel_2.setOpaque(true);
+		serviceCombo.setPreferredSize(dim1);
+		service_panel_2.add(serviceCombo);
+		
+		info_panel.add(service_panel_1); 
+		info_panel.add(service_panel_2);	
+		explan_label.setText("도우미 예약");
 		
 		// 이벤트 처리
 		//도우미 검색 Action
@@ -537,7 +535,7 @@ public class Reservation_helper_GUI extends JFrame {
 	public Reservation_helper_GUI() {
 		res=new Reservation();
 		resDB=new ReservationDB();
-		//setTitle("도우미 예약하기");
+		setTitle("도우미 예약하기");
 		
 		createFrame("도우미 예약");
 	
@@ -571,7 +569,6 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.setFont(new Font("Serief", Font.BOLD, 15));
 		info_panel.setLayout(new GridLayout(4, 2));
 		//info_panel.setVisible(true);
-		
 		
 		//이용날짜
 		dim2=new Dimension(77,30);
@@ -688,7 +685,6 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(service_panel_1); 
 		info_panel.add(service_panel_2);	
 		explan_label.setText("도우미 예약");
-		
 		
 		// 이벤트 처리
 		//이용 날짜 Action
