@@ -86,12 +86,13 @@ public class PetSitterSearchGUI extends Reservation_helper_GUI{
 					try {
 						String[] a=petSitter.readDB().get(row).getAttributeInString().split(",");
 						helper = a[0];
+						fr.dispose();
+						dispose();
 					} catch (IllegalArgumentException | IllegalAccessException | IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 		
-				fr.dispose();
 			}
 		});
 		fr.add(resvButton, BorderLayout.PAGE_END);
