@@ -12,14 +12,17 @@ import javax.swing.table.*;
 
 import database_package.PetGroomingSalonDBConnector;
 import reservation_package.PetGroomingSalon;
+import reservation_package.Reservation;
 
 public class PetGroomingSalonReservationGUI extends JFrame{
 	private PetGroomingSalonDBConnector conn;
+	private Reservation res;
 	public PetGroomingSalonReservationGUI() {
 		this.setTitle("피어펫 서비스");
 	}
-	public PetGroomingSalonReservationGUI(String title) {
+	public PetGroomingSalonReservationGUI(String title, Reservation res) {
 		createFrame(title);
+		this.res = res;
 		this.conn = new PetGroomingSalonDBConnector();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime

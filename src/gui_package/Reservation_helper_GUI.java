@@ -436,13 +436,13 @@ public class Reservation_helper_GUI extends JFrame {
 				else if(n.getText().equals("병원 예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
-					new AnimalHospitalReservationGUI("병원 예약 서비스");
+					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
 					dispose();
 				}
 				else if(n.getText().equals("미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
-					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스");
+					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res);
 					dispose();
 				}
 			}
@@ -788,13 +788,39 @@ public class Reservation_helper_GUI extends JFrame {
 				else if(n.getText().equals("병원 예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
-					new AnimalHospitalReservationGUI("병원 예약 서비스");
+					int i_ye=Integer.parseInt(ye);
+					int i_mo=Integer.parseInt(mo);
+					int i_da=Integer.parseInt(da);
+					int i_ho=Integer.parseInt(ho);
+					int i_mi=Integer.parseInt(mi);
+					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
+					LocalTime time=LocalTime.of(i_ho, i_mi);
+					res.setDate(date);
+					res.setTime(time);
+					res.setHelper(helper);
+					res.setService(service_choose);
+					res.setCost(cost);
+					resDB.saveFile(res);
+					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
 					dispose();
 				}
 				else if(n.getText().equals("미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
-					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스");
+					int i_ye=Integer.parseInt(ye);
+					int i_mo=Integer.parseInt(mo);
+					int i_da=Integer.parseInt(da);
+					int i_ho=Integer.parseInt(ho);
+					int i_mi=Integer.parseInt(mi);
+					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
+					LocalTime time=LocalTime.of(i_ho, i_mi);
+					res.setDate(date);
+					res.setTime(time);
+					res.setHelper(helper);
+					res.setService(service_choose);
+					res.setCost(cost);
+					resDB.saveFile(res);
+					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res);
 					dispose();
 				}
 			}
