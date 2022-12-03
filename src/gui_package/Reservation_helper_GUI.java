@@ -373,7 +373,7 @@ public class Reservation_helper_GUI extends JFrame {
 				}
 					
 				else if(service_choose.equals("반려동물 미용샵 동행")) {
-					next_btn.setText("미용샵 예약");
+					next_btn.setText("반려동물 미용샵 예약");
 				}
 			}
 		});
