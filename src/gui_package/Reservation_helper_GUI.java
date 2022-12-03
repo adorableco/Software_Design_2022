@@ -289,23 +289,23 @@ public class Reservation_helper_GUI extends JFrame {
 				res.setStartTime(sttime);
 				res.setFinishTime(fitime);
 				petsitterSearchGUI = new PetSitterSearchGUI("도우미 검색 서비스", res);
-				BufferedReader bf;
-				try {
-					bf = new BufferedReader(new FileReader("./Database/petsitter_temp.txt"));
-					String helper_temp = bf.readLine();
-					res.setHelper(helper_temp);
-					
-						
-				} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-				}
+				
 				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
 					@Override
-			        public void windowClosing(WindowEvent e) {
-						helper_search_button.setText("도우미 선택 완료");
-						helper_search_button.setEnabled(false);
-						
+			        public void windowClosed(WindowEvent e) {
+						explan_label.setText("도우미 선택 완료");
+//						helper_search_button.setEnabled(false);
+						BufferedReader bf;
+						try {
+							bf = new BufferedReader(new FileReader("./Database/petsitter_temp.txt"));
+							String helper_temp = bf.readLine();
+							res.setHelper(helper_temp);
+							
+								
+						} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+						}
 			        }
 			    });
 			}
@@ -864,28 +864,29 @@ public class Reservation_helper_GUI extends JFrame {
 				res.setStartTime(sttime);
 				res.setFinishTime(fitime);
 				petsitterSearchGUI=new PetSitterSearchGUI("도우미 검색 서비스", res);
-				BufferedReader bf;
-				try {
-					bf = new BufferedReader(new FileReader("./Database/petsitter_temp.txt"));
-					try {
-						String helper_temp = bf.readLine();
-						res.setHelper(helper_temp);
-						System.out.println(res.Get_Helper());
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} //String
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} //선언
+				
 				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
 					@Override
-					    public void windowClosing(WindowEvent e) {
-						helper_search_button.setEnabled(false);
-							JLabel helper_search_complete = new JLabel("도우미 선택 완료");
-							helper_search_panel_2.add(helper_search_complete);
-							
+					    public void windowClosed(WindowEvent e) {
+//							helper_search_button.setEnabled(false);
+//							JLabel helper_search_complete = new JLabel("도우미 선택 완료");
+//							helper_search_panel_2.add(helper_search_complete);
+							explan_label.setText("도우미 선택 완료");
+							BufferedReader bf;
+							try {
+								bf = new BufferedReader(new FileReader("./Database/petsitter_temp.txt"));
+								try {
+									String helper_temp = bf.readLine();
+									res.setHelper(helper_temp);
+									System.out.println(res.Get_Helper());
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} //String
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} //선언
 							
 					    }
 				});
