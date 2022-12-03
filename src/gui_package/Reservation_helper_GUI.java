@@ -19,7 +19,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import database_package.ReservationDB;
-import database_package.ReservationDBConector;
 import reservation_package.Reservation;
 
 public class Reservation_helper_GUI extends JFrame {

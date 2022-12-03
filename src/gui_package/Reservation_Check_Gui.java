@@ -5,7 +5,6 @@ import javax.swing.event.*;
 
 import database_package.AnimalHospitalDBConnector;
 import database_package.ReservationDB;
-import database_package.ReservationDBConector;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -73,7 +72,6 @@ class CheckReservationMode extends JFrame implements ActionListener{
 	private int selectedMenu = 0;
 	private int InformationIndex;
 	private File[] flist;
-	ReservationDBConector RDBC;
 	
 	
 	
