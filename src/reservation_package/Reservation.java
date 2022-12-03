@@ -51,13 +51,13 @@ public class Reservation {
 	}
 
 
-	public String madeDate() {
+	/*public String madeDate() {
 		//date를 String으로 바꾸고 예약 정보를 String으로 합치기
 		String s_date=this.date.format(DateTimeFormatter.ofPattern("yyyy MM dd"));
 		String s_time=this.time.format(DateTimeFormatter.ofPattern("HH mm"));
 		String dataString=String.format("%s %s %s %d", s_date,s_time,service,cost);
 		return dataString;
-	}
+	}*/
 	
 	public int Get_State() {
 		return this.State;
