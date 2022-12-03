@@ -9,12 +9,12 @@ import java.sql.*;
 import javax.swing.*;
 //reservation 객체 선언
 
-import database_package.ReservationDB;
+import database_package.ReservationDBConector;
 import reservation_package.Reservation;
 
 public class Reservation_helper_GUI extends JFrame {
 	Reservation res;
-	ReservationDB resDB;
+	ReservationDBConector resDB;
 	
 	private Dimension dim1,dim2,dim3,dim4, dim5;
 	private String[] year= {"yyyy","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
@@ -44,7 +44,7 @@ public class Reservation_helper_GUI extends JFrame {
 	
 	public Reservation_helper_GUI(Reservation reservation_Info, File Selected_File) {
 		res=new Reservation();
-		resDB=new ReservationDB();
+		resDB=new ReservationDBConector();
 		LocalDate resvDate = reservation_Info.Get_Use_Day();
 		LocalTime resvTime = reservation_Info.Get_Use_Time();
 		String resvService = reservation_Info.Get_Use_Service();
@@ -372,7 +372,7 @@ public class Reservation_helper_GUI extends JFrame {
 	
 	public Reservation_helper_GUI() {
 		res=new Reservation();
-		resDB=new ReservationDB();
+		resDB=new ReservationDBConector();
 		setTitle("도우미 예약하기");
 		
 		JPanel title = new JPanel();

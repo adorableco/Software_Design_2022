@@ -23,4 +23,15 @@ public class PetDB {
 			e.printStackTrace();
 		}
 	}
+//	public Pet[] dataDownload_pet() {
+//		Pet[] pet = new Pet[5];
+//		try {
+//			BufferedReader Br = new BufferedReader(new FileReader("./DataBase/Pet DB.txt"));
+//			String
+//		}catch(IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return pet;
+//	}
 }
