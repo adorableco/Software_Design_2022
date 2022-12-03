@@ -12,24 +12,26 @@ import javax.swing.table.*;
 
 import database_package.PetSitterDBConnector;
 import reservation_package.PetSitter;
+import reservation_package.Reservation;
 
-public class PetSitterSearchGUI extends Reservation_helper_GUI{
+public class PetSitterSearchGUI extends JFrame{
 	public JTable table;
 	public JFrame fr;
 	protected int row;
 	private PetSitterDBConnector conn;
+	private Reservation res;
 	public PetSitterSearchGUI() {
 		
 	}
 	
-	public PetSitterSearchGUI(String title) {
-		super();
+	public PetSitterSearchGUI(String title, Reservation res) {
+		this.res = res;
 		createFrame1(title);
 		this.conn = new PetSitterDBConnector();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
-		LocalDate resvDate = LocalDate.now();
-		LocalTime resvTime = LocalTime.parse("12:00");
+		LocalDate resvDate = res.Get_Use_Day();
+		LocalTime resvTime = res.Get_Use_Start_Time();
 		fr.add(infoPanel(resvDate, resvTime), BorderLayout.NORTH);
 		LinkedList<PetSitter> petsitterDB = new LinkedList<PetSitter>();
 		
@@ -43,7 +45,77 @@ public class PetSitterSearchGUI extends Reservation_helper_GUI{
 		
 		JPanel tablePanel = new JPanel();
 		try {
-			tablePanel = showList(petsitterDB);
+//			tablePanel = showList(petsitterDB);
+			JPanel cList = new JPanel();
+			JLabel select = new JLabel();
+			cList.setLayout(new BorderLayout());
+			
+			JPanel subList = new JPanel();		
+			
+			String[] header = this.conn.getDBHeader();
+			String[][] contents = new String[petsitterDB.size()][19];
+			for (int i = 0; i < petsitterDB.size();i++) {
+				try {
+					contents[i] = petsitterDB.get(i).getAttributeInList();
+//					System.out.println(String.join(",", contents[i]));
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			JTable petsitterListTable = new JTable(contents, header);
+			petsitterListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			resizeColumnWidth(petsitterListTable);
+			petsitterListTable.getColumnModel().getColumn(0).setMinWidth(200);
+			petsitterListTable.getColumnModel().getColumn(1).setMinWidth(150);
+			petsitterListTable.getColumnModel().getColumn(2).setMinWidth(420);
+			
+			MouseListener tableListener = new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					table = (JTable) e.getSource();
+					row = table.getSelectedRow();
+//					System.out.print(table.getModel().getValueAt(row,0 )+"\t");
+					select.setText(table.getModel().getValueAt(row,0)+"에 예약을 진행합니다.");
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			};
+			petsitterListTable.addMouseListener(tableListener);
+			
+			
+			
+			JScrollPane scrollTable = new JScrollPane(petsitterListTable);
+			scrollTable.setPreferredSize(new Dimension(780, 200));
+			cList.add(new JLabel("선택한 예약일에 대한 도우미 조회 결과입니다."), BorderLayout.NORTH);
+
+			subList.add(scrollTable, BorderLayout.CENTER);
+			subList.add(select, BorderLayout.SOUTH);
+			cList.add(subList, BorderLayout.CENTER);
+			tablePanel = cList;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,16 +154,20 @@ public class PetSitterSearchGUI extends Reservation_helper_GUI{
 		JButton resvButton = new JButton("선택하기");
 		resvButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			PetSitterDBConnector petSitter = new PetSitterDBConnector();
-					try {
-						String[] a=petSitter.readDB().get(row).getAttributeInString().split(",");
-						helper = a[0];
-						fr.dispose();
-						dispose();
-					} catch (IllegalArgumentException | IllegalAccessException | IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				try {
+//						String[] a=petSitter.readDB().get(row).getAttributeInString().split(",");
+//						helper = a[0];
+					BufferedWriter writer = new BufferedWriter(new FileWriter("./Database/petsitter_temp.txt"));
+					writer.write(table.getModel().getValueAt(row,0).toString());
+					System.out.println("search:"+table.getModel().getValueAt(row,0).toString());
+					writer.flush();
+				    writer.close();
+					fr.dispose();
+					dispose();
+				} catch (IllegalArgumentException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		
 			}
 		});
@@ -109,79 +185,11 @@ public class PetSitterSearchGUI extends Reservation_helper_GUI{
 		return info;
 	}
 	
-	public JPanel showList(LinkedList<PetSitter> petsitterDB) throws IOException {
-		JPanel cList = new JPanel();
-		JLabel select = new JLabel();
-		cList.setLayout(new BorderLayout());
-		
-		JPanel subList = new JPanel();		
-		
-		String[] header = this.conn.getDBHeader();
-		String[][] contents = new String[petsitterDB.size()][19];
-		for (int i = 0; i < petsitterDB.size();i++) {
-			try {
-				contents[i] = petsitterDB.get(i).getAttributeInList();
-//				System.out.println(String.join(",", contents[i]));
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		JTable petsitterListTable = new JTable(contents, header);
-		petsitterListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		resizeColumnWidth(petsitterListTable);
-		petsitterListTable.getColumnModel().getColumn(0).setMinWidth(200);
-		petsitterListTable.getColumnModel().getColumn(1).setMinWidth(150);
-		petsitterListTable.getColumnModel().getColumn(2).setMinWidth(420);
-		
-		MouseListener tableListener = new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				table = (JTable) e.getSource();
-				row = table.getSelectedRow();
-//				System.out.print(table.getModel().getValueAt(row,0 )+"\t");
-				select.setText(table.getModel().getValueAt(row,0)+"에 예약을 진행합니다.");
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		};
-		petsitterListTable.addMouseListener(tableListener);
-		
-		
-		
-		JScrollPane scrollTable = new JScrollPane(petsitterListTable);
-		scrollTable.setPreferredSize(new Dimension(780, 200));
-		cList.add(new JLabel("선택한 예약일에 대한 도우미 조회 결과입니다."), BorderLayout.NORTH);
-
-		subList.add(scrollTable, BorderLayout.CENTER);
-		subList.add(select, BorderLayout.SOUTH);
-		cList.add(subList, BorderLayout.CENTER);
-		return cList;
-	
-	}
+//	public JPanel showList(LinkedList<PetSitter> petsitterDB) throws IOException {
+//
+//		return cList;
+//	
+//	}
 	public void resizeColumnWidth(JTable table) {
 	    final TableColumnModel columnModel = table.getColumnModel();
 	    for (int column = 0; column < table.getColumnCount(); column++) {

@@ -57,7 +57,8 @@ public class MainGUI {
 		JButton button1 = new JButton("도우미 예약");
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PetSitterSearchGUI reservationGUI = new PetSitterSearchGUI();
+//				PetSitterSearchGUI reservationGUI = new PetSitterSearchGUI();
+				new Reservation_helper_GUI();
 			}
 		});
 		button1.setBounds(21, 29, 120, 29);

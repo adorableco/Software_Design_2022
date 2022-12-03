@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.sql.*;
 import javax.swing.*;
 //reservation 객체 선언
@@ -108,6 +107,8 @@ public class Reservation_helper_GUI extends JFrame {
 		fi_mi = Integer.toString(resvFinishTime.getMinute());
 		
 		service_choose = reservation_Info.Get_Use_Service();
+		
+		helper = reservation_Info.Get_Helper();
 		
 		createFrame("도우미 예약");
 	
@@ -274,12 +275,37 @@ public class Reservation_helper_GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//도우미 검색 창으로 넘어감
-				petsitterSearchGUI = new PetSitterSearchGUI("도우미 검색 서비스");
+				int i_ye=Integer.parseInt(ye);
+				int i_mo=Integer.parseInt(mo);
+				int i_da=Integer.parseInt(da);
+				int i_st_ho=Integer.parseInt(st_ho);
+				int i_st_mi=Integer.parseInt(st_mi);
+				int i_fi_ho=Integer.parseInt(fi_ho);
+				int i_fi_mi=Integer.parseInt(fi_mi);
+				LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
+				LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
+				LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
+				res.setDate(date);
+				res.setStartTime(sttime);
+				res.setFinishTime(fitime);
+				petsitterSearchGUI = new PetSitterSearchGUI("도우미 검색 서비스", res);
+				BufferedReader bf;
+				try {
+					bf = new BufferedReader(new FileReader("./Database/petsitter_temp.txt"));
+					String helper_temp = bf.readLine();
+					res.setHelper(helper_temp);
+					
+						
+				} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+				}
 				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
 					@Override
 			        public void windowClosing(WindowEvent e) {
 						helper_search_button.setText("도우미 선택 완료");
 						helper_search_button.setEnabled(false);
+						
 			        }
 			    });
 			}
@@ -480,6 +506,7 @@ public class Reservation_helper_GUI extends JFrame {
 					res.setFinishTime(fitime);
 					res.setService(service_choose);
 					res.setCost(cost);
+//					res.setHelper(helper);
 					resDB.saveFile(res, Selected_File);
 					
 					dispose();
@@ -823,13 +850,43 @@ public class Reservation_helper_GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//도우미 검색 창으로 넘어감
-				petsitterSearchGUI=new PetSitterSearchGUI("도우미 검색 서비스");
+				int i_ye=Integer.parseInt(ye);
+				int i_mo=Integer.parseInt(mo);
+				int i_da=Integer.parseInt(da);
+				int i_st_ho=Integer.parseInt(st_ho);
+				int i_st_mi=Integer.parseInt(st_mi);
+				int i_fi_ho=Integer.parseInt(fi_ho);
+				int i_fi_mi=Integer.parseInt(fi_mi);
+				LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
+				LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
+				LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
+				res.setDate(date);
+				res.setStartTime(sttime);
+				res.setFinishTime(fitime);
+				petsitterSearchGUI=new PetSitterSearchGUI("도우미 검색 서비스", res);
+				BufferedReader bf;
+				try {
+					bf = new BufferedReader(new FileReader("./Database/petsitter_temp.txt"));
+					try {
+						String helper_temp = bf.readLine();
+						res.setHelper(helper_temp);
+						System.out.println(res.Get_Helper());
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} //String
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} //선언
 				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
 					@Override
 					    public void windowClosing(WindowEvent e) {
 						helper_search_button.setEnabled(false);
 							JLabel helper_search_complete = new JLabel("도우미 선택 완료");
 							helper_search_panel_2.add(helper_search_complete);
+							
+							
 					    }
 				});
 			}
@@ -865,6 +922,7 @@ public class Reservation_helper_GUI extends JFrame {
 					res.setFinishTime(fitime);
 					res.setService(service_choose);
 					res.setCost(cost);
+//					res.setHelper(helper);
 					resDB.saveFile(res);
 					
 					dispose();
@@ -887,6 +945,8 @@ public class Reservation_helper_GUI extends JFrame {
 					res.setFinishTime(fitime);
 					res.setService(service_choose);
 					res.setCost(cost);
+//					res.setHelper(helper);
+					
 					resDB.saveFile(res);
 					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
 					dispose();

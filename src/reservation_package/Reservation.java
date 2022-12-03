@@ -1,10 +1,7 @@
 package reservation_package;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class Reservation {
 	private LocalDate date;
@@ -30,7 +27,12 @@ public class Reservation {
 		this.service = Use_Service;
 		this.State = State;
 		this.cost = Cost;
-		this.Review = Review;
+		if (Review == "null") {
+			this.Review = "0";
+		}
+		else {
+			this.Review = Review;
+		}
 		this.helper = helper;
 	}
 
