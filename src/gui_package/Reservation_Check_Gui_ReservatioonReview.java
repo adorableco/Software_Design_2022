@@ -186,11 +186,13 @@ class ReviewMode extends JFrame implements ActionListener{
 				String[] Review = addList.get(0).split("_");
 				String Day = SelectedReservation.Get_Use_Day().toString();
 				String[] date = Day.split("-");
-				String Time = SelectedReservation.Get_Use_Time().toString();
-				String[] time = Time.split(":");
+				String S_Time = SelectedReservation.Get_Use_Start_Time().toString();
+				String[] Start_time = S_Time.split(":");
+				String F_Time = SelectedReservation.Get_Use_Start_Time().toString();
+				String[] Finish_time = F_Time.split(":");
 				try {
 					FileWriter fw = new FileWriter(Selected_File.getPath(),false);
-					fw.write(date[0] + " " + date[1] + " " + date[2] + " " + time[0] + " " + time[1] + " "
+					fw.write(date[0] + " " + date[1] + " " + date[2] + " " + Start_time[0] + " " + Start_time[1] + " "+Finish_time[0]+" "+Finish_time[1]+" "
 							+ SelectedReservation.Get_Use_Service() +  " 1 "
 							+ Integer.toString(SelectedReservation.Get_Cost()) + " " );
 					fw.close();

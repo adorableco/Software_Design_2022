@@ -61,14 +61,14 @@ public class AnimalHospitalDBConnector {
 		return;
 	};
 	
-	public LinkedList<AnimalHospital> searchDBwithTime(LocalDate date, LocalTime time) throws IOException{
+	public LinkedList<AnimalHospital> searchDBwithTime(LocalDate date, LocalTime start_time,LocalTime finish_time) throws IOException{
 		BufferedReader reader = new BufferedReader(new FileReader(this.fname));
 		reader.readLine(); //header 제거
 		String str;
 		LinkedList<AnimalHospital> hospitalDB = new LinkedList<AnimalHospital>();
         while ((str = reader.readLine()) != null) {
         	AnimalHospital hospital = new AnimalHospital(Arrays.asList(str.split(",")));
-        	if (hospital.checkWithinBH(date, time)) { //참이면 추가
+        	if (hospital.checkWithinBH(date, start_time,finish_time)) { //참이면 추가
         		hospitalDB.add(hospital);
         	}	
         }

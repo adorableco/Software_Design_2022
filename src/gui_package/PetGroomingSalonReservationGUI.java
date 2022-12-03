@@ -27,10 +27,11 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
 		LocalDate resvDate = LocalDate.now();
-		LocalTime resvTime = LocalTime.parse("12:00");
-		this.add(infoPanel(resvDate, resvTime), BorderLayout.NORTH);
+		LocalTime resvStartTime = LocalTime.parse("12:00");
+		LocalTime resvFinishTime = LocalTime.parse("12:00");
+		this.add(infoPanel(resvDate, resvStartTime,resvFinishTime), BorderLayout.NORTH);
 		try {
-			this.add(showList(this.conn.searchDBwithTime(resvDate, resvTime)), BorderLayout.CENTER);
+			this.add(showList(this.conn.searchDBwithTime(resvDate, resvStartTime,resvFinishTime)), BorderLayout.CENTER);
 //			this.add(showList(this.conn.readDB()), BorderLayout.WEST);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -42,12 +43,14 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 		this.setFocusable(true);
 	}
 	
-	public JPanel infoPanel(LocalDate resvDate, LocalTime resvTime) {
+	public JPanel infoPanel(LocalDate resvDate, LocalTime resvStartTime,LocalTime resvFinishTime) {
 		JPanel info = new JPanel();
 		JLabel resvDateInfo = new JLabel(resvDate.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
-		JLabel resvTimeInfo = new JLabel(resvTime.format(DateTimeFormatter.ofPattern("HH:mm에 예약을 진행합니다.")));
+		JLabel resvStartTimeInfo = new JLabel(resvStartTime.format(DateTimeFormatter.ofPattern("HH:mm ~ ")));
+		JLabel resvFinishTimeInfo = new JLabel(resvFinishTime.format(DateTimeFormatter.ofPattern("HH:mm에 예약을 진행합니다.")));
 		info.add(resvDateInfo);
-		info.add(resvTimeInfo);
+		info.add(resvStartTimeInfo);
+		info.add(resvFinishTimeInfo);
 		return info;
 	}
 	

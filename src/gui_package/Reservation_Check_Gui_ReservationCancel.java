@@ -117,7 +117,7 @@ private static final long serialVersionUID = 1L;
 		else informationGuideWindow.setText("상태 : 예약 취소\n");
 		
 		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 날짜 : " + SelectedReservation.Get_Use_Day() + "\n");
-		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Time() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Start_Time() + " ~ " + SelectedReservation.Get_Use_Finish_Time()+"\n");
 		informationGuideWindow.setText( informationGuideWindow.getText() + "할일 목록 : " + SelectedReservation.Get_Use_Service() + "\n");
 		informationGuideWindow.setText( informationGuideWindow.getText() + "결제 금액 : " + Integer.toString(SelectedReservation.Get_Cost())+ "\n");
 		
@@ -134,12 +134,14 @@ private static final long serialVersionUID = 1L;
 				result = confirm.showConfirmDialog(null, "정말 취소하시겠습니까?", "예약 취소", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				String Day = SelectedReservation.Get_Use_Day().toString();
 				String[] date = Day.split("-");
-				String Time = SelectedReservation.Get_Use_Time().toString();
-				String[] time = Time.split(":"); 
+				String S_Time = SelectedReservation.Get_Use_Start_Time().toString();
+				String[] Start_time = S_Time.split(":"); 
+				String F_Time = SelectedReservation.Get_Use_Start_Time().toString();
+				String[] Finish_time = F_Time.split(":"); 
 				if(result == 0) {
 					try {
 						FileWriter fw = new FileWriter(Selected_File.getPath(), false);
-						fw.write( date[0] + " " + date[1] + " " + date[2] + " " + time[0] + " " + time[1] + " "
+						fw.write( date[0] + " " + date[1] + " " + date[2] + " " + Start_time[0] + " " + Start_time[1] + " "+ Finish_time[0] + " " + Finish_time[1] + " "
 								+ SelectedReservation.Get_Use_Service() +  " 2 "
 								+ Integer.toString(SelectedReservation.Get_Cost()) + " " + SelectedReservation.Get_Review());
 						fw.close();

@@ -67,14 +67,14 @@ public class PetGroomingSalonDBConnector {
 		return;
 	};
 	
-	public LinkedList<PetGroomingSalon> searchDBwithTime(LocalDate date, LocalTime time) throws IOException{
+	public LinkedList<PetGroomingSalon> searchDBwithTime(LocalDate date, LocalTime start_time,LocalTime finish_time) throws IOException{
 		BufferedReader reader = new BufferedReader(new FileReader(this.fname));
 		reader.readLine(); //header 제거
 		String str;
 		LinkedList<PetGroomingSalon> salonDB = new LinkedList<PetGroomingSalon>();
         while ((str = reader.readLine()) != null) {
         	PetGroomingSalon salon = new PetGroomingSalon(Arrays.asList(str.split(",")));
-        	if (salon.checkWithinBH(date, time)) { //참이면 추가
+        	if (salon.checkWithinBH(date, start_time,finish_time)) { //참이면 추가
         		salonDB.add(salon);
         	}	
         }

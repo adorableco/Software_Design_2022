@@ -122,12 +122,15 @@ public class Company {
 		
 	}
 	
-	public Boolean checkWithinBH(LocalDate date, LocalTime time) {
+	public Boolean checkWithinBH(LocalDate date, LocalTime start_time,LocalTime finish_time) {
 		DayOfWeek dayOfWeek = date.getDayOfWeek();
         int dayOfWeekNumber = dayOfWeek.getValue();
         LocalTime[] times = this.hours[dayOfWeekNumber].getTime();
-        if (time.isBefore(times[1]) && time.isAfter(times[0])){
-        	return true;
+        if (start_time.isBefore(times[1]) && start_time.isAfter(times[0])){
+        	if(finish_time.isBefore(times[1])&&finish_time.isAfter(times[0]))
+        		return true;
+        	else
+        		return false;
         }
         else {
         	return false;

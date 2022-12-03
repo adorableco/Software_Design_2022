@@ -60,8 +60,8 @@ public class ReservationDB {
 						Reserv_Info.add(
 								new Reservation(
 								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
-								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
-								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8], contentlist[9])
+								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0), LocalTime.of(Integer.parseInt(contentlist[5]), Integer.parseInt(contentlist[6]),0),
+								contentlist[7], Integer.parseInt(contentlist[8]), Integer.parseInt(contentlist[9]), contentlist[10], contentlist[11])
 								);
 					}
 				}
@@ -81,7 +81,8 @@ public class ReservationDB {
 		int userId = 1;
 		String fname = this.path + Integer.toString(userId) + "_Reser_" + Integer.toString(resvInt) + ".txt";
 		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+ " " +
-				resvInfo.Get_Use_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
+				resvInfo.Get_Use_Start_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
+				resvInfo.Get_Use_Finish_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
 				resvInfo.Get_Use_Service() + " " +
 				Integer.toString(resvInfo.Get_State()) + " " +
 				Integer.toString(resvInfo.Get_Cost()) + " " +
@@ -104,7 +105,8 @@ public class ReservationDB {
 	public void saveFile(Reservation resvInfo, File originalFile) {
 		String fname = this.path + originalFile.getName().substring(0, originalFile.getName().lastIndexOf("."))+"_temp.txt";
 		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+ " " + 
-				resvInfo.Get_Use_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
+				resvInfo.Get_Use_Start_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
+				resvInfo.Get_Use_Finish_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
 				resvInfo.Get_Use_Service() + " " +
 				Integer.toString(resvInfo.Get_State()) + " " +
 				Integer.toString(resvInfo.Get_Cost()) + " " + 

@@ -51,8 +51,10 @@ public class Reservation_helper_GUI extends JFrame {
 	private JComboBox<String> yearCombo;
 	private JComboBox<String> monthCombo;
 	private JComboBox<String> dayCombo;
-	private JComboBox<String> hourCombo;
-	private JComboBox<String> minCombo;
+	private JComboBox<String> start_hourCombo;
+	private JComboBox<String> start_minCombo;
+	private JComboBox<String> finish_hourCombo;
+	private JComboBox<String> finish_minCombo;
 	private JComboBox<String> serviceCombo;
 	
 	private JComboBox<String> PetnameCombo;
@@ -61,8 +63,10 @@ public class Reservation_helper_GUI extends JFrame {
 	private String ye;
 	private String mo;
 	private String da;
-	private String ho;
-	private String mi;
+	private String st_ho;
+	private String st_mi;
+	private String fi_ho;
+	private String fi_mi;
 	public String helper;
 	private int cost;
 	
@@ -92,13 +96,18 @@ public class Reservation_helper_GUI extends JFrame {
 		res=new Reservation();
 		resDB=new ReservationDB();
 		LocalDate resvDate = reservation_Info.Get_Use_Day();
-		LocalTime resvTime = reservation_Info.Get_Use_Time();
+		LocalTime resvStartTime = reservation_Info.Get_Use_Start_Time();
+		LocalTime resvFinishTime = reservation_Info.Get_Use_Finish_Time();
 		
 		ye = Integer.toString(resvDate.getYear());
 		mo = Integer.toString(resvDate.getMonthValue());
 		da = Integer.toString(resvDate.getDayOfMonth());
-		ho = Integer.toString(resvTime.getHour());
-		mi = Integer.toString(resvTime.getMinute());
+		st_ho = Integer.toString(resvStartTime.getHour());
+		st_mi = Integer.toString(resvStartTime.getMinute());
+		
+		fi_ho = Integer.toString(resvFinishTime.getHour());
+		fi_mi = Integer.toString(resvFinishTime.getMinute());
+		
 		service_choose = reservation_Info.Get_Use_Service();
 		
 		createFrame("도우미 예약");
@@ -134,10 +143,8 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.setLayout(new GridLayout(4, 2));
 		//info_panel.setVisible(true);
 		
-		
-		
 		//이용날짜
-		dim2=new Dimension(70,30);
+		dim2=new Dimension(77,30);
 		JPanel date_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel date_label = new JLabel("이용 날짜 : ", JLabel.CENTER);
 		date_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -175,7 +182,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(date_panel_2);
 		
 		//이용시간
-		dim3=new Dimension(110,30);
+		dim3=new Dimension(55,30);
 		JPanel time_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel time_label = new JLabel("이용 시간 : ", JLabel.CENTER);
 		time_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -186,28 +193,34 @@ public class Reservation_helper_GUI extends JFrame {
 		time_panel_1.add(time_label);
 					
 		JPanel time_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
-		hourCombo = new JComboBox<String>(hour);
-		hourCombo.setSelectedIndex(Arrays.asList(hour).indexOf(resvTime.format(DateTimeFormatter.ofPattern("HH"))));
+		start_hourCombo = new JComboBox<String>(hour);
+		start_hourCombo.setSelectedIndex(Arrays.asList(hour).indexOf(resvStartTime.format(DateTimeFormatter.ofPattern("HH"))));
 		
-		minCombo = new JComboBox<String>(min);
-		minCombo.setSelectedIndex(Arrays.asList(min).indexOf(resvTime.format(DateTimeFormatter.ofPattern("mm"))));
+		start_minCombo = new JComboBox<String>(min);
+		start_minCombo.setSelectedIndex(Arrays.asList(min).indexOf(resvStartTime.format(DateTimeFormatter.ofPattern("mm"))));
 		
-		hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		start_hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		start_minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		finish_hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		finish_minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		time_panel_2.setOpaque(true);
 		time_panel_2.setBackground(Color.gray);
 		time_panel_2.setOpaque(true);
-		hourCombo.setPreferredSize(dim3);
-		minCombo.setPreferredSize(dim3);
+		start_hourCombo.setPreferredSize(dim3);
+		start_minCombo.setPreferredSize(dim3);
+		finish_hourCombo.setPreferredSize(dim3);
+		finish_minCombo.setPreferredSize(dim3);
 						
-		time_panel_2.add(hourCombo);
-		time_panel_2.add(minCombo);
+		time_panel_2.add(start_hourCombo);
+		time_panel_2.add(start_minCombo);
+		time_panel_2.add(finish_hourCombo);
+		time_panel_2.add(finish_minCombo);
 				
 		info_panel.add(time_panel_1); 
 		info_panel.add(time_panel_2);
 		
 		//이용서비스
-		dim1=new Dimension(230,30);
+		dim1=new Dimension(245,30);
 		JPanel service_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel service_label = new JLabel("이용 서비스 : ", JLabel.CENTER);
 		service_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -233,7 +246,7 @@ public class Reservation_helper_GUI extends JFrame {
 		explan_label.setText("도우미 예약");
 		
 		//도우미 검색
-		dim1=new Dimension(230,30);
+		dim1=new Dimension(245,30);
 		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel helper_search_label = new JLabel("도우미 검색 : ", JLabel.CENTER);
 		helper_search_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -320,7 +333,7 @@ public class Reservation_helper_GUI extends JFrame {
 		});
 		
 		//이용 시간 Action  몇시간하는지도 받아야함
-		hourCombo.addActionListener(new ActionListener() {
+		start_hourCombo.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -329,12 +342,12 @@ public class Reservation_helper_GUI extends JFrame {
 				if(h.getSelectedItem().equals("HH"))
 					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
 				else {
-					ho=h.getSelectedItem().toString();
+					st_ho=h.getSelectedItem().toString();
 				}
 			}
 			
 		});
-		minCombo.addActionListener(new ActionListener() {
+		start_minCombo.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -343,7 +356,7 @@ public class Reservation_helper_GUI extends JFrame {
 				if(m.getSelectedItem().equals("mm"))
 					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
 				else {
-					mi=m.getSelectedItem().toString();
+					st_mi=m.getSelectedItem().toString();
 				}
 				int servIndex = serviceCombo.getSelectedIndex();
 				switch(servIndex) {
@@ -363,6 +376,52 @@ public class Reservation_helper_GUI extends JFrame {
 				}
 			}
 			
+		});
+		
+		//이용 시간 Action  몇시간하는지도 받아야함
+		finish_hourCombo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JComboBox h=(JComboBox)e.getSource();
+				if(h.getSelectedItem().equals("HH"))
+					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
+				else {
+					fi_ho=h.getSelectedItem().toString();
+				}
+			}
+					
+		});
+		finish_minCombo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JComboBox m=(JComboBox)e.getSource();
+				if(m.getSelectedItem().equals("mm"))
+					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
+				else {
+					fi_mi=m.getSelectedItem().toString();
+				}
+				int servIndex = serviceCombo.getSelectedIndex();
+				switch(servIndex) {
+				case(1):{
+					next_btn.setText("저장");
+				}
+				case(2):{
+					break;
+				}
+				case(3): {
+					next_btn.setText("병원 예약");
+					break;
+				}
+				case(4):{
+					next_btn.setText("반려동물 미용샵 예약");
+				}
+				}
+			}
+					
 		});
 		
 		//이용 서비스 Action
@@ -411,12 +470,16 @@ public class Reservation_helper_GUI extends JFrame {
 					int i_ye=Integer.parseInt(ye);
 					int i_mo=Integer.parseInt(mo);
 					int i_da=Integer.parseInt(da);
-					int i_ho=Integer.parseInt(ho);
-					int i_mi=Integer.parseInt(mi);
+					int i_st_ho=Integer.parseInt(st_ho);
+					int i_st_mi=Integer.parseInt(st_mi);
+					int i_fi_ho=Integer.parseInt(fi_ho);
+					int i_fi_mi=Integer.parseInt(fi_mi);
 					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
-					LocalTime time=LocalTime.of(i_ho, i_mi);
+					LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
+					LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
 					res.setDate(date);
-					res.setTime(time);
+					res.setStartTime(sttime);
+					res.setFinishTime(fitime);
 					res.setService(service_choose);
 					res.setCost(cost);
 					resDB.saveFile(res, Selected_File);
@@ -511,7 +574,7 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		
 		//이용날짜
-		dim2=new Dimension(70,30);
+		dim2=new Dimension(77,30);
 		JPanel date_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel date_label = new JLabel("이용 날짜 : ", JLabel.CENTER);
 		date_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -543,7 +606,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(date_panel_2);
 		
 		//이용시간
-		dim3=new Dimension(110,30);
+		dim3=new Dimension(55,30);
 		JPanel time_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel time_label = new JLabel("이용 시간 : ", JLabel.CENTER);
 		time_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -554,24 +617,56 @@ public class Reservation_helper_GUI extends JFrame {
 		time_panel_1.add(time_label);
 					
 		JPanel time_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
-		hourCombo = new JComboBox<String>(hour);
-		minCombo = new JComboBox<String>(min);
-		hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		start_hourCombo = new JComboBox<String>(hour);
+		start_minCombo = new JComboBox<String>(min);
+		finish_hourCombo= new JComboBox<String>(hour);
+		finish_minCombo= new JComboBox<String>(min);
+		start_hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		start_minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		finish_hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		finish_minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		time_panel_2.setOpaque(true);
 		time_panel_2.setBackground(Color.gray);
 		time_panel_2.setOpaque(true);
-		hourCombo.setPreferredSize(dim3);
-		minCombo.setPreferredSize(dim3);
-						
-		time_panel_2.add(hourCombo);
-		time_panel_2.add(minCombo);
+		start_hourCombo.setPreferredSize(dim3);
+		start_minCombo.setPreferredSize(dim3);
+		finish_hourCombo.setPreferredSize(dim3);
+		finish_minCombo.setPreferredSize(dim3);
+		
+		time_panel_2.add(start_hourCombo);
+		time_panel_2.add(start_minCombo);
+		time_panel_2.add(finish_hourCombo);
+		time_panel_2.add(finish_minCombo);
 				
 		info_panel.add(time_panel_1); 
 		info_panel.add(time_panel_2);
 		
+		//도우미 검색
+		dim1=new Dimension(245,30);
+		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
+		JLabel helper_search_label = new JLabel("도우미 검색 : ", JLabel.CENTER);
+		helper_search_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		helper_search_label.setForeground(Color.white);
+		helper_search_panel_1.setOpaque(true);
+		helper_search_panel_1.setBackground(Color.gray);
+		helper_search_panel_1.setOpaque(true);
+		helper_search_panel_1.add(helper_search_label);
+						
+		JPanel helper_search_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,30));
+		helper_search_button = new JButton("도우미 검색");
+		helper_search_button.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+		helper_search_panel_2.setOpaque(true);
+		helper_search_panel_2.setBackground(Color.gray);
+		helper_search_panel_2.setOpaque(true);
+		helper_search_button.setPreferredSize(dim1);
+							
+		helper_search_panel_2.add(helper_search_button);
+						
+		info_panel.add(helper_search_panel_1); 
+		info_panel.add(helper_search_panel_2);
+		
 		//이용서비스
-		dim1=new Dimension(230,30);
+		dim1=new Dimension(245,30);
 		JPanel service_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel service_label = new JLabel("이용 서비스 : ", JLabel.CENTER);
 		service_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -594,49 +689,8 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(service_panel_2);	
 		explan_label.setText("도우미 예약");
 		
-		//도우미 검색
-		dim1=new Dimension(230,30);
-		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
-		JLabel helper_search_label = new JLabel("도우미 검색 : ", JLabel.CENTER);
-		helper_search_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		helper_search_label.setForeground(Color.white);
-		helper_search_panel_1.setOpaque(true);
-		helper_search_panel_1.setBackground(Color.gray);
-		helper_search_panel_1.setOpaque(true);
-		helper_search_panel_1.add(helper_search_label);
-				
-		JPanel helper_search_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,30));
-		helper_search_button = new JButton("도우미 검색");
-		helper_search_button.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-		helper_search_panel_2.setOpaque(true);
-		helper_search_panel_2.setBackground(Color.gray);
-		helper_search_panel_2.setOpaque(true);
-		helper_search_button.setPreferredSize(dim1);
-					
-		helper_search_panel_2.add(helper_search_button);
-				
-		info_panel.add(helper_search_panel_1); 
-		info_panel.add(helper_search_panel_2);
 		
 		// 이벤트 처리
-		//도우미 검색 Action
-		helper_search_button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//도우미 검색 창으로 넘어감
-				petsitterSearchGUI=new PetSitterSearchGUI("도우미 검색 서비스");
-				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
-					@Override
-			        public void windowClosing(WindowEvent e) {
-						helper_search_button.setEnabled(false);
-						JLabel helper_search_complete = new JLabel("도우미 선택 완료");
-						helper_search_panel_2.add(helper_search_complete);
-			        }
-			    });
-			}
-		});
-		
 		//이용 날짜 Action
 		yearCombo.addActionListener(new ActionListener() {
 
@@ -683,7 +737,7 @@ public class Reservation_helper_GUI extends JFrame {
 		});
 		
 		//이용 시간 Action  몇시간하는지도 받아야함
-		hourCombo.addActionListener(new ActionListener() {
+		start_hourCombo.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -692,12 +746,12 @@ public class Reservation_helper_GUI extends JFrame {
 				if(h.getSelectedItem().equals("HH"))
 					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
 				else {
-					ho=h.getSelectedItem().toString();
+					st_ho=h.getSelectedItem().toString();
 				}
 			}
 			
 		});
-		minCombo.addActionListener(new ActionListener() {
+		start_minCombo.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -706,7 +760,36 @@ public class Reservation_helper_GUI extends JFrame {
 				if(m.getSelectedItem().equals("mm"))
 					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
 				else {
-					mi=m.getSelectedItem().toString();
+					st_mi=m.getSelectedItem().toString();
+				}
+			}
+			
+		});
+		
+		finish_hourCombo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JComboBox h=(JComboBox)e.getSource();
+				if(h.getSelectedItem().equals("HH"))
+					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
+				else {
+					fi_ho=h.getSelectedItem().toString();
+				}
+			}
+			
+		});
+		finish_minCombo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JComboBox m=(JComboBox)e.getSource();
+				if(m.getSelectedItem().equals("mm"))
+					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
+				else {
+					fi_mi=m.getSelectedItem().toString();
 				}
 			}
 			
@@ -738,6 +821,23 @@ public class Reservation_helper_GUI extends JFrame {
 			}
 		});
 		
+		//도우미 검색 Action
+		helper_search_button.addActionListener(new ActionListener() {
+					
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//도우미 검색 창으로 넘어감
+				petsitterSearchGUI=new PetSitterSearchGUI("도우미 검색 서비스");
+				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
+					@Override
+					    public void windowClosing(WindowEvent e) {
+						helper_search_button.setEnabled(false);
+							JLabel helper_search_complete = new JLabel("도우미 선택 완료");
+							helper_search_panel_2.add(helper_search_complete);
+					    }
+				});
+			}
+		});
 		next_btn.addActionListener(new ActionListener() {
 
 			@Override
@@ -757,13 +857,16 @@ public class Reservation_helper_GUI extends JFrame {
 					int i_ye=Integer.parseInt(ye);
 					int i_mo=Integer.parseInt(mo);
 					int i_da=Integer.parseInt(da);
-					int i_ho=Integer.parseInt(ho);
-					int i_mi=Integer.parseInt(mi);
+					int i_st_ho=Integer.parseInt(st_ho);
+					int i_st_mi=Integer.parseInt(st_mi);
+					int i_fi_ho=Integer.parseInt(fi_ho);
+					int i_fi_mi=Integer.parseInt(fi_mi);
 					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
-					LocalTime time=LocalTime.of(i_ho, i_mi);
+					LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
+					LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
 					res.setDate(date);
-					res.setTime(time);
-					res.setHelper(helper);
+					res.setStartTime(sttime);
+					res.setFinishTime(fitime);
 					res.setService(service_choose);
 					res.setCost(cost);
 					resDB.saveFile(res);
@@ -776,13 +879,16 @@ public class Reservation_helper_GUI extends JFrame {
 					int i_ye=Integer.parseInt(ye);
 					int i_mo=Integer.parseInt(mo);
 					int i_da=Integer.parseInt(da);
-					int i_ho=Integer.parseInt(ho);
-					int i_mi=Integer.parseInt(mi);
+					int i_st_ho=Integer.parseInt(st_ho);
+					int i_st_mi=Integer.parseInt(st_mi);
+					int i_fi_ho=Integer.parseInt(fi_ho);
+					int i_fi_mi=Integer.parseInt(fi_mi);
 					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
-					LocalTime time=LocalTime.of(i_ho, i_mi);
+					LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
+					LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
 					res.setDate(date);
-					res.setTime(time);
-					res.setHelper(helper);
+					res.setStartTime(sttime);
+					res.setFinishTime(fitime);
 					res.setService(service_choose);
 					res.setCost(cost);
 					resDB.saveFile(res);
@@ -795,13 +901,16 @@ public class Reservation_helper_GUI extends JFrame {
 					int i_ye=Integer.parseInt(ye);
 					int i_mo=Integer.parseInt(mo);
 					int i_da=Integer.parseInt(da);
-					int i_ho=Integer.parseInt(ho);
-					int i_mi=Integer.parseInt(mi);
+					int i_st_ho=Integer.parseInt(st_ho);
+					int i_st_mi=Integer.parseInt(st_mi);
+					int i_fi_ho=Integer.parseInt(fi_ho);
+					int i_fi_mi=Integer.parseInt(fi_mi);
 					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
-					LocalTime time=LocalTime.of(i_ho, i_mi);
+					LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
+					LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
 					res.setDate(date);
-					res.setTime(time);
-					res.setHelper(helper);
+					res.setStartTime(sttime);
+					res.setFinishTime(fitime);
 					res.setService(service_choose);
 					res.setCost(cost);
 					resDB.saveFile(res);
