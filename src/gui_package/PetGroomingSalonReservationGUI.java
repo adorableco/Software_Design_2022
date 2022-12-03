@@ -13,9 +13,11 @@ import javax.swing.table.*;
 import database_package.PetGroomingSalonDBConnector;
 import reservation_package.PetGroomingSalon;
 
-public class PetGroomingSalonReservationGUI extends ReservationMainGUI{
+public class PetGroomingSalonReservationGUI extends JFrame{
 	private PetGroomingSalonDBConnector conn;
-	
+	public PetGroomingSalonReservationGUI() {
+		this.setTitle("피어펫 서비스");
+	}
 	public PetGroomingSalonReservationGUI(String title) {
 		createFrame(title);
 		this.conn = new PetGroomingSalonDBConnector();
@@ -126,5 +128,23 @@ public class PetGroomingSalonReservationGUI extends ReservationMainGUI{
 	        }
 	        columnModel.getColumn(column).setPreferredWidth(width);
 	    }
+	}
+	
+	void createFrame(String title) {
+		this.setTitle(title);
+		this.setSize(800,600);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension frame = getSize();
+		
+		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2);
+		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2);
+		
+		this.setLocation(xPos, yPos);
+		this.setResizable(true);
+		
+		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		this.setLayout(new BorderLayout());	
 	}
 }
