@@ -2,16 +2,11 @@ package gui_package;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.awt.*;
 import java.awt.event.*;
@@ -29,6 +24,7 @@ import reservation_package.Reservation;
 public class Reservation_helper_GUI extends JFrame {
 	Reservation res;
 	ReservationDB resDB;
+	PetSitterSearchGUI petsitterSearchGUI;
 	
 	String Menu[]= {"(1) 도우미 예약"};
 	private JPanel listPanel = new JPanel();
@@ -171,8 +167,14 @@ public class Reservation_helper_GUI extends JFrame {
 		date_panel_2.setBackground(Color.gray);
 		date_panel_2.setOpaque(true);
 		yearCombo = new JComboBox<String>(year);
+		yearCombo.setSelectedIndex(Arrays.asList(year).indexOf(resvDate.format(DateTimeFormatter.ofPattern("yyyy"))));
+		
 		monthCombo = new JComboBox<String>(month);
+		monthCombo.setSelectedIndex(Arrays.asList(month).indexOf(resvDate.format(DateTimeFormatter.ofPattern("MM"))));
+		
 		dayCombo = new JComboBox<String>(day);
+		dayCombo.setSelectedIndex(Arrays.asList(day).indexOf(resvDate.format(DateTimeFormatter.ofPattern("dd"))));
+		
 		yearCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		monthCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		dayCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -200,7 +202,11 @@ public class Reservation_helper_GUI extends JFrame {
 					
 		JPanel time_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
 		hourCombo = new JComboBox<String>(hour);
+		hourCombo.setSelectedIndex(Arrays.asList(hour).indexOf(resvTime.format(DateTimeFormatter.ofPattern("HH"))));
+		
 		minCombo = new JComboBox<String>(min);
+		minCombo.setSelectedIndex(Arrays.asList(min).indexOf(resvTime.format(DateTimeFormatter.ofPattern("mm"))));
+		
 		hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		time_panel_2.setOpaque(true);
@@ -259,7 +265,15 @@ public class Reservation_helper_GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//도우미 검색 창으로 넘어감
-				new PetSitterSearchGUI("도우미 검색 서비스");
+				petsitterSearchGUI = new PetSitterSearchGUI("도우미 검색 서비스");
+				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
+					@Override
+			        public void windowClosing(WindowEvent e) {
+						helper_search_button.setEnabled(false);
+						JLabel helper_search_complete = new JLabel("도우미 선택 완료");
+						helper_search_panel_2.add(helper_search_complete);
+			        }
+			    });
 			}
 		});
 		
