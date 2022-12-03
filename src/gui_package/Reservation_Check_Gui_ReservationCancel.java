@@ -135,7 +135,7 @@ private static final long serialVersionUID = 1L;
 				String Day = SelectedReservation.Get_Use_Day();
 				String[] date = Day.split("-");
 				String Time = SelectedReservation.Get_Use_Time();
-				String[] time = Time.split(":");
+				String[] time = Time.split(":"); 
 				if(result == 0) {
 					try {
 						FileWriter fw = new FileWriter(Selected_File.getPath(), false);
@@ -151,8 +151,7 @@ private static final long serialVersionUID = 1L;
 			}
 		});
 		
-		BackBtn.addActionListener(new ActionListener() {
-			
+		BackBtn.addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane confirm = new JOptionPane();
