@@ -16,7 +16,7 @@ public class Reservation_helper_GUI extends JFrame {
 	Reservation res;
 	ReservationDB resDB;
 	
-	private Dimension dim1,dim2,dim3,dim4;
+	private Dimension dim1,dim2,dim3,dim4, dim5;
 	private String[] year= {"yyyy","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
 	private String[] month= {"MM","01","02","03","04","05","06","07","08","09","10","11","12"};
 	private String[] day= {"dd","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
@@ -30,6 +30,7 @@ public class Reservation_helper_GUI extends JFrame {
 	private JComboBox<String> hourCombo;
 	private JComboBox<String> minCombo;
 	private JComboBox<String> serviceCombo;
+	private JComboBox<String> PetnameCombo;
 	private JButton cancel_button;
 	private JButton next_button;
 	private String service_choose;
@@ -178,6 +179,8 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		add(title, BorderLayout.NORTH);
 		add(out_info_panel, BorderLayout.CENTER);
+		
+		
 		
 		// 이벤트 처리
 		//도우미 검색 Action
@@ -479,6 +482,7 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		info_panel.add(cancel_panel); 
 		info_panel.add(next_panel);
+		
 		
 		//out_info_panel
 		JPanel out_info_panel = new JPanel();
