@@ -338,7 +338,7 @@ public class Reservation_helper_GUI extends JFrame {
 					res.setTime(time);
 					res.setService(service_choose);
 					res.setCost(cost);
-					resDB.dataUpload(res);
+					resDB.saveFile(res, Selected_File);
 					
 					dispose();
 				}					
@@ -650,7 +650,7 @@ public class Reservation_helper_GUI extends JFrame {
 					res.setTime(time);
 					res.setService(service_choose);
 					res.setCost(cost);
-					resDB.dataUpload(res);
+					resDB.saveFile(res);
 					
 					dispose();
 				}					

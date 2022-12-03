@@ -49,7 +49,7 @@ public class ReservationDB {
 		return;
 	}
 	public void saveFile(Reservation resvInfo, File originalFile) {
-		String fname = this.path + originalFile.getName().substring(0, originalFile.getName().lastIndexOf("."));
+		String fname = this.path + originalFile.getName().substring(0, originalFile.getName().lastIndexOf("."))+"_temp.txt";
 		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+
 				resvInfo.Get_Use_Time().format(DateTimeFormatter.ofPattern("HH mm")) +
 				resvInfo.Get_Use_Service() +
