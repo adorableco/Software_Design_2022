@@ -2,12 +2,15 @@ package gui_package;
 
 import javax.swing.*;
 import javax.swing.event.*;
+
 import database_package.AnimalHospitalDBConnector;
 import database_package.ReservationDB;
+import database_package.ReservationDBConector;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+
 import reservation_package.Company;
 import reservation_package.Reservation;
 
@@ -25,8 +28,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -34,6 +35,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import java.util.*;
 import java.util.List;
 
 
@@ -46,7 +49,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 	
 	//Get Reservation Information
 	private ArrayList<Reservation> Reserv_Info = new ArrayList<Reservation>();
-	
+	DefaultListModel<String> Accesable_Info = new DefaultListModel<>();
 	
 	private JPanel listPanel = new JPanel();
 	
@@ -63,7 +66,6 @@ class CheckReservationMode extends JFrame implements ActionListener{
 	private ArrayList<String> addList = new ArrayList<String>();
 	private ArrayList<String> subMenuList = new ArrayList<String>();
 
-	DefaultListModel<String> Accesable_Info = new DefaultListModel<>();
 	private JList informationGuideWindow;
 	
 
@@ -71,6 +73,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 	private int selectedMenu = 0;
 	private int InformationIndex;
 	private File[] flist;
+	ReservationDBConector RDBC;
 	
 	
 	
@@ -104,44 +107,44 @@ class CheckReservationMode extends JFrame implements ActionListener{
 		createFrame("Checking Reservation");
 		
 		//Get Reservation Information
-		try {
-			
-			File Path = new File("./DataBase/Reservation/");
-			flist = Path.listFiles(new FilenameFilter() {
-				
-				@Override
-				public boolean accept(File dir, String name) {
-					return !name.equals(".DS_Store");
-				}
-			});
-			
-			Arrays.sort(flist);
-			
-			for(int i = 0; i < flist.length; i++) {
-				// Contain User name
-				if(flist[i].getName().contains("1_Res")) {
-					BufferedReader br = new BufferedReader(new FileReader(flist[i]));
-					String content;
-					String name;
-					int state;
-					while((content = br.readLine()) != null) {
-						String[] contentlist = content.split(" ");
-						this.Reserv_Info.add(
-								new Reservation(
-										LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
-										LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
-										contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8],contentlist[9])
-										);
-					}
-				}
-			}
-			
-		}catch (FileNotFoundException e) {
-			// TODO: handle exception
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			
+//			File Path = new File("./DataBase/Reservation/");
+//			flist = Path.listFiles(new FilenameFilter() {
+//				
+//				@Override
+//				public boolean accept(File dir, String name) {
+//					return !name.equals(".DS_Store");
+//				}
+//			});
+//			
+//			Arrays.sort(flist);
+//			
+//			for(int i = 0; i < flist.length; i++) {
+//				// Contain User name
+//				if(flist[i].getName().contains("1_Res")) {
+//					BufferedReader br = new BufferedReader(new FileReader(flist[i]));
+//					String content;
+//					String name;
+//					int state;
+//					while((content = br.readLine()) != null) {
+//						String[] contentlist = content.split(" ");
+//						this.Reserv_Info.add(
+//								new Reservation(
+//								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
+//								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
+//								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8])
+//								);
+//					}
+//				}
+//			}
+//			
+//		}catch (FileNotFoundException e) {
+//			// TODO: handle exception
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 //		this.Reserv_Info.add(new Reservation("예약 1",1));
 //		this.Reserv_Info.add(new Reservation("예약 2",2));
