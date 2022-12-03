@@ -54,6 +54,7 @@ public class Reservation_helper_GUI extends JFrame {
 	private JComboBox<String> hourCombo;
 	private JComboBox<String> minCombo;
 	private JComboBox<String> serviceCombo;
+	
 	private JComboBox<String> PetnameCombo;
 	private String service_choose;
 	private int serviceNum;
@@ -132,29 +133,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.setLayout(new GridLayout(4, 2));
 		//info_panel.setVisible(true);
 		
-		//도우미 검색
-		dim1=new Dimension(230,30);
-		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
-		JLabel helper_search_label = new JLabel("도우미 검색 : ", JLabel.CENTER);
-		helper_search_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		helper_search_label.setForeground(Color.white);
-		helper_search_panel_1.setOpaque(true);
-		helper_search_panel_1.setBackground(Color.gray);
-		helper_search_panel_1.setOpaque(true);
-		helper_search_panel_1.add(helper_search_label);
 		
-		JPanel helper_search_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,30));
-		helper_search_button = new JButton("도우미 검색");
-		helper_search_button.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-		helper_search_panel_2.setOpaque(true);
-		helper_search_panel_2.setBackground(Color.gray);
-		helper_search_panel_2.setOpaque(true);
-		helper_search_button.setPreferredSize(dim1);
-			
-		helper_search_panel_2.add(helper_search_button);
-		
-		info_panel.add(helper_search_panel_1); 
-		info_panel.add(helper_search_panel_2);
 		
 		//이용날짜
 		dim2=new Dimension(70,30);
@@ -250,21 +229,31 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(service_panel_2);	
 		explan_label.setText("도우미 예약");
 		
+		//도우미 검색
+		dim1=new Dimension(230,30);
+		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
+		JLabel helper_search_label = new JLabel("도우미 검색 : ", JLabel.CENTER);
+		helper_search_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		helper_search_label.setForeground(Color.white);
+		helper_search_panel_1.setOpaque(true);
+		helper_search_panel_1.setBackground(Color.gray);
+		helper_search_panel_1.setOpaque(true);
+		helper_search_panel_1.add(helper_search_label);
+				
+		JPanel helper_search_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,30));
+		helper_search_button = new JButton("도우미 검색");
+		helper_search_button.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+		helper_search_panel_2.setOpaque(true);
+		helper_search_panel_2.setBackground(Color.gray);
+		helper_search_panel_2.setOpaque(true);
+		helper_search_button.setPreferredSize(dim1);
+					
+		helper_search_panel_2.add(helper_search_button);
+				
+		info_panel.add(helper_search_panel_1); 
+		info_panel.add(helper_search_panel_2);
+		
 		// 이벤트 처리
-		//메뉴에서 도우미예약 선택
-		/*menu_btn.addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				int selection = menu_btn.getSelectedIndex();
-				switch(selection) {
-				case(0):
-					explan_label.setText("도우미 예약");
-					//out_info_panel.add(info_panel);
-					break;
-				}
-			}
-		});*/
 		//도우미 검색 Action
 		helper_search_button.addActionListener(new ActionListener() {
 			
@@ -501,29 +490,6 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.setLayout(new GridLayout(4, 2));
 		//info_panel.setVisible(true);
 		
-		//도우미 검색
-		dim1=new Dimension(230,30);
-		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
-		JLabel helper_search_label = new JLabel("도우미 검색 : ", JLabel.CENTER);
-		helper_search_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		helper_search_label.setForeground(Color.white);
-		helper_search_panel_1.setOpaque(true);
-		helper_search_panel_1.setBackground(Color.gray);
-		helper_search_panel_1.setOpaque(true);
-		helper_search_panel_1.add(helper_search_label);
-		
-		JPanel helper_search_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,30));
-		helper_search_button = new JButton("도우미 검색");
-		helper_search_button.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-		helper_search_panel_2.setOpaque(true);
-		helper_search_panel_2.setBackground(Color.gray);
-		helper_search_panel_2.setOpaque(true);
-		helper_search_button.setPreferredSize(dim1);
-			
-		helper_search_panel_2.add(helper_search_button);
-		
-		info_panel.add(helper_search_panel_1); 
-		info_panel.add(helper_search_panel_2);
 		
 		//이용날짜
 		dim2=new Dimension(70,30);
@@ -609,21 +575,31 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(service_panel_2);	
 		explan_label.setText("도우미 예약");
 		
+		//도우미 검색
+		dim1=new Dimension(230,30);
+		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
+		JLabel helper_search_label = new JLabel("도우미 검색 : ", JLabel.CENTER);
+		helper_search_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		helper_search_label.setForeground(Color.white);
+		helper_search_panel_1.setOpaque(true);
+		helper_search_panel_1.setBackground(Color.gray);
+		helper_search_panel_1.setOpaque(true);
+		helper_search_panel_1.add(helper_search_label);
+				
+		JPanel helper_search_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,30));
+		helper_search_button = new JButton("도우미 검색");
+		helper_search_button.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+		helper_search_panel_2.setOpaque(true);
+		helper_search_panel_2.setBackground(Color.gray);
+		helper_search_panel_2.setOpaque(true);
+		helper_search_button.setPreferredSize(dim1);
+					
+		helper_search_panel_2.add(helper_search_button);
+				
+		info_panel.add(helper_search_panel_1); 
+		info_panel.add(helper_search_panel_2);
+		
 		// 이벤트 처리
-		//메뉴에서 도우미예약 선택
-		/*menu_btn.addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				int selection = menu_btn.getSelectedIndex();
-				switch(selection) {
-				case(0):
-					explan_label.setText("도우미 예약");
-					out_info_panel.add(info_panel);
-					break;
-				}
-			}
-		});*/
 		//도우미 검색 Action
 		helper_search_button.addActionListener(new ActionListener() {
 			
