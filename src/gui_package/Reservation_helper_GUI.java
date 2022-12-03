@@ -62,6 +62,7 @@ public class Reservation_helper_GUI extends JFrame {
 	private String da;
 	private String ho;
 	private String mi;
+	public String helper;
 	private int cost;
 	
 	//frame 생성
@@ -276,9 +277,8 @@ public class Reservation_helper_GUI extends JFrame {
 				petsitterSearchGUI.fr.addWindowListener(new WindowAdapter() {
 					@Override
 			        public void windowClosing(WindowEvent e) {
+						helper_search_button.setText("도우미 선택 완료");
 						helper_search_button.setEnabled(false);
-						JLabel helper_search_complete = new JLabel("도우미 선택 완료");
-						helper_search_panel_2.add(helper_search_complete);
 			        }
 			    });
 			}
@@ -778,6 +778,7 @@ public class Reservation_helper_GUI extends JFrame {
 					LocalTime time=LocalTime.of(i_ho, i_mi);
 					res.setDate(date);
 					res.setTime(time);
+					res.setHelper(helper);
 					res.setService(service_choose);
 					res.setCost(cost);
 					resDB.saveFile(res);

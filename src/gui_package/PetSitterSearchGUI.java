@@ -19,10 +19,12 @@ public class PetSitterSearchGUI extends Reservation_helper_GUI{
 	protected int row;
 	private PetSitterDBConnector conn;
 	public PetSitterSearchGUI() {
-		this.setTitle("피어펫 서비스");
+		
 	}
+	
 	public PetSitterSearchGUI(String title) {
-		createFrame(title);
+		super();
+		createFrame1(title);
 		this.conn = new PetSitterDBConnector();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
@@ -79,8 +81,16 @@ public class PetSitterSearchGUI extends Reservation_helper_GUI{
 		fr.add(tablePanel, BorderLayout.CENTER);
 		JButton resvButton = new JButton("선택하기");
 		resvButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {;
-				res.setHelper(table.getModel().getValueAt(row,0).toString());
+			public void actionPerformed(ActionEvent e) {
+			PetSitterDBConnector petSitter = new PetSitterDBConnector();
+					try {
+						String[] a=petSitter.readDB().get(row).getAttributeInString().split(",");
+						helper = a[0];
+					} catch (IllegalArgumentException | IllegalAccessException | IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		
 				fr.dispose();
 			}
 		});
@@ -189,7 +199,7 @@ public class PetSitterSearchGUI extends Reservation_helper_GUI{
 		JComboBox addrCombo = new JComboBox(address); 
 		return addrCombo;
 	}
-	void createFrame(String title) {
+	void createFrame1(String title) {
 		fr = new JFrame();
 		fr.setTitle(title);
 		fr.setSize(800,600);
