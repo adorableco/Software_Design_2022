@@ -354,20 +354,20 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					
 					
 				case (1):
-					new Reservation_Gui_ReservatioonReview(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
+					new Reservation_Check_Gui_ReservatioonReview(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
 					break;
 				case (2): // 예약변경
-					new Reservation_Gui_ReservationChange(Reserv_Info.get(InformationIndex), flist[InformationIndex] );
+					new Reservation_Check_Gui_ReservationChange(Reserv_Info.get(InformationIndex), flist[InformationIndex] );
 					break;
 				case (3): // 예약 취소
-					new Reservation_Gui_ReservationCancel(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
+					new Reservation_Check_Gui_ReservationCancel(Reserv_Info.get(InformationIndex), flist[InformationIndex]);
 					break;
 			}
 			
 		}
 		else {
 			dispose();
-			new Reservation_Gui();
+			new Reservation_Check_Gui();
 		}
 	}
 	
@@ -375,9 +375,9 @@ class CheckReservationMode extends JFrame implements ActionListener{
 
 
 
-public class Reservation_Gui {
+public class Reservation_Check_Gui {
 	
-	public Reservation_Gui(){
+	public Reservation_Check_Gui(){
 
 		new CheckReservationMode();
 	}

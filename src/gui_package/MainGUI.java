@@ -66,7 +66,7 @@ public class MainGUI {
 		JButton button2 = new JButton("예약 정보 관리");
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Reservation_Gui();
+				new Reservation_Check_Gui();
 			}
 		});
 		button2.setBounds(25, 93, 103, 29);

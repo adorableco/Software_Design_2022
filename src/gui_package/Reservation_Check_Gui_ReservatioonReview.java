@@ -265,8 +265,8 @@ class ReviewMode extends JFrame implements ActionListener{
 
 
 
-public class Reservation_Gui_ReservatioonReview {
-	public Reservation_Gui_ReservatioonReview(Reservation reservation_Info, File Selected_File) {
+public class Reservation_Check_Gui_ReservatioonReview {
+	public Reservation_Check_Gui_ReservatioonReview(Reservation reservation_Info, File Selected_File) {
 		new ReviewMode(reservation_Info, Selected_File);
 	}
 }
