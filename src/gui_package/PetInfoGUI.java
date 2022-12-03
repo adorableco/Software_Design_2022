@@ -228,19 +228,19 @@ public class PetInfoGUI {
 		registerFirstPanel.add(noticeLabel);
 		
 		JLabel typeLabel = new JLabel("*반려동물 종류");
-		typeLabel.setBounds(191, 162, 77, 16);
+		typeLabel.setBounds(191, 162, 90, 16);
 		registerFirstPanel.add(typeLabel);
 		
 		JLabel nameLabel = new JLabel("*반려동물 이름");
-		nameLabel.setBounds(191, 204, 77, 16);
+		nameLabel.setBounds(191, 204, 90, 16);
 		registerFirstPanel.add(nameLabel);
 		
 		JLabel breedLabel = new JLabel("*반려동물 품종");
-		breedLabel.setBounds(191, 249, 77, 16);
+		breedLabel.setBounds(191, 249, 90, 16);
 		registerFirstPanel.add(breedLabel);
 		
 		JLabel ageLabel = new JLabel("*반려동물 출생연도");
-		ageLabel.setBounds(191, 299, 106, 16);
+		ageLabel.setBounds(191, 299, 150, 16);
 		registerFirstPanel.add(ageLabel);
 		
 		nameText = new JTextField("");
@@ -281,12 +281,12 @@ public class PetInfoGUI {
 				registerSecondPanel.setVisible(true);
 			}
 		});
-		nextButton.setBounds(261, 450, 117, 29);
+		nextButton.setBounds(261, 450, 150, 29);
 		registerFirstPanel.add(nextButton);
 		
 		JLabel registerpageLabel = new JLabel("반려동물 정보 등록 페이지");
 		registerpageLabel.setFont(new Font("Lucida Grande", Font.BOLD, 17));
-		registerpageLabel.setBounds(229, 70, 188, 16);
+		registerpageLabel.setBounds(229, 70, 250, 16);
 		registerFirstPanel.add(registerpageLabel);
 		
 		JPanel deletePanel = new JPanel();
@@ -296,7 +296,7 @@ public class PetInfoGUI {
 		deletePanel.setLayout(null);
 		
 		JLabel deletepageLabel = new JLabel("반려동물 정보 삭제 페이지");
-		deletepageLabel.setBounds(229, 70, 188, 16);
+		deletepageLabel.setBounds(229, 70, 250, 16);
 		deletepageLabel.setFont(new Font("Lucida Grande", Font.BOLD, 17));
 		deletePanel.add(deletepageLabel);
 		

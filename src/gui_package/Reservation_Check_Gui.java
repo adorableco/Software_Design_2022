@@ -2,14 +2,12 @@ package gui_package;
 
 import javax.swing.*;
 import javax.swing.event.*;
-
 import database_package.AnimalHospitalDBConnector;
-
+import database_package.ReservationDB;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-
 import reservation_package.Company;
 import reservation_package.Reservation;
 
@@ -27,6 +25,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -34,8 +34,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import java.util.*;
 import java.util.List;
 
 
@@ -130,10 +128,10 @@ class CheckReservationMode extends JFrame implements ActionListener{
 						String[] contentlist = content.split(" ");
 						this.Reserv_Info.add(
 								new Reservation(
-								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
-								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
-								contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8])
-								);
+										LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
+										LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0),
+										contentlist[5], Integer.parseInt(contentlist[6]), Integer.parseInt(contentlist[7]), contentlist[8],contentlist[9])
+										);
 					}
 				}
 			}

@@ -12,6 +12,7 @@ public class Reservation {
 	private String service;
 	private int State;
 	private int cost;
+	private String helper;
 	private String Review;
 	private int Petcode;
 	private int Companycode;
@@ -21,14 +22,16 @@ public class Reservation {
 	
 	
 	public Reservation(LocalDate Use_Day, LocalTime Use_Time, String Use_Service
-			,int State, int Cost, String Review){
+			,int State, int Cost, String Review, String helper){
 		this.date = Use_Day;
 		this.time = Use_Time;
 		this.service = Use_Service;
 		this.State = State;
 		this.cost = Cost;
 		this.Review = Review;
+		this.helper = helper;
 	}
+
 	
 	public void setDate(LocalDate date){
 		this.date=date;
@@ -43,6 +46,11 @@ public class Reservation {
 		this.cost=cost;
 	}
 	
+	public void setHelper(String helper) {
+		this.helper=helper;
+	}
+
+
 	public String madeDate() {
 		//date를 String으로 바꾸고 예약 정보를 String으로 합치기
 		String s_date=this.date.format(DateTimeFormatter.ofPattern("yyyy MM dd"));
@@ -68,6 +76,9 @@ public class Reservation {
 	}
 	public String Get_Review() {
 		return this.Review;
+	}
+	public String Get_Helper() {
+		return this.helper;
 	}
 	
 	
