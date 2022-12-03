@@ -174,6 +174,7 @@ public class Reservation_helper_GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//도우미 검색 창으로 넘어감
+				new PetSitterSearchGUI("도우미 검색 서비스");
 			}
 		});
 		
@@ -329,11 +330,13 @@ public class Reservation_helper_GUI extends JFrame {
 				else if(n.getText().equals("병원 예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
+					new AnimalHospitalReservationGUI("병원 예약 서비스");
 					dispose();
 				}
 				else if(n.getText().equals("반려동물 미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
+					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스");
 					dispose();
 				}
 				
