@@ -2,16 +2,11 @@ package gui_package;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.awt.*;
 import java.awt.event.*;
@@ -171,8 +166,14 @@ public class Reservation_helper_GUI extends JFrame {
 		date_panel_2.setBackground(Color.gray);
 		date_panel_2.setOpaque(true);
 		yearCombo = new JComboBox<String>(year);
+		yearCombo.setSelectedIndex(Arrays.asList(year).indexOf(resvDate.format(DateTimeFormatter.ofPattern("yyyy"))));
+		
 		monthCombo = new JComboBox<String>(month);
+		monthCombo.setSelectedIndex(Arrays.asList(month).indexOf(resvDate.format(DateTimeFormatter.ofPattern("MM"))));
+		
 		dayCombo = new JComboBox<String>(day);
+		dayCombo.setSelectedIndex(Arrays.asList(day).indexOf(resvDate.format(DateTimeFormatter.ofPattern("dd"))));
+		
 		yearCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		monthCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		dayCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -200,7 +201,11 @@ public class Reservation_helper_GUI extends JFrame {
 					
 		JPanel time_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
 		hourCombo = new JComboBox<String>(hour);
+		hourCombo.setSelectedIndex(Arrays.asList(hour).indexOf(resvTime.format(DateTimeFormatter.ofPattern("HH"))));
+		
 		minCombo = new JComboBox<String>(min);
+		minCombo.setSelectedIndex(Arrays.asList(min).indexOf(resvTime.format(DateTimeFormatter.ofPattern("mm"))));
+		
 		hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		time_panel_2.setOpaque(true);
