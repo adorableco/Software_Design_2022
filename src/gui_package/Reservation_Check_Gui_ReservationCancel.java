@@ -98,8 +98,8 @@ private static final long serialVersionUID = 1L;
 		GuiMenu.setSelectedIndex(0);
 //		areaPanel.add(scrollPane);
 		
-		informationWpanel.add(CancelBtn);
 		informationWpanel.add(BackBtn);
+		informationWpanel.add(CancelBtn);
 		
 		informationPanel.add(informationWindow);
 		informationPanel.add(informationWpanel);
