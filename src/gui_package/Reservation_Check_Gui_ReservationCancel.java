@@ -138,6 +138,7 @@ private static final long serialVersionUID = 1L;
 					ReservationDB RDB = new ReservationDB();
 					SelectedReservation.setState(2);
 					RDB.savdFile_Selected(reservation_Info, Selected_File);
+					dispose();
 				}
 			}
 		});
