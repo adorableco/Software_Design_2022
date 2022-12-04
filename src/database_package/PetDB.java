@@ -29,6 +29,7 @@ public class PetDB {
 			BufferedReader Br = new BufferedReader(new FileReader("./DataBase/Pet DB.txt"));
 			String line;
 			while((line = Br.readLine())!=null) {
+				if(line.trim().isEmpty()) break;
 				System.out.println(line);
 				String [] petData = line.split(" ");
 				pet[n].registerType(petData[0]);
