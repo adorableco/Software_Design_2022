@@ -157,27 +157,46 @@ public class PetSitterSearchGUI extends JFrame{
 
 		
 		fr.add(tablePanel, BorderLayout.CENTER);
-		JButton resvButton = new JButton("선택하기");
-		resvButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-//						String[] a=petSitter.readDB().get(row).getAttributeInString().split(",");
-//						helper = a[0];
-					BufferedWriter writer = new BufferedWriter(new FileWriter("./Database/petsitter_temp.txt"));
-					writer.write(table.getModel().getValueAt(row,0).toString());
-//					System.out.println("search:"+table.getModel().getValueAt(row,0).toString());
-					writer.flush();
-				    writer.close();
-					fr.dispose();
-					dispose();
-				} catch (IllegalArgumentException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		
-			}
-		});
-		fr.add(resvButton, BorderLayout.PAGE_END);
+		JPanel buttonPanel = new JPanel(new GridLayout(1,2));
+	      
+	      JButton backBtn = new JButton("뒤로가기");
+	      buttonPanel.add(backBtn);
+	      backBtn.addActionListener(new ActionListener() {
+	         
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	            JOptionPane confirm = new JOptionPane();
+	            int result;
+	            result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+	            if(result == 0) {
+	               fr.dispose();
+	               dispose();
+	            } 
+	         }
+	      });
+	      
+	      JButton resvButton = new JButton("선택하기");
+	      buttonPanel.add(resvButton);
+	      resvButton.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            try {
+//	                  String[] a=petSitter.readDB().get(row).getAttributeInString().split(",");
+//	                  helper = a[0];
+	               BufferedWriter writer = new BufferedWriter(new FileWriter("./Database/petsitter_temp.txt"));
+	               writer.write(table.getModel().getValueAt(row,0).toString());
+//	               System.out.println("search:"+table.getModel().getValueAt(row,0).toString());
+	               writer.flush();
+	                writer.close();
+	               fr.dispose();
+	               dispose();
+	            } catch (IllegalArgumentException | IOException e1) {
+	               // TODO Auto-generated catch block
+	               e1.printStackTrace();
+	            }
+	      
+	         }
+	      });
+	      fr.add(buttonPanel, BorderLayout.PAGE_END);
 		fr.setVisible(true);
 		fr.setFocusable(true);
 	}
