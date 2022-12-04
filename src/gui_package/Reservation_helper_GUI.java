@@ -80,7 +80,7 @@ public class Reservation_helper_GUI extends JFrame {
 	//frame 생성
 	void createFrame(String title) {
 			this.setTitle(title);
-			this.setSize(800,600);
+			this.setSize(1100,600);
 			
 			Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 			Dimension frame = getSize();
