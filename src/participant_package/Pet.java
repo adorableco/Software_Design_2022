@@ -14,6 +14,17 @@ public class Pet  { //반려동물 정보를 가지고 있는 클래스
 	private String hospital;
 	private String shop;
 	
+	public Pet() {
+		this.type = "0";
+		this.name = "0";
+		this.age = 0;
+		this.breed = "0";
+		this.weight = 0;
+		this.illness = "0";
+		this.drug = "0";
+		this.hospital = "0";
+		this.shop = "0";
+	}
 	public void registerType(String type) 
 	{
 		this.type = type;
