@@ -63,7 +63,7 @@ public class AnimalHospitalReservationGUI extends JFrame{
 				JOptionPane confirm = new JOptionPane();
 				int result;
 				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				if(result == 0) {
+				if(result == 0) {=
 						new Reservation_helper_GUI();
 						dispose();
 				} 
@@ -136,7 +136,9 @@ public class AnimalHospitalReservationGUI extends JFrame{
 				int result;
 				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				if(result == 0) {
-						dispose();
+
+					new Reservation_helper_GUI();
+					dispose();
 				} 
 			}
 		});
