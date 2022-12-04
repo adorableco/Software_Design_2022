@@ -194,7 +194,7 @@ public class PetInfoGUI {
 		illnessLabel.setBounds(189, 156, 89, 16);
 		registerSecondPanel.add(illnessLabel);
 		
-		illnessText = new JTextField("");
+		illnessText = new JTextField("0");
 		illnessText.setColumns(10);
 		illnessText.setBounds(334, 145, 130, 40);
 		registerSecondPanel.add(illnessText);
@@ -203,7 +203,7 @@ public class PetInfoGUI {
 		drugLabel.setBounds(192, 209, 89, 16);
 		registerSecondPanel.add(drugLabel);
 		
-		drugText = new JTextField("");
+		drugText = new JTextField("0");
 		drugText.setBounds(334, 197, 130, 40);
 		registerSecondPanel.add(drugText);
 		drugText.setColumns(10);
@@ -212,7 +212,7 @@ public class PetInfoGUI {
 		hospitalLabel.setBounds(189, 258, 105, 16);
 		registerSecondPanel.add(hospitalLabel);
 		
-		hospitalText = new JTextField("");
+		hospitalText = new JTextField("0");
 		hospitalText.setColumns(10);
 		hospitalText.setBounds(334, 249, 130, 40);
 		registerSecondPanel.add(hospitalText);
@@ -221,7 +221,7 @@ public class PetInfoGUI {
 		shopLabel.setBounds(189, 314, 152, 16);
 		registerSecondPanel.add(shopLabel);
 		
-		shopText = new JTextField("");
+		shopText = new JTextField("0");
 		shopText.setColumns(10);
 		shopText.setBounds(334, 302, 130, 40);
 		registerSecondPanel.add(shopText);
@@ -257,7 +257,7 @@ public class PetInfoGUI {
 		registerFirstPanel.add(nameText);
 		nameText.setColumns(10);
 		
-		breedText = new JTextField("");
+		breedText = new JTextField("0");
 		breedText.setColumns(10);
 		breedText.setBounds(327, 237, 130, 40);
 		registerFirstPanel.add(breedText);
@@ -274,7 +274,7 @@ public class PetInfoGUI {
 		weightLabel.setBounds(191, 345, 77, 16);
 		registerFirstPanel.add(weightLabel);
 		
-		weightText = new JTextField("");
+		weightText = new JTextField("0");
 		weightText.setColumns(10);
 		weightText.setBounds(327, 334, 130, 40);
 		registerFirstPanel.add(weightText);

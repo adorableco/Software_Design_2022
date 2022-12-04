@@ -600,7 +600,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.setForeground(Color.white);
 		info_panel.setOpaque(true);
 		info_panel.setFont(new Font("Serief", Font.BOLD, 15));
-		info_panel.setLayout(new GridLayout(4, 2));
+		info_panel.setLayout(new GridLayout(5, 2));
 		//info_panel.setVisible(true);
 		
 		//이용날짜
@@ -716,8 +716,32 @@ public class Reservation_helper_GUI extends JFrame {
 		service_panel_2.add(serviceCombo);
 		
 		info_panel.add(service_panel_1); 
-		info_panel.add(service_panel_2);	
+		info_panel.add(service_panel_2);
+		
+		JPanel pet_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
+		JLabel pet_label = new JLabel("반려동물 선택 : ", JLabel.CENTER);
+		pet_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		pet_label.setForeground(Color.white);
+		pet_panel_1.setOpaque(true);
+		pet_panel_1.setBackground(Color.gray);
+		pet_panel_1.setOpaque(true);
+		pet_panel_1.add(pet_label);
+					
+		JPanel pet_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
+		serviceCombo = new JComboBox<String>(service);
+		serviceCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		pet_panel_2.setOpaque(true);
+		pet_panel_2.setBackground(Color.gray);
+		pet_panel_2.setOpaque(true);
+		serviceCombo.setPreferredSize(dim1);
+		pet_panel_2.add(serviceCombo);
+		
+		info_panel.add(pet_panel_1); 
+		info_panel.add(pet_panel_2);
+		
+		
 		explan_label.setText("도우미 예약");
+		
 		
 		// 이벤트 처리
 		//이용 날짜 Action
