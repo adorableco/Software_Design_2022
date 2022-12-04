@@ -15,9 +15,7 @@ import reservation_package.PetSitter;
 import reservation_package.Reservation;
 
 public class PetSitterSearchGUI extends JFrame{
-	public JTable table;
 	public JFrame fr;
-	protected int row;
 	private PetSitterDBConnector conn;
 	private Reservation res;
 	private JComboBox addrCombo;
@@ -86,10 +84,13 @@ public class PetSitterSearchGUI extends JFrame{
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					// TODO Auto-generated method stub
-					table = (JTable) e.getSource();
-					row = table.getSelectedRow();
+					JTable table = (JTable) e.getSource();
+					int row = table.getSelectedRow();
+					row = table.convertRowIndexToModel(row);
 //					System.out.print(table.getModel().getValueAt(row,0 )+"\t");
-					select.setText(table.getModel().getValueAt(row,0)+"에 예약을 진행합니다.");
+					String help = table.getModel().getValueAt(row,0).toString();
+					select.setText(help+"에 예약을 진행합니다.");
+					res.setHelper(help);
 				}
 
 				@Override
@@ -183,10 +184,12 @@ public class PetSitterSearchGUI extends JFrame{
 //	                  String[] a=petSitter.readDB().get(row).getAttributeInString().split(",");
 //	                  helper = a[0];
 	               BufferedWriter writer = new BufferedWriter(new FileWriter("./Database/petsitter_temp.txt"));
-	               writer.write(table.getModel().getValueAt(row,0).toString());
+//	               writer.write(table.getModel().getValueAt(row,0).toString());
+	               writer.write(res.Get_Helper_Name());
+	               System.out.println("search:"+res.Get_Helper_Name());
 //	               System.out.println("search:"+table.getModel().getValueAt(row,0).toString());
 	               writer.flush();
-	                writer.close();
+	               writer.close();
 	               fr.dispose();
 	               dispose();
 	            } catch (IllegalArgumentException | IOException e1) {

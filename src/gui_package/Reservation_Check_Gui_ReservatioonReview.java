@@ -194,15 +194,18 @@ class ReviewMode extends JFrame implements ActionListener{
 					FileWriter fw = new FileWriter(Selected_File.getPath(),false);
 					fw.write(date[0] + " " + date[1] + " " + date[2] + " " + Start_time[0] + " " + Start_time[1] + " "+Finish_time[0]+" "+Finish_time[1]+" "
 							+ SelectedReservation.Get_Use_Service() +  " 1 "
-							+ Integer.toString(SelectedReservation.Get_Cost()) + " " );
+							+ Integer.toString(SelectedReservation.Get_Cost()) + " ");
 					fw.close();
 					FileWriter fw1 = new FileWriter(Selected_File.getPath(),true);
 				
 					for(int k =0; k<Review.length; k++) {
-						fw1.write(Review[k] + " ");
+						fw1.write(Review[k] + " " );
 					}
 					fw1.close();
 					
+					FileWriter fw2 = new FileWriter(Selected_File.getPath(),true);
+					fw2.write(SelectedReservation.Get_Company()+ " " + SelectedReservation.Get_Helper_Name() + " " + SelectedReservation.Get_SelectedPet());
+					fw2.close();
 				} catch(IOException e2) {
 					e2.printStackTrace();
 				}
