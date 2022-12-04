@@ -230,7 +230,7 @@ class ReservationChange extends JFrame implements ActionListener{
 							temp = new Reservation(
 									LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
 									LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0), LocalTime.of(Integer.parseInt(contentlist[5]), Integer.parseInt(contentlist[6]),0),
-									contentlist[7], Integer.parseInt(contentlist[8]), Integer.parseInt(contentlist[9]), contentlist[10], contentlist[11], contentlist[12]);
+									contentlist[7], Integer.parseInt(contentlist[8]), Integer.parseInt(contentlist[9]), contentlist[10], contentlist[11], contentlist[12],contentlist[13]);
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}

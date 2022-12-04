@@ -137,5 +137,8 @@ public class Company {
         }
  
 	}
+	public String Get_Company_Name() {
+		return this.name;
+	}
 
 }

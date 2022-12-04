@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 
+import database_package.AnimalHospitalDBConnector;
+import database_package.PetGroomingSalonDBConnector;
 import database_package.PetSitterDBConnector;
 import participant_package.Pet;
 
@@ -19,36 +21,54 @@ public class Reservation {
 	private int State;
 	private int cost;
 	private String Review;
-	
-	private String Company;
-	private PetSitter helper;
-	private Pet SelectedPet;
+	private AnimalHospital SelectedCompany_Hospital = null;
+	private PetGroomingSalon SelectedCompany_Salon = null;
+	//private Company SelectedCompany;
+	private PetSitter Selected_helper;
+	private String SelectedPet;
+
 	
 	
 
-	PetSitterDBConnector PDB = new PetSitterDBConnector();
 	public Reservation() {
 	}
 	
 	
-	public Reservation(LocalDate Use_Day, LocalTime Use_Start_Time, LocalTime Use_Finish_Time,String Use_Service
-			,int State, int Cost, String Review, String Company, String helper){
+	public Reservation(LocalDate Use_Day, LocalTime Use_Start_Time, LocalTime Use_Finish_Time,String Use_Service 
+						,int State, int Cost, String Review, String Company, String helper, String SelectedPet){
+
 		this.date = Use_Day;
 		this.start_time = Use_Start_Time;
 		this.finish_time=Use_Finish_Time;
 		this.service = Use_Service;
 		this.State = State;
 		this.cost = Cost;
+		
 		if (Review.equals("null")) {
 			this.Review = "0";
 		}
 		else {
 			this.Review = Review;
 		}
-		
-		this.helper = PDB.Get_Selected_PetSitter(helper);
-	}
 
+		PetSitterDBConnector PDB = new PetSitterDBConnector();
+		this.Selected_helper = PDB.Get_Selected_PetSitter(helper);
+
+		if(!Company.equals("null")){
+			//company가져오기.
+			if(this.service.equals("병원동행")) {
+				AnimalHospitalDBConnector ADBC = new AnimalHospitalDBConnector();
+				SelectedCompany_Hospital = ADBC.Get_Selected_Company(Company);
+			}
+			else {
+
+				PetGroomingSalonDBConnector SDBC = new PetGroomingSalonDBConnector();
+				SelectedCompany_Salon = SDBC.Get_Selected_Company(Company);
+			}
+		}
+
+		this.SelectedPet = SelectedPet;
+	}
 	
 	public void setDate(LocalDate date){
 		this.date=date;
@@ -67,12 +87,23 @@ public class Reservation {
 	}
 	
 	public void setHelper(String helper) {
-
-		this.helper = PDB.Get_Selected_PetSitter(helper);
+		PetSitterDBConnector PDB = new PetSitterDBConnector();
+		this.Selected_helper = PDB.Get_Selected_PetSitter(helper);
 	}
 	public void setCompany(String company) {
+		if(this.service.equals("병원동행")) {
+			AnimalHospitalDBConnector ADBC = new AnimalHospitalDBConnector();
+			SelectedCompany_Hospital = ADBC.Get_Selected_Company(company);
+		}
+		else {
 
-		this.Company=company;
+			PetGroomingSalonDBConnector SDBC = new PetGroomingSalonDBConnector();
+			SelectedCompany_Salon = SDBC.Get_Selected_Company(company);
+		}
+	}
+	
+	public void setSelectedPet(String SelectedPet) {
+		this.SelectedPet = SelectedPet;
 	}
 	
 	public int Get_State() {
@@ -97,17 +128,32 @@ public class Reservation {
 		return this.Review;
 	}
 	public String Get_Helper_Name() {
-		return this.helper.Get_Name();
+		return this.Selected_helper.Get_Name();
 	}
 	public String Get_Helper_Phone() {
-		return this.helper.Get_phon();
+		return this.Selected_helper.Get_phon();
 	}
 	public String Get_Helper_Address() {
-		return this.helper.getAddress();
+		return this.Selected_helper.getAddress();
 	}
 	public String Get_Company() {
-		return this.Company;
+		if(SelectedCompany_Hospital != null) {
+			return SelectedCompany_Hospital.Get_Company_Name();
+		}
+		else if( SelectedCompany_Salon != null) {
+			return SelectedCompany_Salon.Get_Company_Name();
+		}
+		else {
+			return "없음";
+		}
 	}
-	
-	
+
+	public String Get_SelectedPet() {
+		return this.SelectedPet;
+	}
 }
+
+//	public String Get_Company() {
+//		return this.Company;
+//	}
+	

@@ -17,8 +17,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import database_package.PetDB;
 import database_package.ReservationDB;
 import reservation_package.Reservation;
+
+import participant_package.Pet;
+import database_package.PetDB;
+
 
 public class Reservation_helper_GUI extends JFrame {
 	Reservation res;
@@ -46,6 +51,7 @@ public class Reservation_helper_GUI extends JFrame {
 	private String[] hour= {"HH","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
 	private String[] min= {"mm","00","10","20","30","40","50"};
 	private String[] service= {"서비스 선택","산책","집방문","병원동행","반려동물미용샵동행"};
+	private String[] pet;
 	private JButton helper_search_button;
 	private JComboBox<String> yearCombo;
 	private JComboBox<String> monthCombo;
@@ -55,8 +61,9 @@ public class Reservation_helper_GUI extends JFrame {
 	private JComboBox<String> finish_hourCombo;
 	private JComboBox<String> finish_minCombo;
 	private JComboBox<String> serviceCombo;
-	private JComboBox<String> PetnameCombo;
+	private JComboBox<String> petCombo;
 	private String service_choose;
+	private String pet_choose;
 	private int serviceNum;
 	private String ye;
 	private String mo;
@@ -728,13 +735,25 @@ public class Reservation_helper_GUI extends JFrame {
 		pet_panel_1.add(pet_label);
 					
 		JPanel pet_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
-		serviceCombo = new JComboBox<String>(service);
-		serviceCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		Pet [] pet_class = new Pet[5];
+		for(int i=0; i<5; i++)
+			pet_class[i] = new Pet();
+		
+		PetDB petDB = new PetDB();
+		int n = petDB.dataDownload_pet(pet_class);
+		pet = new String[n];
+		
+		for(int i=0; i<n; i++)
+			pet[i] = pet_class[i].Get_name();
+	
+		petCombo = new JComboBox<String>(pet);
+		
+		petCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		pet_panel_2.setOpaque(true);
 		pet_panel_2.setBackground(Color.gray);
 		pet_panel_2.setOpaque(true);
-		serviceCombo.setPreferredSize(dim1);
-		pet_panel_2.add(serviceCombo);
+		petCombo.setPreferredSize(dim1);
+		pet_panel_2.add(petCombo);
 		
 		info_panel.add(pet_panel_1); 
 		info_panel.add(pet_panel_2);
@@ -874,6 +893,18 @@ public class Reservation_helper_GUI extends JFrame {
 			}
 		});
 		
+		//반려동물 선택 Action
+				petCombo.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						JComboBox meau = (JComboBox)e.getSource();
+						
+						pet_choose = meau.getSelectedItem().toString();
+					}
+				});
+		
 		//도우미 검색 Action
 		helper_search_button.addActionListener(new ActionListener() {
 					
@@ -950,12 +981,12 @@ public class Reservation_helper_GUI extends JFrame {
 				res.setFinishTime(fitime);
 				res.setService(service_choose);
 				res.setCost(cost);
+				res.setSelectedPet(pet_choose);
 //				res.setHelper(helper);
 				if(n.getText().equals("결제")) {
 					
 					JOptionPane.showMessageDialog(null,cost+"원 결제되었습니다.");  //결제창 넘어감??
 					//reservation 클래스에 정보줌
-
 					resDB.saveFile(res);
 					
 					dispose();

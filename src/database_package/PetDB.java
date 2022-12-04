@@ -32,7 +32,6 @@ public class PetDB {
 				System.out.println(line);
 				String [] petData = line.split(" ");
 				pet[n].registerType(petData[0]);
-				
 				pet[n].registerName(petData[1]);
 				pet[n].registerAge(Integer.parseInt(petData[2]));
 				pet[n].registerBreed( petData[3]);
