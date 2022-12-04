@@ -11,32 +11,29 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import database_package.PetGroomingSalonDBConnector;
-import database_package.ReservationAnimalHospitalDB;
-import database_package.ReservationPetGroomingSalonDB;
+import database_package.ReservationDB;
 import reservation_package.PetGroomingSalon;
 import reservation_package.Reservation;
-import reservation_package.ReservationAnimalHospital;
-import reservation_package.ReservationPetGroomingSalon;
 
 public class PetGroomingSalonReservationGUI extends JFrame{
 	private PetGroomingSalonDBConnector conn;
-	private Reservation res;
-	private ReservationPetGroomingSalon sal_resv;
+	private Reservation resv;
+//	private ReservationPetGroomingSalon sal_resv;
 	public PetGroomingSalonReservationGUI() {
 		this.setTitle("피어펫 서비스");
 	}
 	public PetGroomingSalonReservationGUI(String title, Reservation res) {
 		createFrame(title);
-		this.res = res;
+		this.resv = res;
 		this.conn = new PetGroomingSalonDBConnector();
-		this.sal_resv = new ReservationPetGroomingSalon();
+//		this.sal_resv = new ReservationPetGroomingSalon();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
-		LocalDate resvDate = res.Get_Use_Day();
-		LocalTime resvStartTime = res.Get_Use_Start_Time();
-		LocalTime resvFinishTime = res.Get_Use_Finish_Time();
-		sal_resv.setDate(resvDate);
-		sal_resv.setTime(resvStartTime);
+		LocalDate resvDate = resv.Get_Use_Day();
+		LocalTime resvStartTime = resv.Get_Use_Start_Time();
+		LocalTime resvFinishTime = resv.Get_Use_Finish_Time();
+//		sal_resv.setDate(resvDate);
+//		sal_resv.setTime(resvStartTime);
 		this.add(infoPanel(resvDate, resvStartTime,resvFinishTime), BorderLayout.NORTH);
 		try {
 			this.add(showList(this.conn.searchDBwithTime(resvDate, resvStartTime,resvFinishTime)), BorderLayout.CENTER);
@@ -53,8 +50,11 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ReservationPetGroomingSalonDB resDB=new ReservationPetGroomingSalonDB();
-				resDB.saveFile(sal_resv);
+//				ReservationPetGroomingSalonDB resDB=new ReservationPetGroomingSalonDB();
+//				resDB.saveFile(sal_resv);
+				ReservationDB resDB=new ReservationDB();
+				JOptionPane.showMessageDialog(null,Integer.toString(res.Get_Cost())+"원 결제되었습니다.");
+				resDB.saveFile(resv);
 				dispose();
 			}
 			
@@ -104,8 +104,9 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 				JTable table = (JTable) e.getSource();
 				int row = table.getSelectedRow();
 //				System.out.print(table.getModel().getValueAt(row,0 )+"\t");
-				select.setText(table.getModel().getValueAt(row,0)+"에 예약을 진행합니다.");
-				sal_resv.setCompanyName(table.getModel().getValueAt(row,0).toString());
+				String comp = table.getModel().getValueAt(row,0).toString();
+				select.setText(comp+"에 예약을 진행합니다.");
+				resv.setCompany(comp);
 			}
 
 			@Override

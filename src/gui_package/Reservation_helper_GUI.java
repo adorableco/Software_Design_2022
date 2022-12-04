@@ -491,28 +491,30 @@ public class Reservation_helper_GUI extends JFrame {
 				
 				//지금 짠 코드는 결제 안하고 바로 예약 DB에 저장함
 				//예약 성공하면 메인창으로 넘어감
+				cost=10000;
+				int i_ye=Integer.parseInt(ye);
+				int i_mo=Integer.parseInt(mo);
+				int i_da=Integer.parseInt(da);
+				int i_st_ho=Integer.parseInt(st_ho);
+				int i_st_mi=Integer.parseInt(st_mi);
+				int i_fi_ho=Integer.parseInt(fi_ho);
+				int i_fi_mi=Integer.parseInt(fi_mi);
+				LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
+				LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
+				LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
+				res.setDate(date);
+				res.setStartTime(sttime);
+				res.setFinishTime(fitime);
+				res.setService(service_choose);
+				res.setCost(cost);
+//				res.setHelper(helper);
+				
 				if(n.getText().equals("저장")) {
-					cost=10000;
+					
 					JOptionPane.showMessageDialog(null,"저장되었습니다.");  
 					//reservation 클래스에 정보줌
-					int i_ye=Integer.parseInt(ye);
-					int i_mo=Integer.parseInt(mo);
-					int i_da=Integer.parseInt(da);
-					int i_st_ho=Integer.parseInt(st_ho);
-					int i_st_mi=Integer.parseInt(st_mi);
-					int i_fi_ho=Integer.parseInt(fi_ho);
-					int i_fi_mi=Integer.parseInt(fi_mi);
-					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
-					LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
-					LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
-					res.setDate(date);
-					res.setStartTime(sttime);
-					res.setFinishTime(fitime);
-					res.setService(service_choose);
-					res.setCost(cost);
-//					res.setHelper(helper);
+
 					resDB.saveFile_Temp(res, Selected_File);
-					
 					dispose();
 				}					
 				else if(n.getText().equals("병원 예약")) {
@@ -908,26 +910,28 @@ public class Reservation_helper_GUI extends JFrame {
 				
 				//지금 짠 코드는 결제 안하고 바로 예약 DB에 저장함
 				//예약 성공하면 메인창으로 넘어감
+				cost=10000;
+				int i_ye=Integer.parseInt(ye);
+				int i_mo=Integer.parseInt(mo);
+				int i_da=Integer.parseInt(da);
+				int i_st_ho=Integer.parseInt(st_ho);
+				int i_st_mi=Integer.parseInt(st_mi);
+				int i_fi_ho=Integer.parseInt(fi_ho);
+				int i_fi_mi=Integer.parseInt(fi_mi);
+				LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
+				LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
+				LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
+				res.setDate(date);
+				res.setStartTime(sttime);
+				res.setFinishTime(fitime);
+				res.setService(service_choose);
+				res.setCost(cost);
+//				res.setHelper(helper);
 				if(n.getText().equals("결제")) {
-					cost=10000;
+					
 					JOptionPane.showMessageDialog(null,cost+"원 결제되었습니다.");  //결제창 넘어감??
 					//reservation 클래스에 정보줌
-					int i_ye=Integer.parseInt(ye);
-					int i_mo=Integer.parseInt(mo);
-					int i_da=Integer.parseInt(da);
-					int i_st_ho=Integer.parseInt(st_ho);
-					int i_st_mi=Integer.parseInt(st_mi);
-					int i_fi_ho=Integer.parseInt(fi_ho);
-					int i_fi_mi=Integer.parseInt(fi_mi);
-					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
-					LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
-					LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
-					res.setDate(date);
-					res.setStartTime(sttime);
-					res.setFinishTime(fitime);
-					res.setService(service_choose);
-					res.setCost(cost);
-//					res.setHelper(helper);
+
 					resDB.saveFile(res);
 					
 					dispose();
@@ -935,46 +939,15 @@ public class Reservation_helper_GUI extends JFrame {
 				else if(n.getText().equals("병원 예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
-					int i_ye=Integer.parseInt(ye);
-					int i_mo=Integer.parseInt(mo);
-					int i_da=Integer.parseInt(da);
-					int i_st_ho=Integer.parseInt(st_ho);
-					int i_st_mi=Integer.parseInt(st_mi);
-					int i_fi_ho=Integer.parseInt(fi_ho);
-					int i_fi_mi=Integer.parseInt(fi_mi);
-					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
-					LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
-					LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
-					res.setDate(date);
-					res.setStartTime(sttime);
-					res.setFinishTime(fitime);
-					res.setService(service_choose);
-					res.setCost(cost);
-//					res.setHelper(helper);
 					
-					resDB.saveFile(res);
 					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
 					dispose();
 				}
 				else if(n.getText().equals("반려동물 미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
-					int i_ye=Integer.parseInt(ye);
-					int i_mo=Integer.parseInt(mo);
-					int i_da=Integer.parseInt(da);
-					int i_st_ho=Integer.parseInt(st_ho);
-					int i_st_mi=Integer.parseInt(st_mi);
-					int i_fi_ho=Integer.parseInt(fi_ho);
-					int i_fi_mi=Integer.parseInt(fi_mi);
-					LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
-					LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
-					LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
-					res.setDate(date);
-					res.setStartTime(sttime);
-					res.setFinishTime(fitime);
-					res.setService(service_choose);
-					res.setCost(cost);
-					resDB.saveFile(res);
+					
+//					resDB.saveFile(res);
 					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res);
 					dispose();
 				}

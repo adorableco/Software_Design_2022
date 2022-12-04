@@ -70,6 +70,10 @@ public class Reservation {
 
 		this.helper = PDB.Get_Selected_PetSitter(helper);
 	}
+	public void setCompany(String company) {
+
+		this.Company=company;
+	}
 	
 	public int Get_State() {
 		return this.State;
@@ -101,9 +105,9 @@ public class Reservation {
 	public String Get_Helper_Address() {
 		return this.helper.getAddress();
 	}
-//	public String Get_Company() {
-//		return this.Company;
-//	}
+	public String Get_Company() {
+		return this.Company;
+	}
 	
 	
 }
