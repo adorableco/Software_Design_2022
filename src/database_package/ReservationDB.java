@@ -104,7 +104,7 @@ public class ReservationDB {
 		return;
 	}
 	
-	public void saveFile(Reservation resvInfo, File originalFile) {
+	public void saveFile_Temp(Reservation resvInfo, File originalFile) {
 		String fname = this.path + originalFile.getName().substring(0, originalFile.getName().lastIndexOf("."))+"_temp.txt";
 		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+ " " + 
 				resvInfo.Get_Use_Start_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
@@ -112,7 +112,7 @@ public class ReservationDB {
 				resvInfo.Get_Use_Service() + " " +
 				Integer.toString(resvInfo.Get_State()) + " " +
 				Integer.toString(resvInfo.Get_Cost()) + " " + 
-				resvInfo.Get_Review() + " "+
+				resvInfo.Get_Review() + " "+ "null " + 
 				resvInfo.Get_Helper_Name();
 		
 	    try {

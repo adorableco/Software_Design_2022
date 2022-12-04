@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,12 +37,12 @@ class ReservationChange extends JFrame implements ActionListener{
 	private JPanel informationRpanel = new JPanel(new GridLayout(1,1));
 	
 	private JPanel informationPanel = new JPanel(new GridLayout(2,1));
-	private JLabel informationWindow = new JLabel("Select the Menu");
+	private JLabel informationWindow = new JLabel("예약 변경 하러 가기");
 	private JPanel informationWpanel = new JPanel(new GridLayout(1,2));
 	private JButton informationWRokBtn = new JButton("예약 변경 하러 가기");
 	private JButton BackBtn = new JButton("뒤돌아 가기");
 	
-	private String Menu[] = {"(2) 예약 변경","(2-1) 저장하기"};
+	private String Menu[] = {"(2) 예약 변경"};
 	private int Selected_Menu_Index;
 	
 	private Reservation SelectedReservation;
@@ -103,14 +105,15 @@ class ReservationChange extends JFrame implements ActionListener{
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				Selected_Menu_Index = e.getLastIndex();
-				
+				Selected_Menu_Index = GuiMenu.getSelectedIndex();
+				System.out.println(Selected_Menu_Index);
 				switch(Selected_Menu_Index) {
-				case 1:
+				case 0:
 					informationWindow.setText("날짜 변경하러 가기");
 					break;
-				case 2:
+				case 1:
 					informationWindow.setText("저장하시겠습니까??");
+					break;
 				}
 			}
 		});
@@ -171,13 +174,73 @@ class ReservationChange extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch(Selected_Menu_Index) {
 		case(0):
-			new Reservation_helper_GUI(SelectedReservation, Selected_File);
+			Reservation_helper_GUI add = new Reservation_helper_GUI(SelectedReservation, Selected_File);
+			add.addWindowListener(new WindowListener() {
+				
+				@Override
+				public void windowOpened(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowIconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowDeiconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowDeactivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowClosing(WindowEvent e) {
+					
+				}
+				
+				@Override
+				public void windowClosed(WindowEvent e) {
+					String filename = Selected_File.getPath();
+					String[] contents = filename.split(".txt");
+					System.out.println(contents[0]);
+					File tempfile = new File(contents[0]+ "_temp.txt");
+					System.out.println(tempfile);
+					if(tempfile.exists()) {
+						JOptionPane confirm = new JOptionPane();
+						int result;
+						result = confirm.showConfirmDialog(null, "예약을 변경하시겟습니까? ", "예약변", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+						if(result == 0) {
+							Selected_File.delete();
+							tempfile.renameTo(new File(filename));
+							dispose();
+						} 
+						else {
+							tempfile.delete();
+						}
+					}
+					
+				}
+				
+				@Override
+				public void windowActivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			break;
 //		case(2):
 //			System.out.println(Selected_File.getName());
 //			try {
 //				FileWriter fw = new FileWriter(Selected_File.getPath(), false);
-//				fw.write(SelectedReservation.Get_name() + " " + SelectedReservation.Get_State());
+////				fw.write(SelectedReservation.Get_name() + " " + SelectedReservation.Get_State());
 //				fw.close();
 //			} catch (IOException e1) {
 //				e1.printStackTrace();

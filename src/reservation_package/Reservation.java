@@ -32,7 +32,7 @@ public class Reservation {
 		this.service = Use_Service;
 		this.State = State;
 		this.cost = Cost;
-		if (Review == "null") {
+		if (Review.equals("null")) {
 			this.Review = "0";
 		}
 		else {
@@ -75,7 +75,21 @@ public class Reservation {
 	}
 	
 	public void setHelper(String helper) {
-//		this.helper=helper;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("./Database/PetSitterDB.txt"));
+			String Line = reader.readLine();
+			System.out.println(Line);
+			while((Line = reader.readLine()) != null) {
+				System.out.println(Line);
+				String[] contents = Line.split(",");
+				if(contents[0].equals(helper)) {
+					this.helper = new PetSitter(Arrays.asList(contents));
+					break;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public int Get_State() {

@@ -511,7 +511,7 @@ public class Reservation_helper_GUI extends JFrame {
 					res.setService(service_choose);
 					res.setCost(cost);
 //					res.setHelper(helper);
-					resDB.saveFile(res, Selected_File);
+					resDB.saveFile_Temp(res, Selected_File);
 					
 					dispose();
 				}					
