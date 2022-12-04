@@ -168,8 +168,8 @@ public class PetInfoGUI {
 						,info.pet[(info.n)-1].Get_breed()
 						,info.pet[(info.n)-1].Get_age()});
 				
-				nameText.setText("0");;
-				breedText.setText("0");
+				nameText.setText("");;
+				breedText.setText("");
 				drugText.setText("0");
 				hospitalText.setText("0");
 				shopText.setText("0");
@@ -259,7 +259,7 @@ public class PetInfoGUI {
 		registerFirstPanel.add(nameText);
 		nameText.setColumns(10);
 		
-		breedText = new JTextField("0");
+		breedText = new JTextField("");
 		breedText.setColumns(10);
 		breedText.setBounds(327, 237, 130, 40);
 		registerFirstPanel.add(breedText);
