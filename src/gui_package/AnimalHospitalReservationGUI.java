@@ -112,11 +112,17 @@ public class AnimalHospitalReservationGUI extends JFrame{
 				// TODO Auto-generated method stub
 //				ReservationAnimalHospitalDB resDB=new ReservationAnimalHospitalDB();
 //				resDB.saveFile(hos_resv);
-				ReservationDB resDB=new ReservationDB();
-				JOptionPane.showMessageDialog(null,"저장되었습니다.");
-				resDB.saveFile_Temp(resv, originalFile);
-				
-				dispose();
+				if(row==0) {
+					JOptionPane confirm = new JOptionPane();
+					confirm.showMessageDialog(null, "예약할 병원을 선택하세요. ");
+				}
+				else {
+					System.out.println(row);
+					ReservationDB resDB=new ReservationDB();
+					JOptionPane.showMessageDialog(null,Integer.toString(resv.Get_Cost())+"원 결제되었습니다.");
+					resDB.saveFile(resv);
+					dispose();
+				}
 			}
 			
 		});
