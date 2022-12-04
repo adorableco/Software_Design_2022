@@ -309,7 +309,6 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		for(int i=0; i<n; i++)
 			pet[i] = pet_class[i].Get_name();
-		pet_choose = pet[0];
 		petCombo = new JComboBox<String>(pet);
 		
 		petCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -768,7 +767,8 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		this.setVisible(true);
 		this.setFocusable(true);
-	
+
+		pet_choose = pet[0];
 	
 	}
 	
@@ -945,7 +945,6 @@ public class Reservation_helper_GUI extends JFrame {
 		for(int i=0; i<n; i++)
 			pet[i] = pet_class[i].Get_name();
 		
-		pet_choose = pet[0];
 	
 		petCombo = new JComboBox<String>(pet);
 		
@@ -1279,6 +1278,10 @@ public class Reservation_helper_GUI extends JFrame {
 			JOptionPane confirm = new JOptionPane();
 			confirm.showMessageDialog(null, "반려동물을 추가하십시오. ", "예약 가능한 반려동물이 없습니다.", JOptionPane.ERROR_MESSAGE);
 			dispose();
+		}
+		else {
+	
+			pet_choose = pet[0];
 		}
 	
 	}
