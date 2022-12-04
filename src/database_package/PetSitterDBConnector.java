@@ -111,6 +111,25 @@ public class PetSitterDBConnector {
 		
 		return petsitterDB;
 	}
+	
+	public PetSitter Get_Selected_PetSitter(String helper){
+		PetSitter Selected_PetSitter = null;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(fname));
+			String Line = reader.readLine();
+			System.out.println(Line);
+			while((Line = reader.readLine()) != null) {
+				String[] contents = Line.split(",");
+				if(contents[0].equals(helper)) {
+					Selected_PetSitter = new PetSitter(Arrays.asList(contents));
+					break;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return Selected_PetSitter;
+	}
 	/* need to implement
 	//DB 값 삭제
 	public Boolean deleteDB(String fname, String name) {

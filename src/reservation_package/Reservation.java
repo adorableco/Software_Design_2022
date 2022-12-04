@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 
+import database_package.PetSitterDBConnector;
+
 public class Reservation {
 	private LocalDate date;
 	private LocalTime start_time;
@@ -19,7 +21,8 @@ public class Reservation {
 	private String Company;
 	private PetSitter helper;
 	
-	
+
+	PetSitterDBConnector PDB = new PetSitterDBConnector();
 	public Reservation() {
 	}
 	
@@ -39,22 +42,7 @@ public class Reservation {
 			this.Review = Review;
 		}
 		
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader("./Database/PetSitterDB.txt"));
-			String Line = reader.readLine();
-			System.out.println(Line);
-			while((Line = reader.readLine()) != null) {
-				System.out.println(Line);
-				String[] contents = Line.split(",");
-				if(contents[0].equals(helper)) {
-					this.helper = new PetSitter(Arrays.asList(contents));
-					break;
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-//		this.helper = helper;
+		this.helper = PDB.Get_Selected_PetSitter(helper);
 	}
 
 	
@@ -75,21 +63,8 @@ public class Reservation {
 	}
 	
 	public void setHelper(String helper) {
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader("./Database/PetSitterDB.txt"));
-			String Line = reader.readLine();
-			System.out.println(Line);
-			while((Line = reader.readLine()) != null) {
-				System.out.println(Line);
-				String[] contents = Line.split(",");
-				if(contents[0].equals(helper)) {
-					this.helper = new PetSitter(Arrays.asList(contents));
-					break;
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		this.helper = PDB.Get_Selected_PetSitter(helper);
 	}
 	
 	public int Get_State() {
