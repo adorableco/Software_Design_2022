@@ -80,7 +80,7 @@ public class Reservation_helper_GUI extends JFrame {
 	//frame 생성
 	void createFrame(String title) {
 			this.setTitle(title);
-			this.setSize(800,600);
+			this.setSize(1100,600);
 			
 			Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 			Dimension frame = getSize();
@@ -153,7 +153,7 @@ public class Reservation_helper_GUI extends JFrame {
 		//info_panel.setVisible(true);
 
 		//이용날짜
-		dim2=new Dimension(85,30);
+		dim2=new Dimension(90,30);
 		JPanel date_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel date_label = new JLabel("이용 날짜 : ", JLabel.CENTER);
 		date_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -191,7 +191,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(date_panel_2);
 		
 		//이용시간
-		dim3=new Dimension(60,30);
+		dim3=new Dimension(90,30);
 		JPanel time_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel time_label = new JLabel("이용 시간 : ", JLabel.CENTER);
 		time_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
