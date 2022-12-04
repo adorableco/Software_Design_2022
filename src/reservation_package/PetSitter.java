@@ -114,4 +114,10 @@ public class PetSitter {
 	public String getAddress() {
 		return this.address;
 	}
+	public String Get_Name() {
+		return this.name;
+	}
+	public String Get_phon() {
+		return this.phone;
+	}
 }

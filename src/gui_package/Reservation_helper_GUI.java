@@ -108,7 +108,7 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		service_choose = reservation_Info.Get_Use_Service();
 		
-		helper = reservation_Info.Get_Helper();
+		helper = reservation_Info.Get_Helper_Name();
 		
 		createFrame("도우미 예약");
 	
@@ -198,6 +198,10 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		start_minCombo = new JComboBox<String>(min);
 		start_minCombo.setSelectedIndex(Arrays.asList(min).indexOf(resvStartTime.format(DateTimeFormatter.ofPattern("mm"))));
+		
+
+		finish_hourCombo= new JComboBox<String>(hour);
+		finish_minCombo= new JComboBox<String>(min);
 		
 		start_hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		start_minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -878,7 +882,7 @@ public class Reservation_helper_GUI extends JFrame {
 								try {
 									String helper_temp = bf.readLine();
 									res.setHelper(helper_temp);
-									System.out.println(res.Get_Helper());
+									System.out.println(res.Get_Helper_Name());
 								} catch (IOException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
