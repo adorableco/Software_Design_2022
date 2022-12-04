@@ -98,7 +98,7 @@ public class Reservation_helper_GUI extends JFrame {
 	}
 		
 	public Reservation_helper_GUI(Reservation reservation_Info,File Selected_File) {
-		res=reservation_Info;
+		res=new Reservation();
 		resDB=new ReservationDB();
 		LocalDate resvDate = reservation_Info.Get_Use_Day();
 		LocalTime resvStartTime = reservation_Info.Get_Use_Start_Time();
@@ -470,6 +470,15 @@ public class Reservation_helper_GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				JComboBox h=(JComboBox)e.getSource();
+				int starthour, endhour, startmin, endmin;
+				starthour = start_hourCombo.getSelectedIndex();
+				endhour = finish_hourCombo.getSelectedIndex();
+				startmin = start_minCombo.getSelectedIndex();
+				endmin = finish_minCombo.getSelectedIndex();
+				System.out.println(starthour);
+				System.out.println(endhour);
+				System.out.println(startmin);
+				System.out.println(endmin);
 				if(h.getSelectedItem().equals("HH"))
 					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
 				else {
@@ -578,13 +587,13 @@ public class Reservation_helper_GUI extends JFrame {
 				else if(n.getText().equals("병원 예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
-					new AnimalHospitalReservationGUI("병원 예약 서비스", res, Selected_File);
+					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
 					dispose();
 				}
 				else if(n.getText().equals("반려동물 미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
-					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res, Selected_File);
+					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res);
 					dispose();
 				}
 			}
@@ -893,11 +902,23 @@ public class Reservation_helper_GUI extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+				int starthour, endhour, startmin, endmin;
+				starthour = start_hourCombo.getSelectedIndex();
+				endhour = finish_hourCombo.getSelectedIndex();
+				startmin = start_minCombo.getSelectedIndex();
+				endmin = finish_minCombo.getSelectedIndex();
+				System.out.println(starthour);
+				System.out.println(endhour);
 				// TODO Auto-generated method stub
 				JComboBox h=(JComboBox)e.getSource();
 				if(h.getSelectedItem().equals("HH"))
 					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
 				else {
+					if((starthour < endhour)||((starthour == endhour) && (startmin > endmin))) {
+						JOptionPane confirm = new JOptionPane();
+						confirm.showMessageDialog(null,"끝나는 시간은 시작 시간 이후여야합니다. ", "돌아가기", JOptionPane.ERROR_MESSAGE);
+					}
 					fi_ho=h.getSelectedItem().toString();
 				}
 			}
