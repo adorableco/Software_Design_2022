@@ -5,13 +5,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
-import reservation_package.ReservationAnimalHospital;
+import reservation_package.ReservationPetGroomingSalon;
 
-public class ReservationAnimalHospitalDB {
+public class ReservationPetGroomingSalonDB {
 	private int resvInt = 7;
-	private String path = "./Database/Hospital/";
+	private String path = "./Database/Salon/";
 	
-	public void saveFile(ReservationAnimalHospital resvInfo) {
+	public void saveFile(ReservationPetGroomingSalon resvInfo) {
 		int userId = 1;
 		String fname = this.path + Integer.toString(userId) + "_Reser_" + Integer.toString(resvInt) + ".txt";
 		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+ " " +
