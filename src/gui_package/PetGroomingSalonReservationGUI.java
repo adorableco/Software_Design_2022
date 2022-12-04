@@ -63,6 +63,47 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 		this.setFocusable(true);
 	}
 	
+	public PetGroomingSalonReservationGUI(String title, Reservation res, File originalFile) {
+		createFrame(title);
+		this.resv = res;
+		this.conn = new PetGroomingSalonDBConnector();
+//		this.sal_resv = new ReservationPetGroomingSalon();
+		// 나중에 LocalDate, LocalTime now에서 변경 필요
+		//임시 resvDate, resvTime
+		LocalDate resvDate = resv.Get_Use_Day();
+		LocalTime resvStartTime = resv.Get_Use_Start_Time();
+		LocalTime resvFinishTime = resv.Get_Use_Finish_Time();
+//		sal_resv.setDate(resvDate);
+//		sal_resv.setTime(resvStartTime);
+		this.add(infoPanel(resvDate, resvStartTime,resvFinishTime), BorderLayout.NORTH);
+		try {
+			this.add(showList(this.conn.searchDBwithTime(resvDate, resvStartTime,resvFinishTime)), BorderLayout.CENTER);
+//			this.add(showList(this.conn.readDB()), BorderLayout.WEST);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JButton resvButton = new JButton("저장하기");
+		this.add(resvButton, BorderLayout.PAGE_END);
+		
+		resvButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+//				ReservationPetGroomingSalonDB resDB=new ReservationPetGroomingSalonDB();
+//				resDB.saveFile(sal_resv);
+				ReservationDB resDB=new ReservationDB();
+				JOptionPane.showMessageDialog(null,"저장되었습니다.");
+				resDB.saveFile_Temp(resv, originalFile);
+				dispose();
+			}
+			
+		});
+		this.setVisible(true);
+		this.setFocusable(true);
+	}
+	
 	public JPanel infoPanel(LocalDate resvDate, LocalTime resvStartTime,LocalTime resvFinishTime) {
 		JPanel info = new JPanel();
 		JLabel resvDateInfo = new JLabel(resvDate.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
