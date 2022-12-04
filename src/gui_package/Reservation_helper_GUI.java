@@ -153,7 +153,7 @@ public class Reservation_helper_GUI extends JFrame {
 		//info_panel.setVisible(true);
 
 		//이용날짜
-		dim2=new Dimension(77,30);
+		dim2=new Dimension(85,30);
 		JPanel date_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel date_label = new JLabel("이용 날짜 : ", JLabel.CENTER);
 		date_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -191,7 +191,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(date_panel_2);
 		
 		//이용시간
-		dim3=new Dimension(55,30);
+		dim3=new Dimension(60,30);
 		JPanel time_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel time_label = new JLabel("이용 시간 : ", JLabel.CENTER);
 		time_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -236,7 +236,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(time_panel_2);
 		
 		//도우미 검색
-		dim1=new Dimension(245,30);
+		dim1=new Dimension(270,30);
 		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel helper_search_label = new JLabel("도우미 검색 : ", JLabel.CENTER);
 		helper_search_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -260,7 +260,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(helper_search_panel_2);
 				
 		//이용서비스
-		dim1=new Dimension(245,30);
+		dim1=new Dimension(270,30);
 		JPanel service_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel service_label = new JLabel("이용 서비스 : ", JLabel.CENTER);
 		service_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -791,7 +791,7 @@ public class Reservation_helper_GUI extends JFrame {
 		//info_panel.setVisible(true);
 		
 		//이용날짜
-		dim2=new Dimension(77,30);
+		dim2=new Dimension(85,30);
 		JPanel date_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel date_label = new JLabel("이용 날짜 : ", JLabel.CENTER);
 		date_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -823,7 +823,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(date_panel_2);
 		
 		//이용시간
-		dim3=new Dimension(55,30);
+		dim3=new Dimension(60,30);
 		JPanel time_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel time_label = new JLabel("이용 시간 : ", JLabel.CENTER);
 		time_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -859,7 +859,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(time_panel_2);
 		
 		//도우미 검색
-		dim1=new Dimension(245,30);
+		dim1=new Dimension(270,30);
 		JPanel helper_search_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel helper_search_label = new JLabel("도우미 검색 : ", JLabel.CENTER);
 		helper_search_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -883,7 +883,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(helper_search_panel_2);
 		
 		//이용서비스
-		dim1=new Dimension(245,30);
+		dim1=new Dimension(270,30);
 		JPanel service_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
 		JLabel service_label = new JLabel("이용 서비스 : ", JLabel.CENTER);
 		service_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
