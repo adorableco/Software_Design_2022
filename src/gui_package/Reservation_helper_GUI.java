@@ -208,7 +208,10 @@ public class Reservation_helper_GUI extends JFrame {
 		
 
 		finish_hourCombo= new JComboBox<String>(hour);
+		finish_hourCombo.setSelectedIndex(Arrays.asList(hour).indexOf(resvFinishTime.format(DateTimeFormatter.ofPattern("HH"))));
+		
 		finish_minCombo= new JComboBox<String>(min);
+		finish_minCombo.setSelectedIndex(Arrays.asList(min).indexOf(resvFinishTime.format(DateTimeFormatter.ofPattern("mm"))));
 		
 		start_hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		start_minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
