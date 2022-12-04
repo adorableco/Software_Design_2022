@@ -362,8 +362,20 @@ public class Reservation_helper_GUI extends JFrame {
 						BufferedReader bf;
 						try {
 							bf = new BufferedReader(new FileReader("./Database/petsitter_temp.txt"));
+							
 							String helper_temp = bf.readLine();
 							res.setHelper(helper_temp);
+							File file = new File("./Database/petsitter_temp.txt");
+					        
+					    	if( file.exists() ){
+					    		if(file.delete()){
+					    			System.out.println("파일삭제 성공");
+					    		}else{
+					    			System.out.println("파일삭제 실패");
+					    		}
+					    	}else{
+					    		System.out.println("파일이 존재하지 않습니다.");
+					    	}
 							
 								
 						} catch (IOException e1) {
@@ -1105,7 +1117,18 @@ public class Reservation_helper_GUI extends JFrame {
 								try {
 									String helper_temp = bf.readLine();
 									res.setHelper(helper_temp);
-									System.out.println(res.Get_Helper_Name());
+									File file = new File("./Database/petsitter_temp.txt");
+							        
+							    	if( file.exists() ){
+							    		if(file.delete()){
+							    			System.out.println("파일삭제 성공");
+							    		}else{
+							    			System.out.println("파일삭제 실패");
+							    		}
+							    	}else{
+							    		System.out.println("파일이 존재하지 않습니다.");
+							    	}
+//									System.out.println(res.Get_Helper_Name());
 								} catch (IOException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
