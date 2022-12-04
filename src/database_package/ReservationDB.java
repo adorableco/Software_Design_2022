@@ -26,7 +26,7 @@ public class ReservationDB {
 //			e.printStackTrace();
 //		}
 //	}
-	private int resvInt = 7;
+	private int resvInt;
 	private String path = "./DataBase/Reservation/";
 	
 	
@@ -40,6 +40,7 @@ public class ReservationDB {
 			}
 		});
 		Arrays.sort(flist);
+		this.resvInt = flist.length;
 		return flist;
 	}
 	
