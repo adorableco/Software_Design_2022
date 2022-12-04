@@ -1,7 +1,7 @@
-package database_package;
 
 import java.util.*;
 import reservation_package.Reservation;
+package database_package;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -64,7 +64,7 @@ public class ReservationDB {
 								new Reservation(
 								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
 								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0), LocalTime.of(Integer.parseInt(contentlist[5]), Integer.parseInt(contentlist[6]),0),
-								contentlist[7], Integer.parseInt(contentlist[8]), Integer.parseInt(contentlist[9]), contentlist[10], contentlist[11], contentlist[12])
+								contentlist[7], Integer.parseInt(contentlist[8]), Integer.parseInt(contentlist[9]), contentlist[10], contentlist[11], contentlist[12],contentlist[13])
 								);
 					}
 				}
@@ -88,10 +88,7 @@ public class ReservationDB {
 				resvInfo.Get_Use_Finish_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
 				resvInfo.Get_Use_Service() + " " +
 				Integer.toString(resvInfo.Get_State()) + " " +
-				Integer.toString(resvInfo.Get_Cost()) + " " +
-				resvInfo.Get_Review() + " " +
-				resvInfo.Get_Company() + " " + 
-				resvInfo.Get_Helper_Name();
+				Integer.toString(resvInfo.Get_Cost()) + " " + resvInfo.Get_Review() + " " + resvInfo.Get_Company() + " " + resvInfo.Get_Helper_Name()+" "+resvInfo.Get_SelectedPet();
 		System.out.println(resv)
 ;		
 	    try {

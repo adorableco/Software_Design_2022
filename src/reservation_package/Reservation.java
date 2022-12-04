@@ -21,12 +21,12 @@ public class Reservation {
 	private int State;
 	private int cost;
 	private String Review;
-	
 	private AnimalHospital SelectedCompany_Hospital = null;
 	private PetGroomingSalon SelectedCompany_Salon = null;
 	//private Company SelectedCompany;
 	private PetSitter Selected_helper;
-	//private Pet SelectedPet;
+	private String SelectedPet;
+
 	
 	
 
@@ -34,8 +34,9 @@ public class Reservation {
 	}
 	
 	
-	public Reservation(LocalDate Use_Day, LocalTime Use_Start_Time, LocalTime Use_Finish_Time,String Use_Service
-			,int State, int Cost, String Review, String Company, String helper /*String Petname*/){
+	public Reservation(LocalDate Use_Day, LocalTime Use_Start_Time, LocalTime Use_Finish_Time,String Use_Service 
+						,int State, int Cost, String Review, String Company, String helper, String SelectedPet){
+
 		this.date = Use_Day;
 		this.start_time = Use_Start_Time;
 		this.finish_time=Use_Finish_Time;
@@ -52,7 +53,7 @@ public class Reservation {
 
 		PetSitterDBConnector PDB = new PetSitterDBConnector();
 		this.Selected_helper = PDB.Get_Selected_PetSitter(helper);
-		
+
 		if(!Company.equals("null")){
 			//company가져오기.
 			if(this.service.equals("병원동행")) {
@@ -65,8 +66,9 @@ public class Reservation {
 				SelectedCompany_Salon = SDBC.Get_Selected_Company(Company);
 			}
 		}
-	}
 
+		this.SelectedPet = SelectedPet;
+	}
 	
 	public void setDate(LocalDate date){
 		this.date=date;
@@ -98,6 +100,10 @@ public class Reservation {
 			PetGroomingSalonDBConnector SDBC = new PetGroomingSalonDBConnector();
 			SelectedCompany_Salon = SDBC.Get_Selected_Company(company);
 		}
+	}
+	
+	public void setSelectedPet(String SelectedPet) {
+		this.SelectedPet = SelectedPet;
 	}
 	
 	public int Get_State() {
@@ -141,4 +147,13 @@ public class Reservation {
 			return "없음";
 		}
 	}
+
+	public String Get_SelectedPet() {
+		return this.SelectedPet;
+	}
 }
+
+//	public String Get_Company() {
+//		return this.Company;
+//	}
+	
