@@ -88,6 +88,10 @@ public class Reservation {
 		PetSitterDBConnector PDB = new PetSitterDBConnector();
 		this.Selected_helper = PDB.Get_Selected_PetSitter(helper);
 	}
+	public void setCompany(String company) {
+
+		this.Company=company;
+	}
 	
 	public int Get_State() {
 		return this.State;
@@ -130,6 +134,4 @@ public class Reservation {
 			return "없음";
 		}
 	}
-	
-	
 }

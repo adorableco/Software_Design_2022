@@ -11,34 +11,36 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import database_package.AnimalHospitalDBConnector;
-import database_package.ReservationAnimalHospitalDB;
+import database_package.ReservationDB;
 import reservation_package.AnimalHospital;
 import reservation_package.Reservation;
-import reservation_package.ReservationAnimalHospital;
 
 public class AnimalHospitalReservationGUI extends JFrame{
 	private AnimalHospitalDBConnector conn;
-	private Reservation res;
-	private ReservationAnimalHospital hos_resv;
+	private Reservation resv;
+//	private ReservationAnimalHospital hos_resv;
 	public AnimalHospitalReservationGUI() {
 		this.setTitle("피어펫 서비스");
 	}
 	public AnimalHospitalReservationGUI(String title, Reservation res) {
-		this.res = res;
+		this.resv = res;
 		createFrame(title);
 
 		this.conn = new AnimalHospitalDBConnector();
-		this.hos_resv = new ReservationAnimalHospital();
+//		this.hos_resv = new ReservationAnimalHospital();
+		
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
-		LocalDate resvDate = res.Get_Use_Day();
-		LocalTime resvStartTime = res.Get_Use_Start_Time();
-		LocalTime resvFinishTime = res.Get_Use_Finish_Time();
-		hos_resv.setDate(resvDate);
-		hos_resv.setTime(resvStartTime);
+		LocalDate resvDate = resv.Get_Use_Day();
+		LocalTime resvStartTime = resv.Get_Use_Start_Time();
+		LocalTime resvFinishTime = resv.Get_Use_Finish_Time();
+//		hos_resv.setDate(resvDate);
+//		hos_resv.setTime(resvStartTime);
 		
 		this.add(infoPanel(resvDate, resvStartTime,resvFinishTime), BorderLayout.NORTH);
 		try {
+			
+//			this.add(cList, BorderLayout.CENTER);
 			this.add(showList(this.conn.searchDBwithTime(resvDate, resvStartTime,resvFinishTime)), BorderLayout.CENTER);
 //			this.add(showList(this.conn.readDB()), BorderLayout.WEST);
 		} catch (IOException e) {
@@ -53,8 +55,12 @@ public class AnimalHospitalReservationGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ReservationAnimalHospitalDB resDB=new ReservationAnimalHospitalDB();
-				resDB.saveFile(hos_resv);
+//				ReservationAnimalHospitalDB resDB=new ReservationAnimalHospitalDB();
+//				resDB.saveFile(hos_resv);
+				ReservationDB resDB=new ReservationDB();
+				JOptionPane.showMessageDialog(null,Integer.toString(resv.Get_Cost())+"원 결제되었습니다.");
+				resDB.saveFile(resv);
+				
 				dispose();
 			}
 			
@@ -75,10 +81,11 @@ public class AnimalHospitalReservationGUI extends JFrame{
 	}
 	
 	public JPanel showList(LinkedList<AnimalHospital> hospitalDB) throws IOException {
+
 		JPanel cList = new JPanel();
 		JLabel select = new JLabel();
 		cList.setLayout(new BorderLayout());
-//		LinkedList<AnimalHospital> hospitalDB = this.conn.readDB();
+//		LinkedList<AnimalHospital> hospitalDB = this.conn.searchDBwithTime(resvDate, resvStartTime,resvFinishTime);
 		String[] header = this.conn.getDBHeader();
 		String[][] contents = new String[hospitalDB.size()][19];
 		for (int i = 0; i < hospitalDB.size();i++) {
@@ -106,8 +113,9 @@ public class AnimalHospitalReservationGUI extends JFrame{
 				JTable table = (JTable) e.getSource();
 				int row = table.getSelectedRow();
 //				System.out.print(table.getModel().getValueAt(row,0 )+"\t");
-				select.setText(table.getModel().getValueAt(row,0)+"에 예약을 진행합니다.");
-				hos_resv.setCompanyName(table.getModel().getValueAt(row,0).toString());
+				String comp = table.getModel().getValueAt(row,0).toString();
+				select.setText(comp+"에 예약을 진행합니다.");
+				resv.setCompany(comp);
 			}
 
 			@Override

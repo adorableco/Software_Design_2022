@@ -89,7 +89,8 @@ public class ReservationDB {
 				resvInfo.Get_Use_Service() + " " +
 				Integer.toString(resvInfo.Get_State()) + " " +
 				Integer.toString(resvInfo.Get_Cost()) + " " +
-				resvInfo.Get_Review() + " "+
+				resvInfo.Get_Review() + " " +
+				resvInfo.Get_Company() + " " + 
 				resvInfo.Get_Helper_Name();
 		System.out.println(resv)
 ;		
@@ -113,7 +114,8 @@ public class ReservationDB {
 				resvInfo.Get_Use_Service() + " " +
 				Integer.toString(resvInfo.Get_State()) + " " +
 				Integer.toString(resvInfo.Get_Cost()) + " " + 
-				resvInfo.Get_Review() + " "+ "null " + 
+				resvInfo.Get_Review() + " "+ 
+				resvInfo.Get_Company() + " " + 
 				resvInfo.Get_Helper_Name();
 		
 	    try {
