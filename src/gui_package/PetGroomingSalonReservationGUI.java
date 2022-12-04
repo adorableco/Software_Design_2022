@@ -86,14 +86,6 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 			}
 			
 		});
-		BckButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				dispose();
-			}
-		});
 		
 		this.setVisible(true);
 		this.setFocusable(true);
