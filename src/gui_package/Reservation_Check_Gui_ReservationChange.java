@@ -228,6 +228,7 @@ class ReservationChange extends JFrame implements ActionListener{
 						try {
 							BufferedReader br = new BufferedReader(new FileReader(tempfile));
 							String content = br.readLine();
+							br.close();
 							String[] contentlist = content.split(" ");
 							temp = new Reservation(
 									LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
@@ -264,7 +265,6 @@ class ReservationChange extends JFrame implements ActionListener{
 							Selected_File.delete();
 							tempfile.renameTo(new File(filename));
 							dispose();
-							System.out.println("temp무시");
 						} 
 						else { //아니오
 
@@ -283,7 +283,6 @@ class ReservationChange extends JFrame implements ActionListener{
 
 							informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 주소 : " + SelectedReservation.Get_Helper_Address()+ "\n");
 							tempfile.delete();
-							System.out.println("파일변경");
 						}
 					}
 					
