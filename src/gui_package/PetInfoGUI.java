@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.awt.event.ActionEvent;
@@ -75,6 +76,7 @@ public class PetInfoGUI {
 	 * Create the application.
 	 */
 	public PetInfoGUI() {
+		
 		petDB = new PetDB();
 		info = new ManagePetInfo();
 		for(int i = 0; i < info.n; i++) {
@@ -331,23 +333,16 @@ public class PetInfoGUI {
 					File file = new File("./DataBase/Pet DB.txt");		
 					String dummy = "";
 					try {
-						BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+						BufferedReader br = new BufferedReader(new FileReader(file));
 						
 						//1. 삭제하고자 하는 position 이전까지는 이동하며 dummy에 저장
 						String line;
-						for(int i=0; i<choiceIndex; i++) {
-						    line = br.readLine(); //읽으며 이동
-						    dummy += (line + "\r\n" ); 
-						}
-						
-						//2. 삭제하고자 하는 데이터는 건너뛰기
-						String delData = br.readLine();
-						
+						int i = 1;
 						//3. 삭제하고자 하는 position 이후부터 dummy에 저장
 						while((line = br.readLine())!=null) {
-							dummy += (line + "\r\n" ); 
+						    if(choiceIndex != i) dummy += (line + "\n" ); 
+						    i++;
 						}
-						
 						//4. FileWriter를 이용해서 덮어쓰기
 						FileWriter fw = new FileWriter("./DataBase/Pet DB.txt");
 						fw.write(dummy);			

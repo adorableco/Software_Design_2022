@@ -792,17 +792,7 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		PetDB petDB = new PetDB();
 		int n = petDB.dataDownload_pet(pet_class);
-		if(n == 0) {
-			JOptionPane confirm = new JOptionPane();
-
-			int result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			if(result == 0) {
-				dispose();
-			}
-		}
-		if(n == 0) {
-			dispose();
-		}
+		
 		pet = new String[n];
 		for(int i=0; i<n; i++)
 			pet[i] = pet_class[i].Get_name();
@@ -1099,7 +1089,12 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		this.setVisible(true);
 		this.setFocusable(true);
-	
+
+		if(n == 0) {
+			JOptionPane confirm = new JOptionPane();
+			confirm.showMessageDialog(null, "반려동물을 추가하십시오. ", "예약 가능한 반려동물이 없습니다.", JOptionPane.ERROR_MESSAGE);
+			dispose();
+		}
 	
 	}
 }

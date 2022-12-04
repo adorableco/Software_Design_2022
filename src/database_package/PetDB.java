@@ -14,8 +14,8 @@ public class PetDB {
 		fw=null;
 		try {
 			fw=new FileWriter("./DataBase/Pet DB.txt",true);
-			fw.write("\r\n",0,2);
-			fw.write(pet_data,0,pet_data.length());
+			fw.write(pet_data);
+			fw.write("\n");
 			fw.close();
 			System.out.println("등록 성공\n");
 		}catch(IOException e) {
