@@ -16,6 +16,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 import database_package.PetDB;
 import database_package.ReservationDB;
@@ -98,7 +100,7 @@ public class Reservation_helper_GUI extends JFrame {
 	}
 		
 	public Reservation_helper_GUI(Reservation reservation_Info,File Selected_File) {
-		res=new Reservation();
+		this.res= reservation_Info;
 		resDB=new ReservationDB();
 		LocalDate resvDate = reservation_Info.Get_Use_Day();
 		LocalTime resvStartTime = reservation_Info.Get_Use_Start_Time();
@@ -349,6 +351,18 @@ public class Reservation_helper_GUI extends JFrame {
 				LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
 				LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
 				LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
+				
+				//현재 날짜 구하기 (시스템 시계, 시스템 타임존)
+		        LocalDate now = LocalDate.now();
+		 
+		        // 현재 날짜 구하기(Paris)
+		        LocalDate koreaNow = LocalDate.now(ZoneId.of("Asia/Seoul"));
+		 
+		        if(koreaNow.isAfter(date)) {
+		        	JOptionPane confirm = new JOptionPane();
+					confirm.showMessageDialog(null,"금일 이전의 날짜를 선택하는 것은 불가능합니다.");
+					return;
+		        }
 				res.setDate(date);
 				res.setStartTime(sttime);
 				res.setFinishTime(fitime);
@@ -492,6 +506,15 @@ public class Reservation_helper_GUI extends JFrame {
 				endmin = finish_minCombo.getSelectedIndex();
 				System.out.println(starthour);
 				System.out.println(endhour);
+				if(h.getSelectedItem().equals("HH"))
+					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
+				else {
+					if((starthour > endhour)||((starthour == endhour) && (startmin > endmin))) {
+						JOptionPane confirm = new JOptionPane();
+						confirm.showMessageDialog(null,"끝나는 시간은 시작 시간 이후여야합니다. ", "돌아가기", JOptionPane.ERROR_MESSAGE);
+					}
+					fi_ho=h.getSelectedItem().toString();
+				}
 				System.out.println(startmin);
 				System.out.println(endmin);
 				if(h.getSelectedItem().equals("HH"))
@@ -583,13 +606,24 @@ public class Reservation_helper_GUI extends JFrame {
 				LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
 				LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
 				LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
+				
+//				//현재 날짜 구하기 (시스템 시계, 시스템 타임존)
+//		        LocalDate now = LocalDate.now();
+//		 
+//		        // 현재 날짜 구하기(Paris)
+//		        LocalDate koreaNow = LocalDate.now(ZoneId.of("Asia/Seoul"));
+//		 
+//		        if(koreaNow.isAfter(date)) {
+//		        	JOptionPane confirm = new JOptionPane();
+//					confirm.showMessageDialog(null,"금일 이전의 날짜를 선택하는 것은 불가능합니다.");
+//					return;
+//		        }
 				res.setDate(date);
 				res.setStartTime(sttime);
 				res.setFinishTime(fitime);
 				res.setService(service_choose);
 				res.setCost(cost);
 				res.setSelectedPet(pet_choose);
-//				res.setHelper(helper);
 				
 				if(n.getText().equals("저장")) {
 					
@@ -1021,7 +1055,7 @@ public class Reservation_helper_GUI extends JFrame {
 				if(h.getSelectedItem().equals("HH"))
 					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
 				else {
-					if((starthour < endhour)||((starthour == endhour) && (startmin > endmin))) {
+					if((starthour > endhour)||((starthour == endhour) && (startmin > endmin))) {
 						JOptionPane confirm = new JOptionPane();
 						confirm.showMessageDialog(null,"끝나는 시간은 시작 시간 이후여야합니다. ", "돌아가기", JOptionPane.ERROR_MESSAGE);
 					}
@@ -1099,6 +1133,18 @@ public class Reservation_helper_GUI extends JFrame {
 				LocalDate date=LocalDate.of(i_ye, i_mo, i_da);
 				LocalTime sttime=LocalTime.of(i_st_ho, i_st_mi);
 				LocalTime fitime=LocalTime.of(i_fi_ho, i_fi_mi);
+				
+				//현재 날짜 구하기 (시스템 시계, 시스템 타임존)
+		        LocalDate now = LocalDate.now();
+		 
+		        // 현재 날짜 구하기(Paris)
+		        LocalDate koreaNow = LocalDate.now(ZoneId.of("Asia/Seoul"));
+		 
+		        if(koreaNow.isAfter(date)) {
+		        	JOptionPane confirm = new JOptionPane();
+					confirm.showMessageDialog(null,"금일 이전의 날짜를 선택하는 것은 불가능합니다.");
+					return;
+		        }
 				res.setDate(date);
 				res.setStartTime(sttime);
 				res.setFinishTime(fitime);
