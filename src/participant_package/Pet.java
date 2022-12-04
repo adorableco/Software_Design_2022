@@ -4,15 +4,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Pet  { //반려동물 정보를 가지고 있는 클래스 
 	
-	public String type;
-	public String name;
-	public int age;
-	public String breed;
-	public int weight;
-	public String illness;
-	public String drug;
-	public String hospital;
-	public String shop;
+	private String type;
+	private String name;
+	private int age;
+	private String breed;
+	private int weight;
+	private String illness;
+	private String drug;
+	private String hospital;
+	private String shop;
 	
 	public void registerType(String type) 
 	{
@@ -59,9 +59,20 @@ public class Pet  { //반려동물 정보를 가지고 있는 클래스
 		this.shop = shop;
 	}
 	
+	public String Get_Type() {
+		return this.type;
+	}
+	public String Get_name() {
+		return this.name;
+	}
+	public String Get_age() {
+		return Integer.toString(this.age);
+	}
 	public String madepetDB() {
 		String petData =this.type+" "+this.name+" "+this.age+" "+this.breed+" "+this.weight+" "+this.illness+" "+this.drug+" "+this.hospital+" "+this.shop;
 		return petData;
 	}
-	
+	public String Get_breed() {
+		return this.breed;
+	}
 }

@@ -1,17 +1,19 @@
 package participant_package;
 
+import database_package.PetDB;
+
 public class ManagePetInfo {
 	//public User_GUI gui = new User_GUI();
 	public static int n; //등록한 반려동물 수  
 	public Pet [] pet;
 	
 	public ManagePetInfo() {
-		
+
 		pet = new Pet[5];
-		
-		
 		for(int i=0; i<5; i++)
 			pet[i] = new Pet();
+		PetDB petDB = new PetDB();
+		this.n = petDB.dataDownload_pet(this.pet);
 	}
 	
 	public Pet registerPet() {

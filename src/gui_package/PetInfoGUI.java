@@ -54,7 +54,7 @@ public class PetInfoGUI {
 	private JPanel registerFirstPanel = new JPanel();
 	public ManagePetInfo info = new ManagePetInfo();
 	private JTable table;
-	private DefaultTableModel model;
+	private DefaultTableModel model = new DefaultTableModel(0,3);
 	/**
 	 * Launch the application.
 	 */
@@ -76,6 +76,13 @@ public class PetInfoGUI {
 	 */
 	public PetInfoGUI() {
 		petDB = new PetDB();
+		info = new ManagePetInfo();
+		for(int i = 0; i < info.n; i++) {
+			model.insertRow(i, new Object[] {info.pet[i].Get_name()
+					,info.pet[i].Get_breed()
+					,info.pet[i].Get_age()});
+			
+		}
 		initialize();
 	}
 	
@@ -155,25 +162,27 @@ public class PetInfoGUI {
 				
 				petDB.dataUpload_pet(pet);
 				
-				model.insertRow(info.n, new Object[] {info.pet[(info.n)-1].name,info.pet[(info.n)-1].breed,info.pet[(info.n)-1].age});
+				model.insertRow(info.n, new Object[] {info.pet[(info.n)-1].Get_name()
+						,info.pet[(info.n)-1].Get_breed()
+						,info.pet[(info.n)-1].Get_age()});
 				
-				nameText.setText("");;
-				breedText.setText("");
-				drugText.setText("");
-				hospitalText.setText("");
-				shopText.setText("");
-				illnessText.setText("");
-				weightText.setText("");
+				nameText.setText("0");;
+				breedText.setText("0");
+				drugText.setText("0");
+				hospitalText.setText("0");
+				shopText.setText("0");
+				illnessText.setText("0");
+				weightText.setText("0");
 				
-				System.out.println("name : "+pet.name);
-				System.out.println("type : " + pet.type);
-				System.out.println("breed : "+pet.breed);
-				System.out.println("age : "+pet.age);
-				System.out.println("weight : "+pet.weight);
-				System.out.println("illness : "+pet.illness);
-				System.out.println("drug : "+pet.drug);
-				System.out.println("hospital : "+pet.hospital);
-				System.out.println("shop : "+pet.shop);
+				System.out.println("name : "+pet.Get_name());
+				System.out.println("type : " + pet.Get_Type());
+//				System.out.println("breed : "+pet.breed);
+//				System.out.println("age : "+pet.age);
+//				System.out.println("weight : "+pet.weight);
+//				System.out.println("illness : "+pet.illness);
+//				System.out.println("drug : "+pet.drug);
+//				System.out.println("hospital : "+pet.hospital);
+//				System.out.println("shop : "+pet.shop);
 				
 				registerSecondPanel.setVisible(false);
 			}
@@ -301,7 +310,6 @@ public class PetInfoGUI {
 		deletePanel.add(deletepageLabel);
 		
 		String header[] = {"이름","품종","출생연도"};
-		model = new DefaultTableModel(0,3);
 		table = new JTable(model);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setIntercellSpacing(new Dimension(5,5));
@@ -383,6 +391,7 @@ public class PetInfoGUI {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				registerFirstPanel.setVisible(false);
+				
 				registerSecondPanel.setVisible(false);
 				deletePanel.setVisible(true);
 			}

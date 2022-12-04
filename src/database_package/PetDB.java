@@ -23,15 +23,30 @@ public class PetDB {
 			e.printStackTrace();
 		}
 	}
-//	public Pet[] dataDownload_pet() {
-//		Pet[] pet = new Pet[5];
-//		try {
-//			BufferedReader Br = new BufferedReader(new FileReader("./DataBase/Pet DB.txt"));
-//			String
-//		}catch(IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return pet;
-//	}
+	public int dataDownload_pet(Pet[] pet) {
+		int n=0;
+		try {
+			BufferedReader Br = new BufferedReader(new FileReader("./DataBase/Pet DB.txt"));
+			String line;
+			while((line = Br.readLine())!=null) {
+				System.out.println(line);
+				String [] petData = line.split(" ");
+				pet[n].registerType(petData[0]);
+				
+				pet[n].registerName(petData[1]);
+				pet[n].registerAge(Integer.parseInt(petData[2]));
+				pet[n].registerBreed( petData[3]);
+				pet[n].registerWeight( Integer.parseInt(petData[4]));
+				pet[n].registerIllness (petData[5]);
+				pet[n].registerDrug (petData[6]);
+				pet[n].registerHospital (petData[7]);
+				pet[n].registerShop (petData[8]);
+				n++;
+			}
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return n;
+	}
 }
