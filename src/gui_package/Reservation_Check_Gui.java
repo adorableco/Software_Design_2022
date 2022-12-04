@@ -316,17 +316,34 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					Accesable_Info.addElement( "할일 목록 : " + Reserv_Info.get(temp).Get_Use_Service() );
 					Accesable_Info.addElement( "결제 금액 : " + Integer.toString(Reserv_Info.get(temp).Get_Cost()));
 					Accesable_Info.addElement( "반려 동물 : " + Reserv_Info.get(temp).Get_SelectedPet());
+
 					if(!(Reserv_Info.get(temp).Get_Review().equals("0"))) {
 						Accesable_Info.addElement( "리뷰내용 : " + Reserv_Info.get(temp).Get_Review());
 					}
 					else {
 						Accesable_Info.addElement( "리뷰내용 : 없음");
 					}
+
+					Accesable_Info.addElement( "------------------------------------------------------");
 					Accesable_Info.addElement("도우미 이름 : " + Reserv_Info.get(temp).Get_Helper_Name());
 					Accesable_Info.addElement("도우미 전화번호 : " + Reserv_Info.get(temp).Get_Helper_Phone());
-
 					Accesable_Info.addElement("도우미 주소 : " + Reserv_Info.get(temp).Get_Helper_Address());
+
+					Accesable_Info.addElement( "------------------------------------------------------");
+					if(!(Reserv_Info.get(temp).Get_Company().equals("없음"))) {
+						Accesable_Info.addElement("업체명 : " + Reserv_Info.get(temp).Get_Company());
+						Accesable_Info.addElement("업체번호 : " + Reserv_Info.get(temp).Get_Company_phone());
+						Accesable_Info.addElement("업체주소 : " + Reserv_Info.get(temp).Get_Company_Address());
+						if(!Reserv_Info.get(temp).Get_Company_Speciality().equals("")) {
+							Accesable_Info.addElement("진료정보  : " + Reserv_Info.get(temp).Get_Company_Speciality());
+						}
+					}
+
+					Accesable_Info.addElement( "------------------------------------------------------");
+
+					Accesable_Info.addElement("예약한 반려동물 이름  : " + Reserv_Info.get(temp).Get_SelectedPet());
 					break;
+				
 					
 					
 				case (1):

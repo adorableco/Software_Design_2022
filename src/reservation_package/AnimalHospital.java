@@ -30,6 +30,9 @@ public class AnimalHospital extends Company {
 		this.address = attr.get(17);
 		this.specialty = attr.get(18);
 	}
+	public String Get_AnmialHospital_Speciality() {
+		return this.specialty;
+	}
 //	public Boolean checkWithinBH(LocalDate date, LocalTime time) {
 //		DayOfWeek dayOfWeek = date.getDayOfWeek();
 //        int dayOfWeekNumber = dayOfWeek.getValue();

@@ -113,16 +113,40 @@ private static final long serialVersionUID = 1L;
 		add(informationPanel, BorderLayout.SOUTH);
 		
 
-		if(SelectedReservation.Get_State() == 0) informationGuideWindow.setText("상태 : 이용예정\n");
-		else if(SelectedReservation.Get_State() == 1) informationGuideWindow.setText("상태 : 이용완료\n");
-		else informationGuideWindow.setText("상태 : 예약 취소\n");
-		
-		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 날짜 : " + SelectedReservation.Get_Use_Day() + "\n");
-		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Start_Time() + " ~ " + SelectedReservation.Get_Use_Finish_Time()+"\n");
-		informationGuideWindow.setText( informationGuideWindow.getText() + "할일 목록 : " + SelectedReservation.Get_Use_Service() + "\n");
-		informationGuideWindow.setText( informationGuideWindow.getText() + "결제 금액 : " + Integer.toString(SelectedReservation.Get_Cost())+ "\n");
-		informationGuideWindow.setText( informationGuideWindow.getText() + "반려 동물 : " + SelectedReservation.Get_SelectedPet()+ "\n");
-		
+		if(SelectedReservation.Get_State() == 0) informationGuideWindow.setText("이용예정\n");
+		else if(SelectedReservation.Get_State() == 1) informationGuideWindow.setText("이용완료\n");
+		else informationGuideWindow.setText("예약 취소\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() +"이용 날짜 : " + SelectedReservation.Get_Use_Day()+ "\n");
+		informationGuideWindow.setText(informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Start_Time()+" ~ "+SelectedReservation.Get_Use_Finish_Time() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() +"할일 목록 : " + SelectedReservation.Get_Use_Service() + "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() +"결제 금액 : " + Integer.toString(SelectedReservation.Get_Cost())+ "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() +"반려 동물 : " + SelectedReservation.Get_SelectedPet()+ "\n");
+
+		if(!(SelectedReservation.Get_Review().equals("0"))) {
+			informationGuideWindow.setText( informationGuideWindow.getText() +"리뷰내용 : " + SelectedReservation.Get_Review()+ "\n");
+		}
+		else {
+			informationGuideWindow.setText( informationGuideWindow.getText() +"리뷰내용 : 없음"+ "\n");
+		}
+
+		informationGuideWindow.setText( informationGuideWindow.getText() +"------------------------------------------------------"+ "\n");
+		informationGuideWindow.setText(informationGuideWindow.getText() +"도우미 이름 : " + SelectedReservation.Get_Helper_Name()+ "\n");
+		informationGuideWindow.setText(informationGuideWindow.getText() +"도우미 전화번호 : " + SelectedReservation.Get_Helper_Phone()+ "\n");
+		informationGuideWindow.setText(informationGuideWindow.getText() +"도우미 주소 : " + SelectedReservation.Get_Helper_Address()+ "\n");
+
+		informationGuideWindow.setText(informationGuideWindow.getText() + "------------------------------------------------------"+ "\n");
+		if(!(SelectedReservation.Get_Company().equals("없음"))) {
+			informationGuideWindow.setText(informationGuideWindow.getText() +"업체명 : " + SelectedReservation.Get_Company()+ "\n");
+			informationGuideWindow.setText(informationGuideWindow.getText() +"업체번호 : " + SelectedReservation.Get_Company_phone()+ "\n");
+			informationGuideWindow.setText(informationGuideWindow.getText() +"업체주소 : " + SelectedReservation.Get_Company_Address()+ "\n");
+			if(!SelectedReservation.Get_Company_Speciality().equals("")) {
+				informationGuideWindow.setText(informationGuideWindow.getText() +"진료정보  : " + SelectedReservation.Get_Company_Speciality()+ "\n");
+			}
+		}
+
+		informationGuideWindow.setText( informationGuideWindow.getText() +"------------------------------------------------------"+ "\n");
+
+		informationGuideWindow.setText(informationGuideWindow.getText() + "예약한 반려동물 이름  : " + SelectedReservation.Get_SelectedPet()+ "\n");
 		this.setVisible(true);
 		this.setFocusable(true);
 		
