@@ -147,7 +147,7 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.setForeground(Color.white);
 		info_panel.setOpaque(true);
 		info_panel.setFont(new Font("Serief", Font.BOLD, 15));
-		info_panel.setLayout(new GridLayout(4, 2));
+		info_panel.setLayout(new GridLayout(5, 2));
 		//info_panel.setVisible(true);
 
 		//이용날짜

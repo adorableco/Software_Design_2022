@@ -150,6 +150,7 @@ class ReservationChange extends JFrame implements ActionListener{
 		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Start_Time() + " ~ " + SelectedReservation.Get_Use_Finish_Time()+"\n");
 		informationGuideWindow.setText( informationGuideWindow.getText() + "할일 목록 : " + SelectedReservation.Get_Use_Service() + "\n");
 		informationGuideWindow.setText( informationGuideWindow.getText() + "결제 금액 : " + Integer.toString(SelectedReservation.Get_Cost())+ "\n");
+		informationGuideWindow.setText( informationGuideWindow.getText() + "반려 동물 : " + SelectedReservation.Get_SelectedPet()+ "\n");
 
 		informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 이름 : " + SelectedReservation.Get_Helper_Name()+ "\n");
 

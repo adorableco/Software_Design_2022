@@ -113,7 +113,7 @@ public class ReservationDB {
 				Integer.toString(resvInfo.Get_Cost()) + " " + 
 				resvInfo.Get_Review() + " "+ 
 				resvInfo.Get_Company() + " " + 
-				resvInfo.Get_Helper_Name();
+				resvInfo.Get_Helper_Name()+" "+resvInfo.Get_SelectedPet();
 		
 	    try {
 	    	BufferedWriter writer = new BufferedWriter(new FileWriter(fname));

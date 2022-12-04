@@ -311,6 +311,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					Accesable_Info.addElement( "이용 시간 : " + Reserv_Info.get(temp).Get_Use_Start_Time()+" ~ "+Reserv_Info.get(temp).Get_Use_Finish_Time() );
 					Accesable_Info.addElement( "할일 목록 : " + Reserv_Info.get(temp).Get_Use_Service() );
 					Accesable_Info.addElement( "결제 금액 : " + Integer.toString(Reserv_Info.get(temp).Get_Cost()));
+					Accesable_Info.addElement( "반려 동물 : " + Reserv_Info.get(temp).Get_SelectedPet());
 					if(!(Reserv_Info.get(temp).Get_Review().equals("0"))) {
 						Accesable_Info.addElement( "리뷰내용 : " + Reserv_Info.get(temp).Get_Review());
 					}
