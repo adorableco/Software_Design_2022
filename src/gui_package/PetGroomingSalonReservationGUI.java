@@ -113,10 +113,16 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 				// TODO Auto-generated method stub
 //				ReservationPetGroomingSalonDB resDB=new ReservationPetGroomingSalonDB();
 //				resDB.saveFile(sal_resv);
-				ReservationDB resDB=new ReservationDB();
-				JOptionPane.showMessageDialog(null,"저장되었습니다.");
-				resDB.saveFile_Temp(resv, originalFile);
-				dispose();
+				if(row1==0) {
+					JOptionPane confirm = new JOptionPane();
+					confirm.showMessageDialog(null, "예약할 미용실을 선택하세요. ");
+				}
+				else {
+					ReservationDB resDB=new ReservationDB();
+					JOptionPane.showMessageDialog(null,Integer.toString(res.Get_Cost())+"원 결제되었습니다.");
+					resDB.saveFile(resv);
+					dispose();
+				}
 			}
 			
 		});
