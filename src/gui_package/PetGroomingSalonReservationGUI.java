@@ -55,12 +55,14 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 //				resDB.saveFile(sal_resv);
 				if(row1==0) {
 					JOptionPane confirm = new JOptionPane();
-					confirm.showMessageDialog(null, "예약할 병원을 선택하세요. ");
+					confirm.showMessageDialog(null, "예약할 미용실을 선택하세요. ");
 				}
-				ReservationDB resDB=new ReservationDB();
-				JOptionPane.showMessageDialog(null,Integer.toString(res.Get_Cost())+"원 결제되었습니다.");
-				resDB.saveFile(resv);
-				dispose();
+				else {
+					ReservationDB resDB=new ReservationDB();
+					JOptionPane.showMessageDialog(null,Integer.toString(res.Get_Cost())+"원 결제되었습니다.");
+					resDB.saveFile(resv);
+					dispose();
+				}
 			}
 			
 		});
