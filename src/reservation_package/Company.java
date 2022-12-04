@@ -140,5 +140,11 @@ public class Company {
 	public String Get_Company_Name() {
 		return this.name;
 	}
+	public String Get_Company_Phone() {
+		return this.phone;
+	}
+	public String Get_Company_address() {
+		return this.address;
+	}
 
 }

@@ -150,7 +150,38 @@ public class Reservation {
 			return "없음";
 		}
 	}
+	public String Get_Company_phone() {
+		if(SelectedCompany_Hospital != null) {
+			return SelectedCompany_Hospital.Get_Company_Phone();
+		}
+		else if( SelectedCompany_Salon != null) {
+			return SelectedCompany_Salon.Get_Company_Phone();
+		}
+		else {
+			return "없음";
+		}
+	}
+	public String Get_Company_Address() {
+		if(SelectedCompany_Hospital != null) {
+			return SelectedCompany_Hospital.Get_Company_address();
+		}
+		else if( SelectedCompany_Salon != null) {
+			return SelectedCompany_Salon.Get_Company_address();
+		}
+		else {
+			return "없음";
+		}
+	}
+	public String Get_Company_Speciality() {
 
+		if(SelectedCompany_Hospital != null) {
+			return SelectedCompany_Hospital.Get_AnmialHospital_Speciality();
+		}
+		else {
+			return "";
+		}
+		
+	}
 	public String Get_SelectedPet() {
 		return this.SelectedPet;
 	}

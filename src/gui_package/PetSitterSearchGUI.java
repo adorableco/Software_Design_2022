@@ -248,8 +248,8 @@ public class PetSitterSearchGUI extends JFrame{
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frame = getSize();
 		
-		int xPos = (int)(screen.getWidth() / 2 - frame.getWidth()/2);
-		int yPos = (int)(screen.getHeight() / 2 - frame.getHeight()/2);
+		int xPos = (int)(screen.getWidth() / 2 );
+		int yPos = (int)(screen.getHeight() / 2 + 100);
 		
 		fr.setLocation(xPos, yPos);
 		fr.setResizable(true);
