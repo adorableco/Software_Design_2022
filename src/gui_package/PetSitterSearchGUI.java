@@ -63,7 +63,12 @@ public class PetSitterSearchGUI extends JFrame{
 					e.printStackTrace();
 				}
 			}
-			JTable petsitterListTable = new JTable(contents, header);
+			JTable petsitterListTable = new JTable(contents, header) {
+				public boolean isCellEditable(int i, int c){
+		          return false;
+		         }
+			};
+			petsitterListTable.getTableHeader().setReorderingAllowed(false);
 			petsitterListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			resizeColumnWidth(petsitterListTable);
 			petsitterListTable.getColumnModel().getColumn(0).setMinWidth(200);

@@ -89,7 +89,12 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 				e.printStackTrace();
 			}
 		}
-		JTable companyListTable = new JTable(contents, header);
+		JTable companyListTable = new JTable(contents, header) {
+			public boolean isCellEditable(int i, int c){
+	          return false;
+	         }
+		};
+		companyListTable.getTableHeader().setReorderingAllowed(false);
 		companyListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		resizeColumnWidth(companyListTable);
 		companyListTable.getColumnModel().getColumn(0).setMinWidth(225);
