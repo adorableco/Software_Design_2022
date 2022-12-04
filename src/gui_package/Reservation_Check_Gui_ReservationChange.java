@@ -107,7 +107,7 @@ class ReservationChange extends JFrame implements ActionListener{
 				
 				switch(Selected_Menu_Index) {
 				case 1:
-					informationWindow.setText("변경할 날짜를 입력하세요");
+					informationWindow.setText("날짜 변경하러 가기");
 					break;
 				case 2:
 					informationWindow.setText("저장하시겠습니까??");
@@ -141,6 +141,12 @@ class ReservationChange extends JFrame implements ActionListener{
 		informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Start_Time() + " ~ " + SelectedReservation.Get_Use_Finish_Time()+"\n");
 		informationGuideWindow.setText( informationGuideWindow.getText() + "할일 목록 : " + SelectedReservation.Get_Use_Service() + "\n");
 		informationGuideWindow.setText( informationGuideWindow.getText() + "결제 금액 : " + Integer.toString(SelectedReservation.Get_Cost())+ "\n");
+
+		informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 이름 : " + SelectedReservation.Get_Helper_Name()+ "\n");
+
+		informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 번호 : " + SelectedReservation.Get_Helper_Phone()+ "\n");
+
+		informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 주소 : " + SelectedReservation.Get_Helper_Address()+ "\n");
 		
 		
 		this.setVisible(true);

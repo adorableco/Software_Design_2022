@@ -55,13 +55,15 @@ public class ReservationDB {
 					String content;
 					String name;
 					int state;
+					
 					while((content = br.readLine()) != null) {
+						System.out.println(content);
 						String[] contentlist = content.split(" ");
-						Reserv_Info.add(
+						Reserv_Info.add( // 0~2 Date / 3~4 StartTime / 5~6 EndTime / 7 Use Service / 8 State / 9 Cost / 10 Review / 11 Company / 12 helper
 								new Reservation(
 								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
 								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0), LocalTime.of(Integer.parseInt(contentlist[5]), Integer.parseInt(contentlist[6]),0),
-								contentlist[7], Integer.parseInt(contentlist[8]), Integer.parseInt(contentlist[9]), contentlist[10], contentlist[11])
+								contentlist[7], Integer.parseInt(contentlist[8]), Integer.parseInt(contentlist[9]), contentlist[10], contentlist[11], contentlist[12])
 								);
 					}
 				}
@@ -87,7 +89,7 @@ public class ReservationDB {
 				Integer.toString(resvInfo.Get_State()) + " " +
 				Integer.toString(resvInfo.Get_Cost()) + " " +
 				resvInfo.Get_Review() + " "+
-				resvInfo.Get_Helper();
+				resvInfo.Get_Helper_Name();
 		System.out.println(resv)
 ;		
 	    try {
@@ -111,7 +113,7 @@ public class ReservationDB {
 				Integer.toString(resvInfo.Get_State()) + " " +
 				Integer.toString(resvInfo.Get_Cost()) + " " + 
 				resvInfo.Get_Review() + " "+
-				resvInfo.Get_Helper();
+				resvInfo.Get_Helper_Name();
 		
 	    try {
 	    	BufferedWriter writer = new BufferedWriter(new FileWriter(fname));

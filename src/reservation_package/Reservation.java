@@ -1,7 +1,12 @@
 package reservation_package;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 public class Reservation {
 	private LocalDate date;
@@ -10,17 +15,17 @@ public class Reservation {
 	private String service;
 	private int State;
 	private int cost;
-	private String helper;
 	private String Review;
-	private int Petcode;
-	private int Companycode;
+	private String Company;
+	private PetSitter helper;
+	
 	
 	public Reservation() {
 	}
 	
 	
 	public Reservation(LocalDate Use_Day, LocalTime Use_Start_Time, LocalTime Use_Finish_Time,String Use_Service
-			,int State, int Cost, String Review, String helper){
+			,int State, int Cost, String Review, String Company, String helper){
 		this.date = Use_Day;
 		this.start_time = Use_Start_Time;
 		this.finish_time=Use_Finish_Time;
@@ -33,7 +38,23 @@ public class Reservation {
 		else {
 			this.Review = Review;
 		}
-		this.helper = helper;
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("./Database/PetSitterDB.txt"));
+			String Line = reader.readLine();
+			System.out.println(Line);
+			while((Line = reader.readLine()) != null) {
+				System.out.println(Line);
+				String[] contents = Line.split(",");
+				if(contents[0].equals(helper)) {
+					this.helper = new PetSitter(Arrays.asList(contents));
+					break;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+//		this.helper = helper;
 	}
 
 	
@@ -54,8 +75,7 @@ public class Reservation {
 	}
 	
 	public void setHelper(String helper) {
-		this.helper=helper;
-		System.out.println("reservation : "+this.helper);
+//		this.helper=helper;
 	}
 	
 	public int Get_State() {
@@ -79,9 +99,18 @@ public class Reservation {
 	public String Get_Review() {
 		return this.Review;
 	}
-	public String Get_Helper() {
-		return this.helper;
+	public String Get_Helper_Name() {
+		return this.helper.Get_Name();
 	}
+	public String Get_Helper_Phone() {
+		return this.helper.Get_phon();
+	}
+	public String Get_Helper_Address() {
+		return this.helper.getAddress();
+	}
+//	public String Get_Company() {
+//		return this.Company;
+//	}
 	
 	
 }

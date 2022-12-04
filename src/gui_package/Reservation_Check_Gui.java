@@ -303,7 +303,7 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					Accesable_Info.clear();
 					System.out.println(temp);
 					
-					// 정보 Print하
+					// 정보 Print하기
 					if(Reserv_Info.get(temp).Get_State() == 0) Accesable_Info.addElement("이용예정");
 					else if(Reserv_Info.get(temp).Get_State() == 1) Accesable_Info.addElement("이용완료");
 					else Accesable_Info.addElement("예약 취소");
@@ -317,6 +317,10 @@ class CheckReservationMode extends JFrame implements ActionListener{
 					else {
 						Accesable_Info.addElement( "리뷰내용 : 없음");
 					}
+					Accesable_Info.addElement("도우미 이름 : " + Reserv_Info.get(temp).Get_Helper_Name());
+					Accesable_Info.addElement("도우미 전화번호 : " + Reserv_Info.get(temp).Get_Helper_Phone());
+
+					Accesable_Info.addElement("도우미 주소 : " + Reserv_Info.get(temp).Get_Helper_Address());
 					break;
 					
 					
