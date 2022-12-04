@@ -98,7 +98,7 @@ public class Reservation_helper_GUI extends JFrame {
 	}
 		
 	public Reservation_helper_GUI(Reservation reservation_Info,File Selected_File) {
-		res=new Reservation();
+		this.res= reservation_Info;
 		resDB=new ReservationDB();
 		LocalDate resvDate = reservation_Info.Get_Use_Day();
 		LocalTime resvStartTime = reservation_Info.Get_Use_Start_Time();
@@ -577,7 +577,6 @@ public class Reservation_helper_GUI extends JFrame {
 				res.setService(service_choose);
 				res.setCost(cost);
 				res.setSelectedPet(pet_choose);
-//				res.setHelper(helper);
 				
 				if(n.getText().equals("저장")) {
 					
