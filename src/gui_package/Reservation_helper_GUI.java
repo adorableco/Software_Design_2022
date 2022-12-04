@@ -100,7 +100,7 @@ public class Reservation_helper_GUI extends JFrame {
 	}
 		
 	public Reservation_helper_GUI(Reservation reservation_Info,File Selected_File) {
-		res=new Reservation();
+		this.res= reservation_Info;
 		resDB=new ReservationDB();
 		LocalDate resvDate = reservation_Info.Get_Use_Day();
 		LocalTime resvStartTime = reservation_Info.Get_Use_Start_Time();
@@ -376,8 +376,20 @@ public class Reservation_helper_GUI extends JFrame {
 						BufferedReader bf;
 						try {
 							bf = new BufferedReader(new FileReader("./Database/petsitter_temp.txt"));
+							
 							String helper_temp = bf.readLine();
 							res.setHelper(helper_temp);
+							File file = new File("./Database/petsitter_temp.txt");
+					        
+					    	if( file.exists() ){
+					    		if(file.delete()){
+					    			System.out.println("파일삭제 성공");
+					    		}else{
+					    			System.out.println("파일삭제 실패");
+					    		}
+					    	}else{
+					    		System.out.println("파일이 존재하지 않습니다.");
+					    	}
 							
 								
 						} catch (IOException e1) {
@@ -494,6 +506,15 @@ public class Reservation_helper_GUI extends JFrame {
 				endmin = finish_minCombo.getSelectedIndex();
 				System.out.println(starthour);
 				System.out.println(endhour);
+				if(h.getSelectedItem().equals("HH"))
+					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
+				else {
+					if((starthour > endhour)||((starthour == endhour) && (startmin > endmin))) {
+						JOptionPane confirm = new JOptionPane();
+						confirm.showMessageDialog(null,"끝나는 시간은 시작 시간 이후여야합니다. ", "돌아가기", JOptionPane.ERROR_MESSAGE);
+					}
+					fi_ho=h.getSelectedItem().toString();
+				}
 				System.out.println(startmin);
 				System.out.println(endmin);
 				if(h.getSelectedItem().equals("HH"))
@@ -603,7 +624,6 @@ public class Reservation_helper_GUI extends JFrame {
 				res.setService(service_choose);
 				res.setCost(cost);
 				res.setSelectedPet(pet_choose);
-//				res.setHelper(helper);
 				
 				if(n.getText().equals("저장")) {
 					
@@ -1035,7 +1055,7 @@ public class Reservation_helper_GUI extends JFrame {
 				if(h.getSelectedItem().equals("HH"))
 					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
 				else {
-					if((starthour < endhour)||((starthour == endhour) && (startmin > endmin))) {
+					if((starthour > endhour)||((starthour == endhour) && (startmin > endmin))) {
 						JOptionPane confirm = new JOptionPane();
 						confirm.showMessageDialog(null,"끝나는 시간은 시작 시간 이후여야합니다. ", "돌아가기", JOptionPane.ERROR_MESSAGE);
 					}
@@ -1143,7 +1163,18 @@ public class Reservation_helper_GUI extends JFrame {
 								try {
 									String helper_temp = bf.readLine();
 									res.setHelper(helper_temp);
-									System.out.println(res.Get_Helper_Name());
+									File file = new File("./Database/petsitter_temp.txt");
+							        
+							    	if( file.exists() ){
+							    		if(file.delete()){
+							    			System.out.println("파일삭제 성공");
+							    		}else{
+							    			System.out.println("파일삭제 실패");
+							    		}
+							    	}else{
+							    		System.out.println("파일이 존재하지 않습니다.");
+							    	}
+//									System.out.println(res.Get_Helper_Name());
 								} catch (IOException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
