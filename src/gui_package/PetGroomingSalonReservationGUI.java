@@ -147,8 +147,8 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 				}
 				else {
 					ReservationDB resDB=new ReservationDB();
-					JOptionPane.showMessageDialog(null,Integer.toString(res.Get_Cost())+"원 결제되었습니다.");
-					resDB.saveFile(resv);
+					JOptionPane.showMessageDialog(null,"저장되었습니다.");
+					resDB.saveFile_Temp(resv, originalFile);
 					dispose();
 				}
 			}

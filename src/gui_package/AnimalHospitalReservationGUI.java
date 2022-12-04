@@ -63,7 +63,7 @@ public class AnimalHospitalReservationGUI extends JFrame{
 				JOptionPane confirm = new JOptionPane();
 				int result;
 				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				if(result == 0) {=
+				if(result == 0) {
 						new Reservation_helper_GUI();
 						dispose();
 				} 
@@ -152,13 +152,12 @@ public class AnimalHospitalReservationGUI extends JFrame{
 //				resDB.saveFile(hos_resv);
 				if(row==0) {
 					JOptionPane confirm = new JOptionPane();
-					confirm.showMessageDialog(null, "예약할 병원을 선택하세요. ");
+					confirm.showMessageDialog(null, "예약할 병원을 선택하세요.");
 				}
 				else {
-					System.out.println(row);
 					ReservationDB resDB=new ReservationDB();
-					JOptionPane.showMessageDialog(null,Integer.toString(resv.Get_Cost())+"원 결제되었습니다.");
-					resDB.saveFile(resv);
+					JOptionPane.showMessageDialog(null,"저장되었습니다.");
+					resDB.saveFile_Temp(resv, originalFile);
 					dispose();
 				}
 			}
