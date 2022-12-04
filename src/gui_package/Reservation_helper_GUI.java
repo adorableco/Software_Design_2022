@@ -309,7 +309,7 @@ public class Reservation_helper_GUI extends JFrame {
 		
 		for(int i=0; i<n; i++)
 			pet[i] = pet_class[i].Get_name();
-	
+		pet_choose = pet[0];
 		petCombo = new JComboBox<String>(pet);
 		
 		petCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -945,6 +945,8 @@ public class Reservation_helper_GUI extends JFrame {
 		pet = new String[n];
 		for(int i=0; i<n; i++)
 			pet[i] = pet_class[i].Get_name();
+		
+		pet_choose = pet[0];
 	
 		petCombo = new JComboBox<String>(pet);
 		
