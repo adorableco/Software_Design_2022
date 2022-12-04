@@ -494,6 +494,15 @@ public class Reservation_helper_GUI extends JFrame {
 				endmin = finish_minCombo.getSelectedIndex();
 				System.out.println(starthour);
 				System.out.println(endhour);
+				if(h.getSelectedItem().equals("HH"))
+					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
+				else {
+					if((starthour > endhour)||((starthour == endhour) && (startmin > endmin))) {
+						JOptionPane confirm = new JOptionPane();
+						confirm.showMessageDialog(null,"끝나는 시간은 시작 시간 이후여야합니다. ", "돌아가기", JOptionPane.ERROR_MESSAGE);
+					}
+					fi_ho=h.getSelectedItem().toString();
+				}
 				System.out.println(startmin);
 				System.out.println(endmin);
 				if(h.getSelectedItem().equals("HH"))
@@ -1035,7 +1044,7 @@ public class Reservation_helper_GUI extends JFrame {
 				if(h.getSelectedItem().equals("HH"))
 					JOptionPane.showMessageDialog(null,"잘못선택하였습니다.");
 				else {
-					if((starthour < endhour)||((starthour == endhour) && (startmin > endmin))) {
+					if((starthour > endhour)||((starthour == endhour) && (startmin > endmin))) {
 						JOptionPane confirm = new JOptionPane();
 						confirm.showMessageDialog(null,"끝나는 시간은 시작 시간 이후여야합니다. ", "돌아가기", JOptionPane.ERROR_MESSAGE);
 					}
