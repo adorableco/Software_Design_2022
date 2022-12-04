@@ -116,7 +116,7 @@ public class Reservation_helper_GUI extends JFrame {
 		service_choose = reservation_Info.Get_Use_Service();
 		
 		helper = reservation_Info.Get_Helper_Name();
-		
+		pet_choose = reservation_Info.Get_SelectedPet();
 		createFrame("도우미 예약");
 	
 		LineBorder line = new LineBorder(Color.black,1);
@@ -559,6 +559,7 @@ public class Reservation_helper_GUI extends JFrame {
 				res.setFinishTime(fitime);
 				res.setService(service_choose);
 				res.setCost(cost);
+				res.setSelectedPet(pet_choose);
 //				res.setHelper(helper);
 				
 				if(n.getText().equals("저장")) {
