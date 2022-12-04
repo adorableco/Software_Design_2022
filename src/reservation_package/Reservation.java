@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 
 import database_package.PetSitterDBConnector;
+import participant_package.Pet;
 
 public class Reservation {
 	private LocalDate date;
@@ -18,8 +19,11 @@ public class Reservation {
 	private int State;
 	private int cost;
 	private String Review;
+	
 	private String Company;
 	private PetSitter helper;
+	private Pet SelectedPet;
+	
 	
 
 	PetSitterDBConnector PDB = new PetSitterDBConnector();
