@@ -20,6 +20,8 @@ public class PetSitterSearchGUI extends JFrame{
 	protected int row;
 	private PetSitterDBConnector conn;
 	private Reservation res;
+	private JComboBox addrCombo;
+	private TableRowSorter<TableModel> sorter;
 	public PetSitterSearchGUI() {
 		
 	}
@@ -41,7 +43,7 @@ public class PetSitterSearchGUI extends JFrame{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		JComboBox addrCombo = addressComboBox();
+		addrCombo = addressComboBox();
 		
 		JPanel tablePanel = new JPanel();
 		try {
@@ -70,6 +72,16 @@ public class PetSitterSearchGUI extends JFrame{
 			petsitterListTable.getColumnModel().getColumn(1).setMinWidth(150);
 			petsitterListTable.getColumnModel().getColumn(2).setMinWidth(420);
 			
+			sorter = new TableRowSorter<>(petsitterListTable.getModel());
+			petsitterListTable.setRowSorter(sorter);
+			if (addrCombo.getSelectedItem().toString().length() > 2) {
+				sorter.setRowFilter(RowFilter.regexFilter(addrCombo.getSelectedItem().toString()));
+			
+			} else {
+			        sorter.setRowFilter(null);
+			
+			}
+	         
 			MouseListener tableListener = new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -125,29 +137,23 @@ public class PetSitterSearchGUI extends JFrame{
 //		tablePanel.add(ex, BorderLayout.SOUTH);
 		
 
-//		addrCombo.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				String addr = addrCombo.getSelectedItem().toString();
-//				// 임시 구현
-//				try {
-//					if(addr == "선택") {
+		addrCombo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String addr = addrCombo.getSelectedItem().toString();
+				if(addr == "선택") {
 //						petsitterDB = conn.searchDBwithTime(resvDate, resvTime);
-//					}
-//					else {
+					sorter.setRowFilter(null);
+				}
+				else {
 //						petsitterDB = conn.searchDBwithAddress(petsitterDB, addr);
-//					}
-//					tablePanel.add(showList(petsitterDB));
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//				ex.setText("선택된 주소:  " + addr);
-//			}
-//			
-//		});
+					sorter.setRowFilter(RowFilter.regexFilter(addr));
+				}
+			}
+			
+		});
 
 		
 		fr.add(tablePanel, BorderLayout.CENTER);
@@ -159,7 +165,7 @@ public class PetSitterSearchGUI extends JFrame{
 //						helper = a[0];
 					BufferedWriter writer = new BufferedWriter(new FileWriter("./Database/petsitter_temp.txt"));
 					writer.write(table.getModel().getValueAt(row,0).toString());
-					System.out.println("search:"+table.getModel().getValueAt(row,0).toString());
+//					System.out.println("search:"+table.getModel().getValueAt(row,0).toString());
 					writer.flush();
 				    writer.close();
 					fr.dispose();
