@@ -18,7 +18,7 @@ import reservation_package.Reservation;
 public class PetGroomingSalonReservationGUI extends JFrame{
 	private PetGroomingSalonDBConnector conn;
 	private Reservation resv;
-	private int row1;
+	private int row1 = -1;
 	private JButton BackBtn = new JButton("뒤로가기");
 //	private ReservationPetGroomingSalon sal_resv;
 	public PetGroomingSalonReservationGUI() {
@@ -97,6 +97,7 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 		createFrame(title);
 		this.resv = res;
 		this.conn = new PetGroomingSalonDBConnector();
+		this.resv.setCompany("null");
 //		this.sal_resv = new ReservationPetGroomingSalon();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
@@ -141,7 +142,7 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 				// TODO Auto-generated method stub
 //				ReservationPetGroomingSalonDB resDB=new ReservationPetGroomingSalonDB();
 //				resDB.saveFile(sal_resv);
-				if(row1==0) {
+				if(row1==-1) {
 					JOptionPane confirm = new JOptionPane();
 					confirm.showMessageDialog(null, "예약할 미용실을 선택하세요. ");
 				}
@@ -204,11 +205,15 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				JTable table = (JTable) e.getSource();
-				row1 = table.getSelectedRow();
+				row1 = companyListTable.getSelectedRow();
+				System.out.println(row1);
 //				System.out.print(table.getModel().getValueAt(row,0 )+"\t");
 				String comp = table.getModel().getValueAt(row1,0).toString();
 				select.setText(comp+"에 예약을 진행합니다.");
+				
 				resv.setCompany(comp);
+				System.out.println(resv.Get_Use_Service());
+				System.out.println(resv.Get_Company());
 			}
 
 			@Override

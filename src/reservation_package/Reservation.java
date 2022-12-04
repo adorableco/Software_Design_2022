@@ -94,12 +94,15 @@ public class Reservation {
 		this.Selected_helper = PDB.Get_Selected_PetSitter(helper);
 	}
 	public void setCompany(String company) {
+		if(company == "null") {
+			this.SelectedCompany_Hospital = null;
+			this.SelectedCompany_Salon = null;
+		}
 		if(this.service.equals("병원동행")) {
 			AnimalHospitalDBConnector ADBC = new AnimalHospitalDBConnector();
 			SelectedCompany_Hospital = ADBC.Get_Selected_Company(company);
 		}
 		else {
-
 			PetGroomingSalonDBConnector SDBC = new PetGroomingSalonDBConnector();
 			SelectedCompany_Salon = SDBC.Get_Selected_Company(company);
 		}

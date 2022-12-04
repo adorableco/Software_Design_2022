@@ -18,7 +18,7 @@ import reservation_package.Reservation;
 public class AnimalHospitalReservationGUI extends JFrame{
 	private AnimalHospitalDBConnector conn;
 	private Reservation resv;
-	private int row;
+	private int row = -1;
 	private JButton BackBtn = new JButton("뒤로가기");
 //	private ReservationAnimalHospital hos_resv;
 	public AnimalHospitalReservationGUI() {
@@ -77,7 +77,7 @@ public class AnimalHospitalReservationGUI extends JFrame{
 				// TODO Auto-generated method stub
 //				ReservationAnimalHospitalDB resDB=new ReservationAnimalHospitalDB();
 //				resDB.saveFile(hos_resv);
-				if(row==0) {
+				if(row==-1) {
 					JOptionPane confirm = new JOptionPane();
 					confirm.showMessageDialog(null, "예약할 병원을 선택하세요. ");
 				}
@@ -100,6 +100,7 @@ public class AnimalHospitalReservationGUI extends JFrame{
 		this.resv = res;
 		createFrame(title);
 
+		this.resv.setCompany("null");
 		this.conn = new AnimalHospitalDBConnector();
 //		this.hos_resv = new ReservationAnimalHospital();
 		
@@ -150,7 +151,7 @@ public class AnimalHospitalReservationGUI extends JFrame{
 				// TODO Auto-generated method stub
 //				ReservationAnimalHospitalDB resDB=new ReservationAnimalHospitalDB();
 //				resDB.saveFile(hos_resv);
-				if(row==0) {
+				if(row==-1) {
 					JOptionPane confirm = new JOptionPane();
 					confirm.showMessageDialog(null, "예약할 병원을 선택하세요.");
 				}
@@ -213,11 +214,12 @@ public class AnimalHospitalReservationGUI extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				JTable table = (JTable) e.getSource();
-				row = table.getSelectedRow();
+				row = companyListTable.getSelectedRow();
 //				System.out.print(table.getModel().getValueAt(row,0 )+"\t");
 				String comp = table.getModel().getValueAt(row,0).toString();
 				select.setText(comp+"에 예약을 진행합니다.");
 				resv.setCompany(comp);
+				System.out.println(resv.Get_Company());
 			}
 
 			@Override

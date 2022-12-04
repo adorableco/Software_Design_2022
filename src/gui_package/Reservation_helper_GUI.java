@@ -636,7 +636,7 @@ public class Reservation_helper_GUI extends JFrame {
 				else if(n.getText().equals("병원 예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
-
+					
 					AnimalHospitalReservationGUI gui = new AnimalHospitalReservationGUI("병원 예약 서비스", res, Selected_File);
 //					dispose();
 					gui.addWindowListener(new WindowListener() {
