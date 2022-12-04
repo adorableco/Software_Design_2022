@@ -18,6 +18,7 @@ import reservation_package.Reservation;
 public class PetGroomingSalonReservationGUI extends JFrame{
 	private PetGroomingSalonDBConnector conn;
 	private Reservation resv;
+	private int row1;
 //	private ReservationPetGroomingSalon sal_resv;
 	public PetGroomingSalonReservationGUI() {
 		this.setTitle("피어펫 서비스");
@@ -52,6 +53,10 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 				// TODO Auto-generated method stub
 //				ReservationPetGroomingSalonDB resDB=new ReservationPetGroomingSalonDB();
 //				resDB.saveFile(sal_resv);
+				if(row1==0) {
+					JOptionPane confirm = new JOptionPane();
+					confirm.showMessageDialog(null, "예약할 병원을 선택하세요. ");
+				}
 				ReservationDB resDB=new ReservationDB();
 				JOptionPane.showMessageDialog(null,Integer.toString(res.Get_Cost())+"원 결제되었습니다.");
 				resDB.saveFile(resv);
@@ -148,9 +153,9 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				JTable table = (JTable) e.getSource();
-				int row = table.getSelectedRow();
+				row1 = table.getSelectedRow();
 //				System.out.print(table.getModel().getValueAt(row,0 )+"\t");
-				String comp = table.getModel().getValueAt(row,0).toString();
+				String comp = table.getModel().getValueAt(row1,0).toString();
 				select.setText(comp+"에 예약을 진행합니다.");
 				resv.setCompany(comp);
 			}
