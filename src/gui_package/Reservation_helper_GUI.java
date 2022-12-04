@@ -378,6 +378,7 @@ public class Reservation_helper_GUI extends JFrame {
 							
 							String helper_temp = bf.readLine();
 							res.setHelper(helper_temp);
+							bf.close();
 							File file = new File("./Database/petsitter_temp.txt");
 					        
 					    	if( file.exists() ){
@@ -1163,6 +1164,7 @@ public class Reservation_helper_GUI extends JFrame {
 								try {
 									String helper_temp = bf.readLine();
 									res.setHelper(helper_temp);
+									bf.close();
 									File file = new File("./Database/petsitter_temp.txt");
 							        
 							    	if( file.exists() ){
