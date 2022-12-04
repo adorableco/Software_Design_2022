@@ -29,6 +29,19 @@ public class ReservationDB {
 	private int resvInt;
 	private String path = "./DataBase/Reservation/";
 	
+	public ReservationDB() {
+
+		File f = new File(path);
+		File[] flist = f.listFiles(new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String name) {
+				return !name.equals(".DS_Store");
+			}
+		});
+		Arrays.sort(flist);
+		this.resvInt = flist.length;
+	}
 	
 	public File[] Get_Filelist() {
 		File f = new File(path);
@@ -47,7 +60,6 @@ public class ReservationDB {
 	public ArrayList<Reservation> Get_Reserve_Info(File[] flist){
 
 		ArrayList<Reservation> Reserv_Info = new ArrayList<Reservation>();
-		
 		try {
 			for(int i = 0; i < flist.length; i++) {
 				// Contain User name
@@ -126,9 +138,24 @@ public class ReservationDB {
 		}
 		return;
 	}
-	
-	public void setResvInt(int n) {
-		this.resvInt = n;
-		return;
+	public void savdFile_Selected(Reservation resvInfo, File originalFile) {
+		String resv = resvInfo.Get_Use_Day().format(DateTimeFormatter.ofPattern("yyyy MM dd"))+ " " + 
+				resvInfo.Get_Use_Start_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
+				resvInfo.Get_Use_Finish_Time().format(DateTimeFormatter.ofPattern("HH mm")) + " " +
+				resvInfo.Get_Use_Service() + " " +
+				Integer.toString(resvInfo.Get_State()) + " " +
+				Integer.toString(resvInfo.Get_Cost()) + " " + 
+				resvInfo.Get_Review() + " "+ 
+				resvInfo.Get_Company() + " " + 
+				resvInfo.Get_Helper_Name()+" "+resvInfo.Get_SelectedPet();
+		try {
+	    	BufferedWriter writer = new BufferedWriter(new FileWriter(originalFile,false));
+			writer.write(resv);
+			writer.flush();
+		    writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

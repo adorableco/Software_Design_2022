@@ -85,7 +85,10 @@ public class Reservation {
 	public void setCost(int cost) {
 		this.cost=cost;
 	}
-	
+	public void setState(int State) {
+		
+		this.State = State;
+	}
 	public void setHelper(String helper) {
 		PetSitterDBConnector PDB = new PetSitterDBConnector();
 		this.Selected_helper = PDB.Get_Selected_PetSitter(helper);

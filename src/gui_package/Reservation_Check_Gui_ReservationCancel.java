@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import database_package.ReservationDB;
 import reservation_package.Reservation;
 
 import java.util.*;
@@ -133,23 +134,10 @@ private static final long serialVersionUID = 1L;
 				JOptionPane confirm = new JOptionPane();
 				int result;
 				result = confirm.showConfirmDialog(null, "정말 취소하시겠습니까?", "예약 취소", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				String Day = SelectedReservation.Get_Use_Day().toString();
-				String[] date = Day.split("-");
-				String S_Time = SelectedReservation.Get_Use_Start_Time().toString();
-				String[] Start_time = S_Time.split(":"); 
-				String F_Time = SelectedReservation.Get_Use_Start_Time().toString();
-				String[] Finish_time = F_Time.split(":"); 
 				if(result == 0) {
-					try {
-						FileWriter fw = new FileWriter(Selected_File.getPath(), false);
-						fw.write( date[0] + " " + date[1] + " " + date[2] + " " + Start_time[0] + " " + Start_time[1] + " "+ Finish_time[0] + " " + Finish_time[1] + " "
-								+ SelectedReservation.Get_Use_Service() +  " 2 "
-								+ Integer.toString(SelectedReservation.Get_Cost()) + " " + SelectedReservation.Get_Review());
-						fw.close();
-						dispose();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+					ReservationDB RDB = new ReservationDB();
+					SelectedReservation.setState(2);
+					RDB.savdFile_Selected(reservation_Info, Selected_File);
 				}
 			}
 		});
