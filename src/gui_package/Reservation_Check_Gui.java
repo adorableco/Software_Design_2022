@@ -211,7 +211,11 @@ class CheckReservationMode extends JFrame implements ActionListener{
 				} 
 			}
 		});
-		
+
+		if(Reserv_Info.size() == 0) {
+			JOptionPane confirm = new JOptionPane();confirm.showMessageDialog(null, "예약 목록이 없습니다. ", "돌아가기",JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+		}
 	}
 
 
@@ -342,7 +346,6 @@ class CheckReservationMode extends JFrame implements ActionListener{
 			new Reservation_Check_Gui();
 		}
 	}
-	
 }
 
 
