@@ -208,7 +208,10 @@ public class Reservation_helper_GUI extends JFrame {
 		
 
 		finish_hourCombo= new JComboBox<String>(hour);
+		finish_hourCombo.setSelectedIndex(Arrays.asList(hour).indexOf(resvFinishTime.format(DateTimeFormatter.ofPattern("HH"))));
+		
 		finish_minCombo= new JComboBox<String>(min);
+		finish_minCombo.setSelectedIndex(Arrays.asList(min).indexOf(resvFinishTime.format(DateTimeFormatter.ofPattern("mm"))));
 		
 		start_hourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		start_minCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -587,14 +590,105 @@ public class Reservation_helper_GUI extends JFrame {
 				else if(n.getText().equals("병원 예약")) {
 					JOptionPane.showMessageDialog(null,"병원을 예약하시겠습니까?");
 					//병원 예약창으로 넘어감
-					new AnimalHospitalReservationGUI("병원 예약 서비스", res);
-					dispose();
+
+					AnimalHospitalReservationGUI gui = new AnimalHospitalReservationGUI("병원 예약 서비스", res, Selected_File);
+//					dispose();
+					gui.addWindowListener(new WindowListener() {
+
+						@Override
+						public void windowOpened(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowClosing(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowClosed(WindowEvent e) {
+							dispose();
+							
+						}
+
+						@Override
+						public void windowIconified(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowDeiconified(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowActivated(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowDeactivated(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+					});
 				}
 				else if(n.getText().equals("반려동물 미용샵 예약")) {
 					JOptionPane.showMessageDialog(null,"반려동물 미용샵을 예약하시겠습니까?");
 					//미용샵 예약창으로 넘어감
-					new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res);
-					dispose();
+					PetGroomingSalonReservationGUI gui = new PetGroomingSalonReservationGUI("반려동물 미용실 예약 서비스", res, Selected_File);
+//					dispose();
+					gui.addWindowListener(new WindowListener() {
+
+						@Override
+						public void windowOpened(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowClosing(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowClosed(WindowEvent e) {
+							dispose();
+							
+						}
+
+						@Override
+						public void windowIconified(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowDeiconified(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowActivated(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void windowDeactivated(WindowEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+					});
 				}
 			}
 			
