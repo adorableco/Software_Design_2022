@@ -279,6 +279,51 @@ public class Reservation_helper_GUI extends JFrame {
 		info_panel.add(service_panel_2);	
 		explan_label.setText("도우미 예약");
 		
+		JPanel pet_panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,30));
+		JLabel pet_label = new JLabel("반려동물 선택 : ", JLabel.CENTER);
+		pet_label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		pet_label.setForeground(Color.white);
+		pet_panel_1.setOpaque(true);
+		pet_panel_1.setBackground(Color.gray);
+		pet_panel_1.setOpaque(true);
+		pet_panel_1.add(pet_label);
+					
+		JPanel pet_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT,10,32));
+		Pet [] pet_class = new Pet[5];
+		for(int i=0; i<5; i++)
+			pet_class[i] = new Pet();
+		
+		PetDB petDB = new PetDB();
+		int n = petDB.dataDownload_pet(pet_class);
+		pet = new String[n];
+		
+		for(int i=0; i<n; i++)
+			pet[i] = pet_class[i].Get_name();
+	
+		petCombo = new JComboBox<String>(pet);
+		
+		petCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		pet_panel_2.setOpaque(true);
+		pet_panel_2.setBackground(Color.gray);
+		pet_panel_2.setOpaque(true);
+		petCombo.setPreferredSize(dim1);
+		pet_panel_2.add(petCombo);
+		
+		info_panel.add(pet_panel_1); 
+		info_panel.add(pet_panel_2);
+		
+		//반려동물 선택 Action
+		petCombo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JComboBox meau = (JComboBox)e.getSource();
+				
+				pet_choose = meau.getSelectedItem().toString();
+			}
+		});
+		
 		// 이벤트 처리
 		//도우미 검색 Action
 		helper_search_button.addActionListener(new ActionListener() {
