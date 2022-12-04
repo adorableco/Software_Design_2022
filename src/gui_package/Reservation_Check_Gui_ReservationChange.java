@@ -8,15 +8,21 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import database_package.ReservationDB;
 import reservation_package.Reservation;
 
 import java.util.*;
@@ -213,16 +219,66 @@ class ReservationChange extends JFrame implements ActionListener{
 					System.out.println(contents[0]);
 					File tempfile = new File(contents[0]+ "_temp.txt");
 					System.out.println(tempfile);
+
+					
 					if(tempfile.exists()) {
+						Reservation temp = null;
+						try {
+							BufferedReader br = new BufferedReader(new FileReader(tempfile));
+							String content = br.readLine();
+							String[] contentlist = content.split(" ");
+							temp = new Reservation(
+									LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
+									LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0), LocalTime.of(Integer.parseInt(contentlist[5]), Integer.parseInt(contentlist[6]),0),
+									contentlist[7], Integer.parseInt(contentlist[8]), Integer.parseInt(contentlist[9]), contentlist[10], contentlist[11], contentlist[12]);
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						
+
+						if(temp.Get_State() == 0) informationGuideWindow.setText("상태 : 이용예정\n");
+						else if(temp.Get_State() == 1) informationGuideWindow.setText("상태 : 이용완료\n");
+						else informationGuideWindow.setText("상태 : 예약 취소\n");
+						
+						informationGuideWindow.setText( informationGuideWindow.getText() + "이용 날짜 : " + temp.Get_Use_Day().toString() + "\n");
+						informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + temp.Get_Use_Start_Time() + " ~ " + temp.Get_Use_Finish_Time()+"\n");
+						informationGuideWindow.setText( informationGuideWindow.getText() + "할일 목록 : " + temp.Get_Use_Service() + "\n");
+						informationGuideWindow.setText( informationGuideWindow.getText() + "결제 금액 : " + Integer.toString(temp.Get_Cost())+ "\n");
+
+						informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 이름 : " + temp.Get_Helper_Name()+ "\n");
+
+						informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 번호 : " + temp.Get_Helper_Phone()+ "\n");
+
+						informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 주소 : " + temp.Get_Helper_Address()+ "\n");
 						JOptionPane confirm = new JOptionPane();
 						int result;
-						result = confirm.showConfirmDialog(null, "예약을 변경하시겟습니까? ", "예약변", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+						result = confirm.showConfirmDialog(null, "예약을 변경하시겟습니까? \n" +
+						"이용 날짜 : " + temp.Get_Use_Day().toString() + "\n" +
+						"이용 시간 : " + temp.Get_Use_Start_Time() + " ~ " + temp.Get_Use_Finish_Time()+"\n" +
+						"할일 목록 : " + temp.Get_Use_Service() + "\n" +
+						"도우미 이름 : " + temp.Get_Helper_Name()+ "\n"
+						, "예약변경", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 						if(result == 0) {
 							Selected_File.delete();
 							tempfile.renameTo(new File(filename));
 							dispose();
 						} 
 						else {
+
+							if(SelectedReservation.Get_State() == 0) informationGuideWindow.setText("상태 : 이용예정\n");
+							else if(SelectedReservation.Get_State() == 1) informationGuideWindow.setText("상태 : 이용완료\n");
+							else informationGuideWindow.setText("상태 : 예약 취소\n");
+							
+							informationGuideWindow.setText( informationGuideWindow.getText() + "이용 날짜 : " + SelectedReservation.Get_Use_Day().toString() + "\n");
+							informationGuideWindow.setText( informationGuideWindow.getText() + "이용 시간 : " + SelectedReservation.Get_Use_Start_Time() + " ~ " + SelectedReservation.Get_Use_Finish_Time()+"\n");
+							informationGuideWindow.setText( informationGuideWindow.getText() + "할일 목록 : " + SelectedReservation.Get_Use_Service() + "\n");
+							informationGuideWindow.setText( informationGuideWindow.getText() + "결제 금액 : " + Integer.toString(SelectedReservation.Get_Cost())+ "\n");
+
+							informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 이름 : " + SelectedReservation.Get_Helper_Name()+ "\n");
+
+							informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 번호 : " + SelectedReservation.Get_Helper_Phone()+ "\n");
+
+							informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 주소 : " + SelectedReservation.Get_Helper_Address()+ "\n");
 							tempfile.delete();
 						}
 					}
