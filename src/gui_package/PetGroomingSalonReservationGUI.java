@@ -44,6 +44,10 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 			e.printStackTrace();
 		}
 		JButton resvButton = new JButton("예약하기");
+
+		JButton BckButton = new JButton("뒤로가기");
+
+		this.add(BckButton, BorderLayout.PAGE_END);
 		this.add(resvButton, BorderLayout.PAGE_END);
 		
 		resvButton.addActionListener(new ActionListener() {
@@ -66,6 +70,15 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 			}
 			
 		});
+		BckButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+			}
+		});
+		
 		this.setVisible(true);
 		this.setFocusable(true);
 	}
@@ -107,6 +120,7 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 			}
 			
 		});
+		
 		this.setVisible(true);
 		this.setFocusable(true);
 	}
