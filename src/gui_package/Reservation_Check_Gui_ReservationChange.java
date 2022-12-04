@@ -125,8 +125,8 @@ class ReservationChange extends JFrame implements ActionListener{
 		});
 //		areaPanel.add(scrollPane);
 		
-		informationWpanel.add(informationWRokBtn);
 		informationWpanel.add(BackBtn);
+		informationWpanel.add(informationWRokBtn);
 		
 		
 		informationPanel.add(informationWindow);
