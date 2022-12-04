@@ -215,6 +215,7 @@ class ReservationChange extends JFrame implements ActionListener{
 				
 				@Override
 				public void windowClosed(WindowEvent e) {
+					System.out.println("closed");
 					String filename = Selected_File.getPath();
 					String[] contents = filename.split(".txt");
 					System.out.println(contents[0]);
@@ -259,12 +260,13 @@ class ReservationChange extends JFrame implements ActionListener{
 						"할일 목록 : " + temp.Get_Use_Service() + "\n" +
 						"도우미 이름 : " + temp.Get_Helper_Name()+ "\n"
 						, "예약변경", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-						if(result == 0) {
+						if(result == 0) { //예
 							Selected_File.delete();
 							tempfile.renameTo(new File(filename));
 							dispose();
+							System.out.println("temp무시");
 						} 
-						else {
+						else { //아니오
 
 							if(SelectedReservation.Get_State() == 0) informationGuideWindow.setText("상태 : 이용예정\n");
 							else if(SelectedReservation.Get_State() == 1) informationGuideWindow.setText("상태 : 이용완료\n");
@@ -281,6 +283,7 @@ class ReservationChange extends JFrame implements ActionListener{
 
 							informationGuideWindow.setText( informationGuideWindow.getText() + "도우미 주소 : " + SelectedReservation.Get_Helper_Address()+ "\n");
 							tempfile.delete();
+							System.out.println("파일변경");
 						}
 					}
 					
