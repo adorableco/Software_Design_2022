@@ -19,6 +19,7 @@ public class AnimalHospitalReservationGUI extends JFrame{
 	private AnimalHospitalDBConnector conn;
 	private Reservation resv;
 	private int row;
+	private JButton BackBtn = new JButton("뒤로가기");
 //	private ReservationAnimalHospital hos_resv;
 	public AnimalHospitalReservationGUI() {
 		this.setTitle("피어펫 서비스");
@@ -49,7 +50,24 @@ public class AnimalHospitalReservationGUI extends JFrame{
 			e.printStackTrace();
 		}
 		JButton resvButton = new JButton("예약하기");
-		this.add(resvButton, BorderLayout.PAGE_END);
+		JPanel dk = new JPanel(new GridLayout(1,2));
+		this.add(dk,BorderLayout.PAGE_END);
+		dk .add(BackBtn);
+		dk.add(resvButton);
+		
+		//뒤로가기 버튼
+		BackBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane confirm = new JOptionPane();
+				int result;
+				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if(result == 0) {
+						dispose();
+				} 
+			}
+		});
 		
 		resvButton.addActionListener(new ActionListener() {
 

@@ -19,6 +19,7 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 	private PetGroomingSalonDBConnector conn;
 	private Reservation resv;
 	private int row1;
+	private JButton BackBtn = new JButton("뒤로가기");
 //	private ReservationPetGroomingSalon sal_resv;
 	public PetGroomingSalonReservationGUI() {
 		this.setTitle("피어펫 서비스");
@@ -45,10 +46,25 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 		}
 		JButton resvButton = new JButton("예약하기");
 
-		JButton BckButton = new JButton("뒤로가기");
+		JPanel dk = new JPanel(new GridLayout(1,2));
+		this.add(dk,BorderLayout.PAGE_END);
+		dk .add(BackBtn);
+		dk.add(resvButton);
+		
+		//뒤로가기 버튼
+		BackBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane confirm = new JOptionPane();
+				int result;
+				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if(result == 0) {
+						dispose();
+				} 
+			}
+		});
 
-		this.add(BckButton, BorderLayout.PAGE_END);
-		this.add(resvButton, BorderLayout.PAGE_END);
 		
 		resvButton.addActionListener(new ActionListener() {
 
@@ -130,6 +146,7 @@ public class PetGroomingSalonReservationGUI extends JFrame{
 		this.setVisible(true);
 		this.setFocusable(true);
 	}
+	
 	
 	public JPanel infoPanel(LocalDate resvDate, LocalTime resvStartTime,LocalTime resvFinishTime) {
 		JPanel info = new JPanel();
