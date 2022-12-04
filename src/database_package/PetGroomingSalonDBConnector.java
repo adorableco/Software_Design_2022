@@ -82,6 +82,24 @@ public class PetGroomingSalonDBConnector {
 		
 		return salonDB;
 	}
+	public PetGroomingSalon Get_Selected_Company(String Company){
+		PetGroomingSalon Selected_Company = null;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(fname));
+			String Line = reader.readLine();
+			System.out.println(Line);
+			while((Line = reader.readLine()) != null) {
+				String[] contents = Line.split(",");
+				if(contents[0].equals(Company)) {
+					Selected_Company = new PetGroomingSalon(Arrays.asList(contents));
+					break;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return Selected_Company;
+	}
 	/* need to implement
 	//DB 값 삭제
 	public Boolean deleteDB(String fname, String name) {

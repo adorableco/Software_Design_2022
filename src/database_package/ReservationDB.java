@@ -60,7 +60,7 @@ public class ReservationDB {
 					while((content = br.readLine()) != null) {
 						System.out.println(content);
 						String[] contentlist = content.split(" ");
-						Reserv_Info.add( // 0~2 Date / 3~4 StartTime / 5~6 EndTime / 7 Use Service / 8 State / 9 Cost / 10 Review / 11 Company / 12 helper
+						Reserv_Info.add( // 0~2 Date / 3~4 StartTime / 5~6 EndTime / 7 Use Service / 8 State / 9 Cost / 10 Review / 11 Company / 12 helper / 13 PetName
 								new Reservation(
 								LocalDate.of(Integer.parseInt(contentlist[0]), Integer.parseInt(contentlist[1]), Integer.parseInt(contentlist[2])),
 								LocalTime.of( Integer.parseInt(contentlist[3]),Integer.parseInt(contentlist[4]),0), LocalTime.of(Integer.parseInt(contentlist[5]), Integer.parseInt(contentlist[6]),0),

@@ -5,6 +5,7 @@ import java.time.*;
 import java.util.*;
 
 import reservation_package.AnimalHospital;
+import reservation_package.Company;
 
 public class AnimalHospitalDBConnector {
 	private String fname;
@@ -75,6 +76,26 @@ public class AnimalHospitalDBConnector {
 		reader.close();
 		
 		return hospitalDB;
+	}
+	
+
+	public AnimalHospital Get_Selected_Company(String Company){
+		AnimalHospital Selected_Company = null;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(fname));
+			String Line = reader.readLine();
+			System.out.println(Line);
+			while((Line = reader.readLine()) != null) {
+				String[] contents = Line.split(",");
+				if(contents[0].equals(Company)) {
+					Selected_Company = new AnimalHospital(Arrays.asList(contents));
+					break;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return Selected_Company;
 	}
 	/* need to implement
 	//DB 값 삭제
