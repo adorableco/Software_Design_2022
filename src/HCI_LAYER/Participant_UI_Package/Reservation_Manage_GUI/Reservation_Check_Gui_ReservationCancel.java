@@ -1,4 +1,4 @@
-package gui_package;
+package HCI_LAYER.Participant_UI_Package.Reservation_Manage_GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +14,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import PD_LAYER.reservation_package.Reservation;
 import database_package.ReservationDB;
-import reservation_package.Reservation;
-
 import java.util.*;
 
 

@@ -4,8 +4,8 @@ import java.io.*;
 import java.time.*;
 import java.util.*;
 
-import reservation_package.AnimalHospital;
-import reservation_package.Company;
+import PD_LAYER.reservation_package.AnimalHospital;
+
 
 public class AnimalHospitalDBConnector {
 	private String fname;

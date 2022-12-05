@@ -1,6 +1,6 @@
-package gui_package;
-import participant_package.ManagePetInfo;
-import participant_package.Pet;
+package HCI_LAYER.Participant_UI_Package;
+import PD_LAYER.participant_package.*;
+import PD_LAYER.participant_package.*;
 
 import java.awt.EventQueue;
 

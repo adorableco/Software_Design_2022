@@ -1,4 +1,4 @@
-package reservation_package;
+package PD_LAYER.reservation_package;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,7 +11,6 @@ import java.util.Arrays;
 import database_package.AnimalHospitalDBConnector;
 import database_package.PetGroomingSalonDBConnector;
 import database_package.PetSitterDBConnector;
-import participant_package.Pet;
 
 public class Reservation {
 	private LocalDate date;

@@ -1,4 +1,4 @@
-package gui_package;
+package HCI_LAYER.Participant_UI_Package.Reservation_UI_Package;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -10,9 +10,9 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import PD_LAYER.reservation_package.PetSitter;
+import PD_LAYER.reservation_package.Reservation;
 import database_package.PetSitterDBConnector;
-import reservation_package.PetSitter;
-import reservation_package.Reservation;
 
 public class PetSitterSearchGUI extends JFrame{
 	public JFrame fr;

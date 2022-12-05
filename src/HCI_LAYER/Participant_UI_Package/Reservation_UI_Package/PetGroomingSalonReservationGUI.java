@@ -1,128 +1,51 @@
-package gui_package;
-
+package HCI_LAYER.Participant_UI_Package.Reservation_UI_Package;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
+import java.time.format.*;
 import java.util.*;
+
 import javax.swing.*;
 import javax.swing.table.*;
 
-import database_package.AnimalHospitalDBConnector;
+import PD_LAYER.reservation_package.PetGroomingSalon;
+import PD_LAYER.reservation_package.Reservation;
+import database_package.PetGroomingSalonDBConnector;
 import database_package.ReservationDB;
-import reservation_package.AnimalHospital;
-import reservation_package.Reservation;
 
-public class AnimalHospitalReservationGUI extends JFrame{
-	private AnimalHospitalDBConnector conn;
+public class PetGroomingSalonReservationGUI extends JFrame{
+	private PetGroomingSalonDBConnector conn;
 	private Reservation resv;
-	private int row = -1;
+	private int row1 = -1;
 	private JButton BackBtn = new JButton("뒤로가기");
-//	private ReservationAnimalHospital hos_resv;
-	public AnimalHospitalReservationGUI() {
+//	private ReservationPetGroomingSalon sal_resv;
+	public PetGroomingSalonReservationGUI() {
 		this.setTitle("피어펫 서비스");
 	}
-	public AnimalHospitalReservationGUI(String title, Reservation res) {
-		this.resv = res;
+	public PetGroomingSalonReservationGUI(String title, Reservation res) {
 		createFrame(title);
-
-		this.conn = new AnimalHospitalDBConnector();
-//		this.hos_resv = new ReservationAnimalHospital();
-		
+		this.resv = res;
+		this.conn = new PetGroomingSalonDBConnector();
+//		this.sal_resv = new ReservationPetGroomingSalon();
 		// 나중에 LocalDate, LocalTime now에서 변경 필요
 		//임시 resvDate, resvTime
 		LocalDate resvDate = resv.Get_Use_Day();
 		LocalTime resvStartTime = resv.Get_Use_Start_Time();
 		LocalTime resvFinishTime = resv.Get_Use_Finish_Time();
-//		hos_resv.setDate(resvDate);
-//		hos_resv.setTime(resvStartTime);
-		
+//		sal_resv.setDate(resvDate);
+//		sal_resv.setTime(resvStartTime);
 		this.add(infoPanel(resvDate, resvStartTime,resvFinishTime), BorderLayout.NORTH);
 		try {
-			
-//			this.add(cList, BorderLayout.CENTER);
 			this.add(showList(this.conn.searchDBwithTime(resvDate, resvStartTime,resvFinishTime)), BorderLayout.CENTER);
 //			this.add(showList(this.conn.readDB()), BorderLayout.WEST);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JButton resvButton = new JButton("저장하기");
-		JPanel dk = new JPanel(new GridLayout(1,2));
-		this.add(dk,BorderLayout.PAGE_END);
-		dk .add(BackBtn);
-		dk.add(resvButton);
-		
-		//뒤로가기 버튼
-		BackBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane confirm = new JOptionPane();
-				int result;
-				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				if(result == 0) {
-						new Reservation_helper_GUI();
-						dispose();
-				} 
-			}
-		});
-		
-		resvButton.addActionListener(new ActionListener() {
+		JButton resvButton = new JButton("예약하기");
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-//				ReservationAnimalHospitalDB resDB=new ReservationAnimalHospitalDB();
-//				resDB.saveFile(hos_resv);
-				if(row==-1) {
-					JOptionPane confirm = new JOptionPane();
-					confirm.showMessageDialog(null, "예약할 병원을 선택하세요. ");
-				}
-				else {
-					System.out.println(row);
-					ReservationDB resDB=new ReservationDB();
-					JOptionPane.showMessageDialog(null,Integer.toString(resv.Get_Cost())+"원 결제되었습니다.");
-					resDB.saveFile(resv);
-					dispose();
-				}
-				
-			}
-			
-		});
-		this.setVisible(true);
-		this.setFocusable(true);
-	}
-	
-	public AnimalHospitalReservationGUI(String title, Reservation res, File originalFile) {
-		this.resv = res;
-		createFrame(title);
-
-		this.resv.setCompany("null");
-		this.conn = new AnimalHospitalDBConnector();
-//		this.hos_resv = new ReservationAnimalHospital();
-		
-		// 나중에 LocalDate, LocalTime now에서 변경 필요
-		//임시 resvDate, resvTime
-		LocalDate resvDate = resv.Get_Use_Day();
-		LocalTime resvStartTime = resv.Get_Use_Start_Time();
-		LocalTime resvFinishTime = resv.Get_Use_Finish_Time();
-//		hos_resv.setDate(resvDate);
-//		hos_resv.setTime(resvStartTime);
-		
-		this.add(infoPanel(resvDate, resvStartTime,resvFinishTime), BorderLayout.NORTH);
-		try {
-			
-//			this.add(cList, BorderLayout.CENTER);
-			this.add(showList(this.conn.searchDBwithTime(resvDate, resvStartTime,resvFinishTime)), BorderLayout.CENTER);
-//			this.add(showList(this.conn.readDB()), BorderLayout.WEST);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		JButton resvButton = new JButton("저장하기");
 		JPanel dk = new JPanel(new GridLayout(1,2));
 		this.add(dk,BorderLayout.PAGE_END);
 		dk .add(BackBtn);
@@ -143,17 +66,85 @@ public class AnimalHospitalReservationGUI extends JFrame{
 				} 
 			}
 		});
+
 		
 		resvButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-//				ReservationAnimalHospitalDB resDB=new ReservationAnimalHospitalDB();
-//				resDB.saveFile(hos_resv);
-				if(row==-1) {
+//				ReservationPetGroomingSalonDB resDB=new ReservationPetGroomingSalonDB();
+//				resDB.saveFile(sal_resv);
+				if(row1==0) {
 					JOptionPane confirm = new JOptionPane();
-					confirm.showMessageDialog(null, "예약할 병원을 선택하세요.");
+					confirm.showMessageDialog(null, "예약할 미용실을 선택하세요. ");
+				}
+				else {
+					ReservationDB resDB=new ReservationDB();
+					JOptionPane.showMessageDialog(null,Integer.toString(res.Get_Cost())+"원 결제되었습니다.");
+					resDB.saveFile(resv);
+					dispose();
+				}
+			}
+			
+		});
+		
+		this.setVisible(true);
+		this.setFocusable(true);
+	}
+	
+	public PetGroomingSalonReservationGUI(String title, Reservation res, File originalFile) {
+		createFrame(title);
+		this.resv = res;
+		this.conn = new PetGroomingSalonDBConnector();
+		this.resv.setCompany("null");
+//		this.sal_resv = new ReservationPetGroomingSalon();
+		// 나중에 LocalDate, LocalTime now에서 변경 필요
+		//임시 resvDate, resvTime
+		LocalDate resvDate = resv.Get_Use_Day();
+		LocalTime resvStartTime = resv.Get_Use_Start_Time();
+		LocalTime resvFinishTime = resv.Get_Use_Finish_Time();
+//		sal_resv.setDate(resvDate);
+//		sal_resv.setTime(resvStartTime);
+		this.add(infoPanel(resvDate, resvStartTime,resvFinishTime), BorderLayout.NORTH);
+		try {
+			this.add(showList(this.conn.searchDBwithTime(resvDate, resvStartTime,resvFinishTime)), BorderLayout.CENTER);
+//			this.add(showList(this.conn.readDB()), BorderLayout.WEST);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JButton resvButton = new JButton("저장하기");
+		JPanel dk = new JPanel(new GridLayout(1,2));
+		this.add(dk,BorderLayout.PAGE_END);
+		dk .add(BackBtn);
+		dk.add(resvButton);
+		
+		//뒤로가기 버튼
+		BackBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane confirm = new JOptionPane();
+				int result;
+				result = confirm.showConfirmDialog(null, "돌아가시겠습니까? ", "돌아가기", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if(result == 0) {
+						dispose();
+				} 
+			}
+		});
+		
+		
+		resvButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+//				ReservationPetGroomingSalonDB resDB=new ReservationPetGroomingSalonDB();
+//				resDB.saveFile(sal_resv);
+				if(row1==-1) {
+					JOptionPane confirm = new JOptionPane();
+					confirm.showMessageDialog(null, "예약할 미용실을 선택하세요. ");
 				}
 				else {
 					ReservationDB resDB=new ReservationDB();
@@ -164,9 +155,12 @@ public class AnimalHospitalReservationGUI extends JFrame{
 			}
 			
 		});
+		
 		this.setVisible(true);
 		this.setFocusable(true);
 	}
+	
+	
 	public JPanel infoPanel(LocalDate resvDate, LocalTime resvStartTime,LocalTime resvFinishTime) {
 		JPanel info = new JPanel();
 		JLabel resvDateInfo = new JLabel(resvDate.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
@@ -178,17 +172,15 @@ public class AnimalHospitalReservationGUI extends JFrame{
 		return info;
 	}
 	
-	public JPanel showList(LinkedList<AnimalHospital> hospitalDB) throws IOException {
-
+	public JPanel showList(LinkedList<PetGroomingSalon> salonDB) throws IOException {
 		JPanel cList = new JPanel();
 		JLabel select = new JLabel();
 		cList.setLayout(new BorderLayout());
-//		LinkedList<AnimalHospital> hospitalDB = this.conn.searchDBwithTime(resvDate, resvStartTime,resvFinishTime);
 		String[] header = this.conn.getDBHeader();
-		String[][] contents = new String[hospitalDB.size()][19];
-		for (int i = 0; i < hospitalDB.size();i++) {
+		String[][] contents = new String[salonDB.size()][19];
+		for (int i = 0; i < salonDB.size();i++) {
 			try {
-				contents[i] = hospitalDB.get(i).getAttributeInList();
+				contents[i] = salonDB.get(i).getAttributeInList();
 //				System.out.println(String.join(",", contents[i]));
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
@@ -203,22 +195,24 @@ public class AnimalHospitalReservationGUI extends JFrame{
 		companyListTable.getTableHeader().setReorderingAllowed(false);
 		companyListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		resizeColumnWidth(companyListTable);
-		companyListTable.getColumnModel().getColumn(0).setMinWidth(200);
-		companyListTable.getColumnModel().getColumn(1).setMinWidth(150);
-		companyListTable.getColumnModel().getColumn(2).setMinWidth(60);
-		companyListTable.getColumnModel().getColumn(3).setMinWidth(250);
-		companyListTable.getColumnModel().getColumn(4).setMinWidth(100);
+		companyListTable.getColumnModel().getColumn(0).setMinWidth(225);
+		companyListTable.getColumnModel().getColumn(1).setMinWidth(175);
+		companyListTable.getColumnModel().getColumn(2).setMinWidth(85);
+		companyListTable.getColumnModel().getColumn(3).setMinWidth(275);
 		
 		MouseListener tableListener = new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				JTable table = (JTable) e.getSource();
-				row = companyListTable.getSelectedRow();
+				row1 = companyListTable.getSelectedRow();
+				System.out.println(row1);
 //				System.out.print(table.getModel().getValueAt(row,0 )+"\t");
-				String comp = table.getModel().getValueAt(row,0).toString();
+				String comp = table.getModel().getValueAt(row1,0).toString();
 				select.setText(comp+"에 예약을 진행합니다.");
+				
 				resv.setCompany(comp);
+				System.out.println(resv.Get_Use_Service());
 				System.out.println(resv.Get_Company());
 			}
 
@@ -250,7 +244,7 @@ public class AnimalHospitalReservationGUI extends JFrame{
 		
 		JScrollPane scrollTable = new JScrollPane(companyListTable);
 		scrollTable.setPreferredSize(new Dimension(780, 200));
-		cList.add(new JLabel("선택한 예약일에 대한 병원 목록 조회 결과입니다."), BorderLayout.NORTH);
+		cList.add(new JLabel("선택한 예약일에 대한 반려동물 미용샵 목록 조회 결과입니다."), BorderLayout.NORTH);
 		JPanel subList = new JPanel();
 		subList.add(scrollTable, BorderLayout.CENTER);
 		subList.add(select, BorderLayout.SOUTH);
@@ -270,7 +264,7 @@ public class AnimalHospitalReservationGUI extends JFrame{
 	        columnModel.getColumn(column).setPreferredWidth(width);
 	    }
 	}
-
+	
 	void createFrame(String title) {
 		this.setTitle(title);
 		this.setSize(800,600);

@@ -10,7 +10,8 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import reservation_package.PetSitter;
+import PD_LAYER.reservation_package.PetSitter;
+
 
 public class PetSitterDBConnector {
 	private String fname;

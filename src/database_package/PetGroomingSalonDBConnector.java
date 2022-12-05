@@ -10,7 +10,8 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import reservation_package.PetGroomingSalon;
+import PD_LAYER.reservation_package.PetGroomingSalon;
+
 
 public class PetGroomingSalonDBConnector {
 	private String fname;

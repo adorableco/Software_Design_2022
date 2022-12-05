@@ -1,5 +1,6 @@
-package gui_package;
-
+package HCI_LAYER.Participant_UI_Package;
+import HCI_LAYER.Participant_UI_Package.Reservation_Manage_GUI.Reservation_Check_Gui;
+import HCI_LAYER.Participant_UI_Package.Reservation_UI_Package.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;

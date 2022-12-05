@@ -1,4 +1,4 @@
-package reservation_package;
+package PD_LAYER.reservation_package;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -52,7 +52,7 @@ public class Company {
 				continue;
 			}
 			if(f.getName() == "hours") {
-				BusinessHours[] hs = (reservation_package.BusinessHours[]) f.get(this);
+				BusinessHours[] hs = (BusinessHours[]) f.get(this);
 				for(BusinessHours h : hs) {
 					String[] times = h.getStringTime();
 					companyAttrList.add(times[0]);
@@ -77,7 +77,7 @@ public class Company {
 		for(Field f : attrs) {
 			f.setAccessible(true);
 			if(f.getName() == "hours") {
-				BusinessHours[] hs = (reservation_package.BusinessHours[]) f.get(this);
+				BusinessHours[] hs = (BusinessHours[]) f.get(this);
 				for(BusinessHours h : hs) {
 					if(h == null) {
 						continue;

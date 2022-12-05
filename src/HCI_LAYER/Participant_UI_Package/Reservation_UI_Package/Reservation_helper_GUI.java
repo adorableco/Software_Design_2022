@@ -1,4 +1,4 @@
-package gui_package;
+package HCI_LAYER.Participant_UI_Package.Reservation_UI_Package;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,14 +16,15 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import PD_LAYER.participant_package.Pet;
+import PD_LAYER.reservation_package.Reservation;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 
 import database_package.PetDB;
 import database_package.ReservationDB;
-import reservation_package.Reservation;
-
-import participant_package.Pet;
 import database_package.PetDB;
 
 
